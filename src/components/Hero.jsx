@@ -1,40 +1,48 @@
 import React from 'react';
+// Make sure you have your icons imported if you use them
+// import { FaGoogle, FaArrowRight } from 'react-icons/fa'; 
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
-      {/* --- THE RUNNING VIDEO --- */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-4100-large.mp4"
-      />
+    <div 
+      className="relative w-full min-h-screen bg-cover bg-center flex items-center"
+      style={{ 
+        backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069')" 
+      }}
+    >
+      {/* This creates the Dark Blue Overlay effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1a202c] via-[#1a202c]/90 to-blue-900/40"></div>
 
-      {/* --- THE DARK OVERLAY (Matches your current screenshot) --- */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[#0b1c38]/75 z-10"></div>
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        
+        {/* Left Text Section */}
+        <div className="text-white space-y-6 mt-20">
+          
+          {/* Awards Badges (Optional - add your images here) */}
+          <div className="flex gap-4 mb-4">
+             {/* Add your Google/Clutch rating images here */}
+          </div>
 
-      {/* --- THE TEXT CONTENT --- */}
-      <div className="relative z-20 text-center px-4 max-w-5xl">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-slide-up">
-          Transforming Ideas Into <br />
-          Cutting-Edge <span className="text-orange-500">Digital Solutions</span>
-        </h1>
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+            Transforming Ideas <br />
+            Into <span className="text-white">Cutting-Edge</span> <br />
+            <span className="text-orange-500">Digital Solutions</span>
+          </h1>
 
-        <p className="text-gray-200 text-lg md:text-xl mb-10 max-w-3xl mx-auto opacity-0 animate-slide-up delay-200" style={{animationFillMode: 'forwards'}}>
-          Creating innovative, high-impact web design and digital solutions that accelerate growth and redefine your business online.
-        </p>
+          <p className="text-gray-300 text-lg max-w-lg">
+            Creating innovative, High-Impact Web-Design And Digital Solutions That Accelerate Growth And Redefine Your Business Online.
+          </p>
 
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center opacity-0 animate-slide-up delay-400" style={{animationFillMode: 'forwards'}}>
-          <button className="bg-[#0056b3] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-lg">
-            Schedule a Call
-          </button>
-          <button className="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all">
-            View Work
+          {/* Button - Exact Match to Original */}
+          <button className="mt-8 px-8 py-3 bg-[#38bdf8] hover:bg-cyan-400 text-white font-semibold rounded-full flex items-center gap-2 transition-all">
+            Schedule A Call 
+            {/* Add an arrow icon here if you want: <FaArrowRight /> */}
           </button>
         </div>
+
+        {/* Right Side (Empty for now to let the image show) */}
+        <div className="hidden md:block"></div>
       </div>
     </div>
   );

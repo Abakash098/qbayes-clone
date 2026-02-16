@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatBot from './components/ChatBot';
-import ContactSection from './components/ContactSection'; // Updated Component
+import ContactSection from './components/ContactSection'; 
 
 // PAGE COMPONENTS
 import Hero from './components/Hero';
@@ -22,6 +22,7 @@ import PortfolioGrid from './components/PortfolioGrid';
 import Testimonials from './components/Testimonials'; 
 import ROISection from './components/ROISection'; 
 import Technologies from './components/Technologies'; 
+import Locations from './components/Locations'; // Import for Kolkata HQ location
 
 function App() {
   return (
@@ -34,25 +35,28 @@ function App() {
           <>
             <Hero />
             
-            {/* Core & Misc Services */}
+            {/* 1. Services & Expertise */}
             <Services />
             <MiscellaneousServices />
-
-            {/* Research and the moved Technologies section */}
             <ResearchInnovation />
             <Technologies />
-            
             <Stats />
             <Clients />
-            <FutureProofAI />
             
+            {/* 2. Portfolio & Proof */}
+            <FutureProofAI />
             <CaseStudies />
             <PortfolioGrid />
             <Testimonials />
             <ROISection />
             <BookingSection />
 
-            {/* THE NEW LAST PAGE SECTIONS (From your screenshots) */}
+            {/* 3. LOCATIONS (Moved here, directly above Contact) */}
+            <div id="location">
+               <Locations /> 
+            </div>
+
+            {/* 4. FINAL CONTACT SECTION */}
             <ContactSection />
           </>
         } />
@@ -61,6 +65,7 @@ function App() {
           <div className="pt-[90px]">
             <Services />
             <MiscellaneousServices />
+            <Locations /> 
             <ContactSection />
           </div>
         } />
@@ -73,7 +78,7 @@ function App() {
         } />
       </Routes>
 
-      <Footer /> {/* The updated Footer matches your screenshot */}
+      <Footer />
       <ChatBot />
     </div>
   );

@@ -17,13 +17,7 @@ const CaseStudies = () => {
       category: 'Automotive', 
       image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
     },
-    { 
-      id: 3, 
-      title: 'Next-Gen E-Commerce Experience for Global Retail Brands', 
-      category: 'E-Commerce', 
-      // FIXED IMAGE LINK BELOW:
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80' 
-    },
+    // --- REMOVED THE E-COMMERCE PROJECT FROM HERE ---
     { 
       id: 4, 
       title: 'AI-Powered FinTech Solutions for Modern Banking', 
@@ -43,13 +37,7 @@ const CaseStudies = () => {
       category: 'Automotive', 
       image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
     },
-    { 
-      id: 7, 
-      title: 'Next-Gen E-Commerce Experience for Global Retail Brands', 
-      category: 'E-Commerce', 
-      // FIXED IMAGE LINK HERE TOO:
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80' 
-    }
+    // --- REMOVED THE E-COMMERCE DUPLICATE FROM HERE TOO ---
   ];
 
   // --- AUTO SCROLL LOGIC ---

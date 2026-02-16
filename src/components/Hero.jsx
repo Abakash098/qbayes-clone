@@ -6,54 +6,59 @@ const Hero = () => {
   const [showVideo, setShowVideo] = useState(false);
 
   return (
-    <section className="relative w-full min-h-screen flex items-center pt-20 bg-[#0b1c38] overflow-hidden">
+    <section className="relative w-full min-h-screen flex items-center pt-20 bg-white overflow-hidden">
       
-      {/* --- BACKGROUND DECORATION --- */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
+      {/* --- BACKGROUND DECORATION (Subtle Grid) --- */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
         <div 
           className="absolute inset-0" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', 
+            backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', 
             backgroundSize: '50px 50px' 
           }}
         ></div>
       </div>
 
-      {/* Glowing Blobs */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600 rounded-full blur-[150px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600 rounded-full blur-[150px] opacity-20 translate-y-1/3 -translate-x-1/3"></div>
+      {/* Glowing Blobs (Purple & Blue) - Adjusted for White BG */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100 rounded-full blur-[120px] opacity-60 -translate-y-1/2 translate-x-1/2 mix-blend-multiply"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-100 rounded-full blur-[120px] opacity-60 translate-y-1/3 -translate-x-1/3 mix-blend-multiply"></div>
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
         
         {/* --- LEFT SIDE: TEXT CONTENT --- */}
         <div>
-          <div className="inline-block px-4 py-2 bg-blue-900/50 border border-blue-500/30 rounded-full text-blue-300 font-bold text-sm mb-6 uppercase tracking-wider backdrop-blur-sm">
+          {/* Badge */}
+          <div className="inline-block px-4 py-2 bg-purple-50 border border-purple-200 rounded-full text-purple-700 font-bold text-sm mb-8 uppercase tracking-wider shadow-sm">
             🚀 Accelerating Digital Transformation
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] mb-6">
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 leading-[1.1] mb-6 tracking-tight">
             Innovate with <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00c2ff] to-blue-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-600">
               Intelligence
             </span>
           </h1>
           
-          <p className="text-blue-100 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+          {/* Subtext */}
+          <p className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-medium">
             QBayes empowers enterprises with cutting-edge AI, seamless IT solutions, and data-driven strategies to build a future-proof business.
           </p>
 
+          {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-[#00c2ff] hover:bg-[#00a0d6] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 group">
+            {/* Primary Button */}
+            <button className="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-purple-200 transition-all flex items-center justify-center gap-2 group active:scale-[0.98]">
               Get Started 
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
             
-            {/* WATCH VIDEO BUTTON - Triggers Modal */}
+            {/* Watch Video Button */}
             <button 
               onClick={() => setShowVideo(true)}
-              className="border border-blue-400/50 hover:bg-blue-900/30 text-white px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3"
+              className="border border-slate-200 hover:border-purple-300 hover:bg-purple-50 text-slate-700 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
             >
-              <div className="w-8 h-8 bg-white text-blue-900 rounded-full flex items-center justify-center text-xs pl-0.5 animate-pulse">
+              <div className="w-8 h-8 bg-purple-700 text-white rounded-full flex items-center justify-center text-xs pl-0.5 shadow-md">
                 <FaPlay />
               </div>
               Watch Video
@@ -61,45 +66,46 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* --- RIGHT SIDE: HERO IMAGE --- */}
+        {/* --- RIGHT SIDE: HERO IMAGE (With White/Purple Styling) --- */}
         <div className="relative hidden lg:block">
-          <div className="relative z-10 rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl bg-blue-900/20 backdrop-blur-sm p-4">
+          <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-2xl bg-white p-3">
              <img 
                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" 
                alt="Analytics Dashboard" 
-               className="rounded-[2.5rem] w-full h-auto object-cover shadow-inner"
+               className="rounded-[2rem] w-full h-auto object-cover"
              />
-             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl animate-bounce-slow">
-               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-xl">
-                   98%
-                 </div>
-                 <div>
-                   <p className="text-gray-500 text-xs font-bold uppercase">Client Satisfaction</p>
-                   <p className="text-gray-900 font-bold text-lg">Guaranteed Results</p>
-                 </div>
+             
+             {/* Floating Stats Card */}
+             <div className="absolute -bottom-8 -left-8 bg-white p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-50 animate-bounce-slow flex items-center gap-4">
+               <div className="w-14 h-14 bg-green-50 rounded-full flex items-center justify-center text-green-600 font-bold text-xl border border-green-100">
+                 98%
+               </div>
+               <div>
+                 <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Client Satisfaction</p>
+                 <p className="text-slate-900 font-bold text-lg">Guaranteed Results</p>
                </div>
              </div>
           </div>
-          <div className="absolute -top-10 -right-10 w-full h-full border-2 border-[#00c2ff]/30 rounded-[3rem] -z-10"></div>
+          
+          {/* Decorative Backdrops */}
+          <div className="absolute -top-8 -right-8 w-full h-full border-2 border-purple-100 rounded-[3rem] -z-10"></div>
+          <div className="absolute top-1/2 left-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-purple-100/50 to-blue-50/50 rounded-full blur-3xl -z-20 -translate-x-1/2 -translate-y-1/2"></div>
         </div>
 
       </div>
 
-      {/* --- VIDEO MODAL POPUP --- */}
+      {/* --- VIDEO MODAL POPUP (Dark Overlay remains for Focus) --- */}
       {showVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-fade-in">
-          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/10">
             
-            {/* Close Button */}
             <button 
               onClick={() => setShowVideo(false)}
-              className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-red-600 text-white p-2 rounded-full transition-all duration-300"
+              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-all backdrop-blur-md"
             >
               <FaTimes size={24} />
             </button>
 
-            {/* YouTube Embed (Innovation/Tech Video) */}
             <iframe 
               width="100%" 
               height="100%" 

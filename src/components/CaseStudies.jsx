@@ -1,54 +1,145 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { FaArrowRight } from 'react-icons/fa';
 
 const CaseStudies = () => {
+  const scrollRef = useRef(null);
+
   const projects = [
-    { id: 1, title: 'Rad Golf', category: 'Mobile App', image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=500&q=60' },
-    { id: 2, title: 'Alokozay', category: 'Web Development', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=60' },
-    { id: 3, title: 'Enviro Waste', category: 'Marketing', image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=500&q=60' },
-    { id: 4, title: 'Mercedes', category: 'Automotive', image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=500&q=60' },
+    { 
+      id: 1, 
+      title: 'Revolutionizing Mental Healthcare Through Seamless Digital Transformation', 
+      category: 'Healthcare', 
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80' 
+    },
+    { 
+      id: 2, 
+      title: 'Embrace the Extraordinary Automotive Website Design for Mercedes', 
+      category: 'Automotive', 
+      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
+    },
+    { 
+      id: 3, 
+      title: 'Next-Gen E-Commerce Experience for Global Retail Brands', 
+      category: 'E-Commerce', 
+      // FIXED IMAGE LINK BELOW:
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80' 
+    },
+    { 
+      id: 4, 
+      title: 'AI-Powered FinTech Solutions for Modern Banking', 
+      category: 'FinTech', 
+      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80' 
+    },
+    // --- DUPLICATES FOR INFINITE SCROLL ---
+    { 
+      id: 5, 
+      title: 'Revolutionizing Mental Healthcare Through Seamless Digital Transformation', 
+      category: 'Healthcare', 
+      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80' 
+    },
+    { 
+      id: 6, 
+      title: 'Embrace the Extraordinary Automotive Website Design for Mercedes', 
+      category: 'Automotive', 
+      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
+    },
+    { 
+      id: 7, 
+      title: 'Next-Gen E-Commerce Experience for Global Retail Brands', 
+      category: 'E-Commerce', 
+      // FIXED IMAGE LINK HERE TOO:
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&w=800&q=80' 
+    }
   ];
 
+  // --- AUTO SCROLL LOGIC ---
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    let scrollAmount = 0;
+    const speed = 1; // Speed of the auto-scroll
+
+    const scrollInterval = setInterval(() => {
+      if (scrollContainer) {
+        scrollContainer.scrollLeft += speed;
+        scrollAmount += speed;
+
+        // Infinite Scroll Reset: If we've scrolled past the first set of items, snap back
+        if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 2)) {
+           scrollContainer.scrollLeft = 0;
+        }
+      }
+    }, 20); 
+
+    return () => clearInterval(scrollInterval);
+  }, []);
+
   return (
-    <div className="w-full py-20 bg-white">
-      <div className="max-w-[1240px] mx-auto px-4">
+    <section className="py-24 bg-[#0b1c38] font-sans relative overflow-hidden">
+      
+      {/* Background Grid Decoration */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="h-full w-full" 
+             style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+        </div>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
         
-        {/* Header */}
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h3 className="text-brand-blue font-bold uppercase tracking-widest mb-2">Case Studies</h3>
-            <h2 className="text-4xl font-bold text-gray-900">Dive into Webskitters <br/> Remarkable Portfolio</h2>
-          </div>
-          <button className="hidden md:block border-2 border-brand-blue text-brand-blue px-6 py-2 rounded-full font-bold hover:bg-brand-blue hover:text-white transition">
-            View All Projects
+        {/* --- LEFT SIDE: TEXT CONTENT --- */}
+        <div className="lg:col-span-4">
+          <h4 className="text-orange-500 font-bold uppercase tracking-widest text-sm mb-4">CASE STUDIES</h4>
+          
+          <h2 className="text-5xl font-extrabold text-white leading-tight mb-8">
+            Dive Into <br/>
+            QBayes <br/>
+            <span className="text-[#00c2ff]">Remarkable Portfolio</span>
+          </h2>
+          
+          <button className="bg-[#00c2ff] hover:bg-[#00a0d6] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-blue-500/30 transition-all flex items-center gap-2 group w-fit">
+            View All Case Studies 
+            <FaArrowRight className="transform group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projects.map((project) => (
-            <div key={project.id} className="group relative overflow-hidden rounded-xl shadow-lg cursor-pointer h-80">
-              {/* Background Image */}
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover group-hover:scale-110 duration-500"
-              />
-              
-              {/* Overlay Content */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all flex flex-col justify-end p-6">
-                <h3 className="text-2xl font-bold text-white mb-1 translate-y-4 group-hover:translate-y-0 transition duration-300">
+        {/* --- RIGHT SIDE: AUTO-SCROLLING SLIDER --- */}
+        <div 
+          ref={scrollRef}
+          className="lg:col-span-8 flex gap-8 overflow-x-hidden pb-8 whitespace-nowrap"
+        >
+          {projects.map((project, index) => (
+            <div 
+              key={index} 
+              className="min-w-[350px] md:min-w-[400px] bg-[#102a52] rounded-3xl overflow-hidden shadow-2xl border border-white/5 hover:border-[#00c2ff]/50 transition-all duration-300 group inline-block whitespace-normal cursor-pointer"
+            >
+              {/* Card Image */}
+              <div className="h-64 overflow-hidden relative">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                />
+                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                  {project.category}
+                </div>
+              </div>
+
+              {/* Card Content */}
+              <div className="p-8 relative">
+                <h3 className="text-xl font-bold text-white leading-snug mb-6 group-hover:text-[#00c2ff] transition-colors line-clamp-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-300 opacity-0 group-hover:opacity-100 transition duration-300 delay-100">
-                  {project.category}
-                </p>
+                
+                {/* Arrow Button Circle */}
+                <div className="w-12 h-12 rounded-full bg-[#00c2ff] flex items-center justify-center text-white shadow-lg shadow-blue-500/40 transform group-hover:scale-110 transition-transform">
+                  <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                </div>
               </div>
             </div>
           ))}
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 

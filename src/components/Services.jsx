@@ -2,21 +2,74 @@ import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Services = () => {
+  // Updated Data with your Specific IT & AI Services
   const services = [
-    { id: "1", title: "UI/UX Design", desc: "Crafting user-centric UX/UI designs that engage and convert.", image: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800" },
-    { id: "2", title: "Web Development", desc: "Scalable and robust web solutions tailored to your business goals.", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" },
-    { id: "3", title: "Mobile App Development", desc: "Flawless iOS and Android apps with superior user experiences.", image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" },
-    { id: "4", title: "Internet Of Things", desc: "Connecting devices to leverage the full power of IoT for business.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-    { id: "5", title: "Game Development", desc: "Immersive 2D/3D games that captivate and entertain audiences.", image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=800" },
-    { id: "6", title: "Artificial Intelligence", desc: "Smart AI solutions to automate and elevate your business processes.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-    { id: "7", title: "Digital Marketing", desc: "Driving targeted traffic and visibility through SEO, PPC, and SMM.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" },
-    { id: "8", title: "Data Science", desc: "Actionable insights from your data to drive strategic decisions.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" }
+    { 
+      id: "1", 
+      title: "IT Consultancy", 
+      desc: "Strategic guidance to align IT infrastructure with your business goals and roadmap.", 
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "2", 
+      title: "UI/UX Design", 
+      desc: "Crafting intuitive, user-centric interfaces and robust system architectures.", 
+      image: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "3", 
+      title: "Web & App Development", 
+      desc: "Building scalable Web, Mobile (iOS/Android), and custom IT applications.", 
+      image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "4", 
+      title: "Artificial Intelligence (AI)", 
+      desc: "Developing intelligent systems, Machine Learning models, and Smart Optimization.", 
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "5", 
+      title: "Data Analytics & Science", 
+      desc: "Data Collection, Curation, Visualization, and Advanced Forecasting/Prediction.", 
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "6", 
+      title: "Deployment & Cloud", 
+      desc: "Secure Cloud and On-Premise deployment services for high availability.", 
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "7", 
+      title: "API & IoT Integration", 
+      desc: "Seamless connectivity between software, hardware, and third-party APIs.", 
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "8", 
+      title: "System Upgradation", 
+      desc: "Modernizing legacy systems to the latest tech stack for better performance.", 
+      image: "https://images.unsplash.com/photo-1504384308090-c54be3855485?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "9", 
+      title: "Testing & QA", 
+      desc: "Comprehensive Quality Assurance, Automation, and Security testing.", 
+      image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800" 
+    },
+    { 
+      id: "10", 
+      title: "Maintenance & Monitoring", 
+      desc: "24/7 Support, bug fixes, and real-time system health monitoring.", 
+      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" 
+    }
   ];
 
   const [activeId, setActiveId] = useState("1");
 
   return (
-    <div className="w-full bg-[#0b1c38] py-20 relative overflow-hidden">
+    <div className="w-full bg-[#0b1c38] py-20 relative overflow-hidden font-sans">
       
       {/* Background Gradient */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#0b1c38] via-[#112d5a] to-[#0b1c38] opacity-50"></div>
@@ -25,16 +78,15 @@ const Services = () => {
         
         {/* Header */}
         <div className="mb-12">
-          <h4 className="text-orange-500 font-bold uppercase tracking-widest text-sm mb-2">OUR SERVICES</h4>
+          <h4 className="text-orange-500 font-bold uppercase tracking-widest text-sm mb-2">WHAT WE DO</h4>
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Our Services To Grow <br /> <span className="text-[#4a90e2]">Your Brand</span>
+            Our Core Services To <br /> <span className="text-[#4a90e2]">Accelerate Growth</span>
           </h2>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           
-          {/* --- LEFT COLUMN: SCROLLABLE LIST (The Fix) --- */}
-          {/* Added 'h-[500px]' and 'overflow-y-auto' to make it scroll internally */}
+          {/* --- LEFT COLUMN: SCROLLABLE LIST --- */}
           <div className="w-full lg:w-1/2 h-[500px] overflow-y-auto pr-4 custom-scrollbar space-y-4">
             {services.map((service) => (
               <div 
@@ -47,7 +99,7 @@ const Services = () => {
                   }`}
               >
                 {/* Number */}
-                <span className={`text-4xl font-bold font-sans ${activeId === service.id ? 'text-[#4a90e2]' : 'text-white/20'}`}>
+                <span className={`text-3xl font-bold font-sans ${activeId === service.id ? 'text-[#4a90e2]' : 'text-white/20'}`}>
                   {service.id}.
                 </span>
                 
@@ -63,7 +115,7 @@ const Services = () => {
 
                 {/* Arrow */}
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0
-                     ${activeId === service.id ? 'bg-orange-500 text-white' : 'bg-white/10 text-white group-hover:bg-orange-500'}`}>
+                      ${activeId === service.id ? 'bg-orange-500 text-white' : 'bg-white/10 text-white group-hover:bg-orange-500'}`}>
                    <FaArrowRight className={`transform transition-transform duration-300 ${activeId === service.id ? 'rotate-0' : '-rotate-45 group-hover:rotate-0'}`} />
                 </div>
               </div>
@@ -89,7 +141,6 @@ const Services = () => {
 
       {/* --- CUSTOM SCROLLBAR CSS --- */}
       <style>{`
-        /* Thin, dark scrollbar to match the theme */
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }
@@ -101,7 +152,7 @@ const Services = () => {
           border-radius: 20px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background-color: #f97316; /* Orange on hover */
+          background-color: #f97316; 
         }
       `}</style>
     </div>

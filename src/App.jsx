@@ -1,67 +1,80 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-// Navigation & Hero
-import TopBar from './components/TopBar';
+// GLOBAL COMPONENTS
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-
-// Trust & Services
-import Awards from './components/Awards';
-import Stats from './components/Stats';
-import Services from './components/Services';
-import AISolutions from './components/AISolutions';
-
-// Portfolio & Evidence
-import Portfolio from './components/Portfolio';
-import CaseStudies from './components/CaseStudies';
-import Technologies from './components/Technologies';
-import ROI from './components/ROI';
-
-// Proof & Identity
-import Testimonials from './components/Testimonials';
-import Clients from './components/Clients';
-import CEO from './components/CEO';
-import GlobalNetwork from './components/GlobalNetwork';
-
-// Support & Final CTA
-import FAQ from './components/FAQ';
-import Locations from './components/Locations';
-import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
+import ContactSection from './components/ContactSection'; // Updated Component
 
-// --- NEW COMPONENT ---
-import ChatBot from './components/ChatBot'; 
+// PAGE COMPONENTS
+import Hero from './components/Hero';
+import Clients from './components/Clients';
+import AISolutions from './components/AISolutions'; 
+import Services from './components/Services';
+import MiscellaneousServices from './components/MiscellaneousServices'; 
+import Stats from './components/Stats';
+import FutureProofAI from './components/FutureProofAI';
+import BookingSection from './components/BookingSection';
+import ResearchInnovation from './components/ResearchInnovation';
+import CaseStudies from './components/CaseStudies'; 
+import PortfolioGrid from './components/PortfolioGrid'; 
+import Testimonials from './components/Testimonials'; 
+import ROISection from './components/ROISection'; 
+import Technologies from './components/Technologies'; 
 
 function App() {
   return (
-    <div className="font-sans text-gray-900 overflow-x-hidden relative">
-      {/* Starting the page at the top */}
-      <TopBar />
-      <Navbar />
-      <Hero />
-
-      {/* Main Content Flow */}
-      <Awards />
-      <Stats />
-      <Services />
-      <AISolutions />
-      <Portfolio />
-      <CaseStudies />
-      <Technologies />
-      <ROI />
-      <Testimonials />
-      <Clients />
-      <CEO />
-      <GlobalNetwork />
+    <div className="font-sans text-white bg-[#0b1c38] min-h-screen overflow-x-hidden">
       
-      {/* Lower Sections */}
-      <FAQ />
-      <ContactSection />
-      <Locations />
-      <Footer />
+      <Navbar />
 
-      {/* Floating Chat Widget */}
-      <ChatBot /> 
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Hero />
+            
+            {/* Core & Misc Services */}
+            <Services />
+            <MiscellaneousServices />
+
+            {/* Research and the moved Technologies section */}
+            <ResearchInnovation />
+            <Technologies />
+            
+            <Stats />
+            <Clients />
+            <FutureProofAI />
+            
+            <CaseStudies />
+            <PortfolioGrid />
+            <Testimonials />
+            <ROISection />
+            <BookingSection />
+
+            {/* THE NEW LAST PAGE SECTIONS (From your screenshots) */}
+            <ContactSection />
+          </>
+        } />
+
+        <Route path="/services" element={
+          <div className="pt-[90px]">
+            <Services />
+            <MiscellaneousServices />
+            <ContactSection />
+          </div>
+        } />
+        
+        <Route path="/ai-services" element={
+          <div className="pt-[90px]">
+            <AISolutions />
+            <ContactSection />
+          </div>
+        } />
+      </Routes>
+
+      <Footer /> {/* The updated Footer matches your screenshot */}
+      <ChatBot />
     </div>
   );
 }

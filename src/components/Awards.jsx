@@ -26,7 +26,7 @@ const Awards = () => {
               {item.name}
             </span>
           ))}
-        </div>
+        </div> 
 
         {/* Second List of Items (Duplicate) */}
         {/* ADDED 'gap-32' (Big Gap) and 'justify-evenly' */}

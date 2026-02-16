@@ -1,75 +1,83 @@
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaLinkedinIn, FaArrowRight } from 'react-icons/fa';
 
 const ContactSection = () => {
-  const stats = [
-    { val: "800+", label: "In house Experts" },
-    { val: "25+", label: "Awards Across the Globe" },
-    { val: "1500+", label: "Customers Worldwide" },
-    { val: "4500+", label: "5 Star Reviews" },
-    { val: "MSME", label: "National MSME Award 2022", isBadge: true },
-    { val: "15+", label: "Years in Service" }
+  const contactData = [
+    {
+      title: "Mobile No.",
+      value: "+91 9038389108",
+      gradient: "from-orange-500 to-red-500",
+      icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-8 h-8">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+      )
+    },
+    {
+      title: "Email",
+      value: "connect2qbayes@gmail.com",
+      gradient: "from-blue-500 to-purple-600",
+      icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-8 h-8">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    },
+    {
+      title: "Address",
+      value: "Jadavpur University Campus, Gate No. 3, 188, Raja S.C. Mallick Road, Kolkata - 700032, India",
+      gradient: "from-purple-500 to-pink-500",
+      icon: (
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-8 h-8">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      )
+    }
   ];
 
   return (
-    <section className="w-full min-h-screen flex flex-col lg:flex-row">
-      {/* --- LEFT SIDE: STATS & SOCIALS --- */}
-      <div className="lg:w-1/2 bg-gradient-to-br from-[#1e60f2] to-[#4a90e2] p-12 md:p-20 text-white">
-        <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-8">
-          Let's Build Something <br /> Extraordinary Together!
-        </h2>
-        <p className="text-blue-50 mb-16 max-w-lg opacity-90">
-          Get a wide range of expert services from web development, software solutions, and digital strategies that drive measurable business growth.
-        </p>
+    <section className="relative py-24 bg-[#0b1c38] overflow-hidden">
+      {/* Dynamic Background Blurs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12 mb-20">
-          {stats.map((stat, i) => (
-            <div key={i} className="flex flex-col">
-              <span className="text-4xl font-bold mb-1">{stat.val}</span>
-              <span className="text-sm opacity-80 uppercase tracking-wide">{stat.label}</span>
+      <div className="max-w-[1300px] mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h4 className="text-orange-500 font-bold uppercase tracking-widest text-sm mb-3">Get In Touch</h4>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Connect With <span className="text-blue-400">QBayes</span></h2>
+          <div className="w-24 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {contactData.map((item, index) => (
+            <div 
+              key={index} 
+              className="group relative p-1 rounded-3xl transition-all duration-500 hover:scale-105"
+            >
+              {/* Gradient Border Effect */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} rounded-3xl opacity-20 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              
+              {/* Card Content */}
+              <div className="relative h-full bg-[#112d5a]/90 backdrop-blur-xl rounded-[22px] p-8 flex flex-col items-center text-center">
+                <div className={`mb-6 p-4 rounded-2xl bg-gradient-to-br ${item.gradient} text-white shadow-lg shadow-black/20`}>
+                  {item.icon}
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wider">{item.title}</h3>
+                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                  {item.value}
+                </p>
+
+                {/* Decorative Element */}
+                <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                   <button className="text-xs font-bold text-white uppercase tracking-widest border-b border-orange-500 pb-1 hover:text-orange-500 transition">
+                      Find Us →
+                   </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>
-
-        {/* Follow Us */}
-        <div className="mb-12">
-          <h4 className="text-xl font-bold mb-6">Follow Us:</h4>
-          <div className="flex gap-4">
-            {[FaFacebookF, FaTwitter, FaInstagram, FaYoutube, FaLinkedinIn].map((Icon, i) => (
-              <div key={i} className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all cursor-pointer">
-                <Icon size={16} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="pt-8 border-t border-white/10">
-          <h4 className="text-2xl font-bold mb-2">What's Next?</h4>
-          <p className="text-blue-100 italic">Our Consultants will reply back to you within 7 hours or less</p>
-        </div>
-      </div>
-
-      {/* --- RIGHT SIDE: FORM --- */}
-      <div className="lg:w-1/2 bg-white p-12 md:p-20 flex flex-col justify-center">
-        <h3 className="text-4xl font-bold text-gray-800 mb-2">Ready To Get Started?</h3>
-        <p className="text-gray-500 mb-12">Share your goals, and we'll help you find the best path.</p>
-
-        <form className="space-y-6">
-          <input type="text" placeholder="Full Name*" className="w-full border-b-2 border-gray-100 py-4 outline-none focus:border-blue-500 transition-all" />
-          <input type="email" placeholder="Email*" className="w-full border-b-2 border-gray-100 py-4 outline-none focus:border-blue-500 transition-all" />
-          <input type="tel" placeholder="Phone*" className="w-full border-b-2 border-gray-100 py-4 outline-none focus:border-blue-500 transition-all" />
-          <input type="text" placeholder="Website" className="w-full border-b-2 border-gray-100 py-4 outline-none focus:border-blue-500 transition-all" />
-          <textarea placeholder="Message" rows="3" className="w-full border-b-2 border-gray-100 py-4 outline-none focus:border-blue-500 transition-all resize-none"></textarea>
-          
-          <button className="bg-[#4a90e2] text-white px-10 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-blue-600 transition-all shadow-lg">
-            Submit <FaArrowRight />
-          </button>
-        </form>
-
-        <p className="mt-8 text-[10px] text-gray-400 leading-relaxed uppercase tracking-wider">
-          *Disclaimer: By submitting this form, you agree to follow-up communication from Webskitters via email, based on your enquiry. We respect your privacy and can opt out of these communications anytime.
-        </p>
       </div>
     </section>
   );

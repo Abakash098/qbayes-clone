@@ -1,103 +1,117 @@
 import React from 'react';
-import { FaFlask, FaLightbulb, FaGlobeAmericas, FaCheck } from 'react-icons/fa';
+import { FaFlask, FaLightbulb, FaGlobeAmericas, FaCheck, FaMicrochip } from 'react-icons/fa';
 
 const ResearchInnovation = () => {
   const data = [
     {
-      title: "Services",
+      title: "R&D Services",
       icon: FaFlask,
-      description: "Comprehensive research support and consultancy.",
+      accent: "from-purple-500 to-indigo-600",
+      description: "Advanced consultancy and methodical exploration of complex problem statements.",
       items: [
-        "Consultancy",
-        "Pursuit of problem statements through Innovation and Novelty",
-        "Investigation, Design, Development & Implementation",
-        "Theory/Philosophy Enhancement of Methodology",
-        "Transparent, Interpretable & Responsible Reporting",
-        "Ethical Compliance",
-        "Knowledge Incubation",
-        "Concept Development",
-        "Research Skill Development"
+        "Innovation-led Problem Solving",
+        "Full-cycle Investigation & Implementation",
+        "Methodology Philosophy Enhancement",
+        "Responsible & Ethical Compliance",
+        "Research Skill & Concept Incubation"
       ]
     },
     {
-      title: "Inventions & Outcomes",
+      title: "Inventions",
       icon: FaLightbulb,
-      description: "Tangible solutions derived from deep research.",
+      accent: "from-blue-500 to-cyan-500",
+      description: "Converting abstract theories into high-impact, tangible digital intelligence.",
       items: [
-        "Research Documentations",
-        "Patents",
-        "Software/Web based Intelligent Systems",
-        "Statistical/Empirical Reports",
-        "AI/Machine/Deep Learning based Systems",
-        "Other R&D Advanced Analytics & Solutions"
+        "IP & Patent Documentation",
+        "Web-based Intelligent Systems",
+        "Empirical Statistical Reporting",
+        "Deep Learning Architectures",
+        "Advanced Analytics R&D Solutions"
       ]
     },
     {
-      title: "Domains Covered",
-      icon: FaGlobeAmericas,
-      description: "Cutting-edge fields we specialize in.",
+      title: "Specialized Domains",
+      icon: FaMicrochip,
+      accent: "from-fuchsia-500 to-pink-600",
+      description: "Pushing boundaries across critical modern technological frontiers.",
       items: [
-        "Image Processing / Computer Vision",
-        "Natural Language Processing (NLP) / LLMs",
-        "Time Series Analysis",
-        "Remote Sensing",
-        "Education Technology",
-        "Population Analysis",
-        "Medical Technologies",
-        "Knowledge/Information Analysis",
-        "Environmental & Sustainable Technologies"
+        "Computer Vision & NLP/LLMs",
+        "Time Series & Remote Sensing",
+        "Med-Tech & Ed-Tech Innovation",
+        "Sustainable Green Technologies",
+        "Population & Information Analysis"
       ]
     }
   ];
 
   return (
-    <section className="py-24 bg-gray-900 text-white font-sans relative overflow-hidden">
+    <section className="relative py-24 bg-white overflow-hidden font-sans">
       
-      {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-purple-900 rounded-full blur-[120px] opacity-40"></div>
-        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-900 rounded-full blur-[120px] opacity-40"></div>
+      {/* --- TECH BACKGROUND DECORATION --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
       </div>
+      
+      {/* Soft Ambient Blobs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-100 rounded-full blur-[120px] opacity-40 -z-10 translate-x-1/3"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-100 rounded-full blur-[120px] opacity-40 -z-10 -translate-x-1/3"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* HEADER */}
-        <div className="text-center mb-16">
-          <h4 className="text-purple-400 font-bold tracking-widest uppercase mb-4">R&D Wing</h4>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-            Research And <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Innovation</span>
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            We bridge the gap between theoretical research and practical application, delivering inventions and outcomes that drive the future.
+        {/* --- SECTION HEADER --- */}
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-block px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold uppercase tracking-[0.2em] rounded-md mb-4">
+              Scientific Excellence
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black text-slate-900 leading-tight">
+              Research & <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-blue-600">
+                Innovation Hub
+              </span>
+            </h2>
+          </div>
+          <p className="text-slate-500 max-w-sm text-lg font-medium leading-relaxed border-l-2 border-purple-100 pl-6">
+            Bridging the gap between academic theory and real-world industrial intelligence.
           </p>
         </div>
 
-        {/* 3-COLUMN GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* --- INTERACTIVE GRID --- */}
+        <div className="grid md:grid-cols-3 gap-8">
           {data.map((col, index) => (
             <div 
               key={index} 
-              className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-3xl border border-gray-700 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-2 group"
+              className="group relative bg-white border border-slate-100 p-10 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.04)] hover:shadow-[0_30px_60px_rgba(126,34,206,0.1)] transition-all duration-500 hover:-translate-y-3"
             >
-              {/* Column Header */}
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 bg-gray-700 rounded-2xl flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition-colors shadow-lg">
-                  <col.icon size={24} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">{col.title}</h3>
-                </div>
+              {/* Icon Header */}
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${col.accent} flex items-center justify-center text-white mb-8 shadow-lg transform group-hover:rotate-6 transition-transform duration-500`}>
+                <col.icon size={28} />
               </div>
 
-              {/* List Items */}
-              <ul className="space-y-4">
+              <h3 className="text-2xl font-bold text-slate-900 mb-4 tracking-tight">
+                {col.title}
+              </h3>
+              
+              <p className="text-slate-400 text-sm mb-8 leading-relaxed group-hover:text-slate-600 transition-colors">
+                {col.description}
+              </p>
+
+              {/* Enhanced List */}
+              <ul className="space-y-4 pt-6 border-t border-slate-50">
                 {col.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3 text-gray-300 text-sm leading-relaxed">
-                    <FaCheck className="text-purple-500 mt-1 shrink-0" size={14} />
-                    <span>{item}</span>
+                  <li key={i} className="flex items-center gap-3 text-slate-600 text-sm font-semibold group/item">
+                    <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center group-hover/item:bg-purple-600 transition-colors">
+                      <FaCheck className="text-purple-600 group-hover/item:text-white transition-colors" size={8} />
+                    </div>
+                    <span className="group-hover/item:text-purple-700 transition-colors cursor-default">{item}</span>
                   </li>
                 ))}
               </ul>
+
+              {/* Decorative Corner Element */}
+              <div className="absolute top-4 right-8 text-slate-50 font-black text-6xl pointer-events-none select-none">
+                0{index + 1}
+              </div>
             </div>
           ))}
         </div>

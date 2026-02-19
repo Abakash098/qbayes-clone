@@ -1,385 +1,302 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  // Core Icons
-  FaBars, FaTimes, FaChevronDown, FaPhoneAlt, 
-  // Solution Icons
-  FaRunning, FaShareAlt, FaCar, FaCoins, FaUniversity, 
-  FaHamburger, FaHome, FaGraduationCap, FaHeartbeat, FaBriefcase,
-  // IT Services Icons
+  FaBars, FaTimes, FaChevronDown, FaArrowRight, FaPlus, FaMinus,
   FaHandshake, FaPaintBrush, FaLaptopCode, FaRocket, FaArrowUp, 
-  FaPuzzlePiece, FaCheckCircle, FaTools, FaEye,
-  // AI Services Icons
-  FaDatabase, FaFilter, FaCogs, FaChartPie, FaSearch, FaServer, FaBrain
+  FaBullhorn, FaNetworkWired, FaGamepad, FaCode, FaMobileAlt, FaBrain, FaDatabase,
+  FaRunning, FaShareAlt, FaCar, FaCoins, FaUniversity, FaMotorcycle, FaCut,
+  FaHome, FaHandPointer, FaCogs, FaGraduationCap, FaUsers, FaHeartbeat, FaBox,
+  FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
 
+import { Link, useNavigate, useLocation } from 'react-router-dom'; 
 import InfoModal from './InfoModal';
 import HireUsModal from './HireUsModal'; 
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  
-  // 1. General Info Modal State (Services/About)
+  const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); 
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ title: '', content: null });
-  
-  // 2. Hire Us Modal State
   const [isHireModalOpen, setIsHireModalOpen] = useState(false);
-
-  // Mobile Accordion State
   const [activeMobileSection, setActiveMobileSection] = useState(null);
+  const [activeWebDev, setActiveWebDev] = useState('PHP Framework');
 
-  // Helper Functions
-  const openPopup = (title, content) => {
-    setModalData({ title, content });
-    setIsModalOpen(true);
-    setNav(false); 
+  const aiDropdownOptions = [
+    { id: 'sol', label: 'AI Services & Solutions', path: '/ai-services', title: 'AI Services & Solutions', desc: 'Transform your business with cutting-edge AI.', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=600' },
+    { id: 'dev', label: 'AI Development', path: '/ai-development', title: 'Custom AI Development', desc: 'Build scalable AI models.', image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=600' },
+    { id: 'con', label: 'AI Consulting', path: '/ai-consulting', title: 'Strategic AI Consulting', desc: 'Expert guidance to navigate the AI landscape.', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600' },
+    { id: 'chat', label: 'AI Chatbot Development', path: '/ai-chatbot', title: 'Intelligent Chatbots', desc: 'Enhance customer engagement with NLP.', image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600' }, 
+    { id: 'gen-dev', label: 'Generative AI Development', path: '/gen-ai-development', title: 'Generative AI Models', desc: 'Unlock creativity with GenAI.', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600' },
+    { id: 'int', label: 'AI Integration', path: '/ai-integration', title: 'Seamless AI Integration', desc: 'Embed AI into your existing ecosystem.', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600' }
+  ];
+
+  const [activeAIItem, setActiveAIItem] = useState(aiDropdownOptions[0]);
+
+  const aboutLinks = [
+    { name: 'About Us', path: '/about' },
+    { name: 'Our Team', path: '/about' },
+    { name: 'How We Work', path: '/how-we-work' } 
+  ];
+
+  const webDevSections = [
+    { name: 'PHP Framework', items: ['Zend Framework', 'Cake PHP', 'Laravel'] },
+    { name: 'MEAN Stack', items: ['MongoDB', 'Express', 'Angular', 'Node.js'] },
+    { name: 'MERN Stack', items: ['MongoDB', 'Express', 'React', 'Node.js'] },
+    { name: 'Open Source Technology', items: [] },
+    { name: 'E-Commerce', items: ['Magento', 'Shopify', 'WooCommerce'] },
+    { name: 'WordPress', items: [] },
+    { name: 'CMS', items: [] }
+  ];
+
+  const solutionsList = [
+    { name: 'Sports', icon: FaRunning, path: '/solutions/sports' },
+    { name: 'Social Media', icon: FaShareAlt, path: '/solutions/social-media' },
+    { name: 'Ride Sharing', icon: FaCar, path: '/solutions/ride-sharing' },
+    { name: 'Fintech', icon: FaCoins, path: '/solutions/fintech' },
+    { name: 'BFSI', icon: FaUniversity, path: '/solutions/bfsi' },
+    { name: 'Food Delivery', icon: FaMotorcycle, path: '/solutions/food-delivery' },
+    { name: 'Salon/Spa Booking App', icon: FaCut, path: '/solutions/salon-spa' },
+    { name: 'Real Estate', icon: FaHome, path: '/solutions/real-estate' },
+    { name: 'Online Ordering App', icon: FaHandPointer, path: '/solutions/online-ordering' },
+    { name: 'On-Demand Service Delivery', icon: FaCogs, path: '/solutions/on-demand' },
+    { name: 'eLearning', icon: FaGraduationCap, path: '/solutions/elearning' },
+    { name: 'Crowdfunding', icon: FaUsers, path: '/solutions/crowdfunding' },
+    { name: 'Fitness App', icon: FaHeartbeat, path: '/solutions/fitness' },
+    { name: 'Logistics & Distribution', icon: FaBox, path: '/solutions/logistics' },
+    { name: 'Multivendor Marketplace', icon: FaStore, path: '/solutions/marketplace' },
+    { name: 'Travel Booking Engine', icon: FaCalendarAlt, path: '/solutions/travel-engine' },
+    { name: 'Travel & Tourism App', icon: FaPlane, path: '/solutions/travel-tourism' },
+    { name: 'Dating', icon: FaHeart, path: '/solutions/dating' },
+    { name: 'Healthcare', icon: FaHandHoldingHeart, path: '/solutions/healthcare' },
+    { name: 'Job Portal', icon: FaBriefcase, path: '/solutions/job-portal' },
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavigation = (path) => {
+    if (path) {
+      navigate(path);
+      setNav(false);
+      window.scrollTo(0, 0); 
+    }
   };
 
   const toggleMobileSection = (section) => {
     setActiveMobileSection(activeMobileSection === section ? null : section);
   };
 
-  // --- DATA LISTS (KEPT EXACTLY THE SAME) ---
-  const aiSolutionsList = [
-    "Statistical Analysis, Inferencing, Regression",
-    "Knowledge/Information Processing and Retrieval",
-    "Forecasting/Prediction",
-    "Intelligent Systems",
-    "Machine/Deep Learning Solutions",
-    "Smart Optimization",
-    "Explainable AI, Sustainable AI, Responsible AI",
-    "Other Advanced Analytics and Solutions"
-  ];
-
-  const aiServicesList = [
-    { icon: FaHandshake, title: 'Consultancy', desc: 'Expert AI strategy & roadmap planning.' },
-    { icon: FaDatabase, title: 'Data Collection', desc: 'Gathering high-quality raw data.' },
-    { icon: FaFilter, title: 'Data Curation', desc: 'Cleaning and organizing datasets.' },
-    { icon: FaCogs, title: 'Data Processing', desc: 'Transforming data for analysis.' },
-    { icon: FaChartPie, title: 'Data Visualization', desc: 'Visual insights & dashboards.' },
-    { icon: FaSearch, title: 'Data Analysis', desc: 'Interpretation & understanding patterns.' },
-    { icon: FaServer, title: 'Database Design', desc: 'Development & maintenance of DBs.' },
-    { icon: FaBrain, title: 'Artificial Intelligence', desc: 'Core AI model development.' }
-  ];
-
-  const itSolutionsList = [
-    "Inventory Management / ERP Systems",
-    "Finance Management Systems",
-    "Human Resource Management Systems (HRMS)",
-    "Academic/Learning Management Systems (LMS)",
-    "Daily Lifestyle Tracking/Health Systems",
-    "Web Design & Development",
-    "Online/Web based Systems",
-    "App Development",
-    "Custom Large/Small-scale IT Applications"
-  ];
-
-  const itServicesList = [
-    { icon: FaHandshake, title: 'Consultancy', desc: 'Strategic IT guidance.' },
-    { icon: FaPaintBrush, title: 'Design', desc: 'UI/UX & Architecture.' },
-    { icon: FaLaptopCode, title: 'Development', desc: 'Web & Mobile Solutions.' },
-    { icon: FaRocket, title: 'Deployment', desc: 'Cloud & On-Premise.' },
-    { icon: FaArrowUp, title: 'Upgradation', desc: 'Modernizing Legacy Systems.' },
-    { icon: FaPuzzlePiece, title: 'Integration', desc: 'API & IoT Connectivity.' },
-    { icon: FaCheckCircle, title: 'Testing', desc: 'QA & Security.' },
-    { icon: FaTools, title: 'Maintenance', desc: '24/7 Support & Fixes.' },
-    { icon: FaEye, title: 'Monitoring', desc: 'Real-time Analytics.' }
-  ];
-
-  const industries = [
-    { icon: FaRunning, name: 'Sports', info: 'Advanced analytics for sports.' },
-    { icon: FaShareAlt, name: 'Social Media', info: 'Scalable social platforms.' },
-    { icon: FaCar, name: 'Ride Sharing', info: 'GPS & payment integration.' },
-    { icon: FaCoins, name: 'Fintech', info: 'Secure financial tech.' },
-    { icon: FaUniversity, name: 'BFSI', info: 'Banking & Insurance systems.' },
-    { icon: FaHamburger, name: 'Food Delivery', info: 'Logistics & ordering apps.' },
-    { icon: FaHome, name: 'Real Estate', info: 'Virtual tours & portals.' },
-    { icon: FaGraduationCap, name: 'eLearning', info: 'Education platforms.' },
-    { icon: FaHeartbeat, name: 'Healthcare', info: 'HIPAA-compliant apps.' },
-    { icon: FaBriefcase, name: 'Job Portal', info: 'Smart talent matching.' }
-  ];
-
-  // --- CONTENT GENERATORS (KEPT SAME) ---
-  const getPopupContent = (title, desc, solutionsList, isAI = false) => (
-    <div className="space-y-8 text-gray-700 font-sans">
-      <div>
-        <p className={`text-lg leading-relaxed border-l-4 ${isAI ? 'border-purple-600 bg-purple-50' : 'border-blue-500 bg-blue-50'} p-4 rounded-r-lg`}>
-          Our <span className={`font-bold ${isAI ? 'text-purple-700' : 'text-blue-700'}`}>{title}</span> services empower your business. {desc} 
-        </p>
-      </div>
-      <div>
-        <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-          {isAI ? <FaBrain className="text-purple-500"/> : <FaLaptopCode className="text-orange-500"/>} 
-          {isAI ? "AI Capabilities & Solutions" : "Available Products & Solutions"}
-        </h3>
-        <div className="grid md:grid-cols-2 gap-3">
-          {solutionsList.map((solution, idx) => (
-            <div key={idx} className={`flex items-start gap-2 p-3 rounded-lg border border-gray-100 transition ${isAI ? 'hover:border-purple-200 hover:bg-purple-50' : 'hover:border-blue-200 hover:bg-blue-50'}`}>
-              <div className={`mt-1 h-2 w-2 rounded-full shrink-0 ${isAI ? 'bg-purple-500' : 'bg-blue-500'}`}></div>
-              <span className="text-sm font-medium">{solution}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const aboutContent = (
-    <div className="space-y-6 text-left text-gray-700 font-sans">
-      <p className="text-lg leading-relaxed">
-        We are a startup that provides <span className="font-bold text-blue-600">Consultancy Services</span> for Software/Web and other IT Solutions along with Data Analytics and AI.
-      </p>
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
-          <h3 className="font-bold text-blue-800 mb-2">🤖 AI & Data Analytics</h3>
-          <p className="text-sm">Information Retrieval, Forecasting, Machine Learning, and Responsible AI.</p>
-        </div>
-        <div className="bg-orange-50 p-4 rounded-xl border border-orange-100">
-          <h3 className="font-bold text-orange-800 mb-2">⚡ Electronics & IoT</h3>
-          <p className="text-sm">A hub for Electronics & IoT Solutions, integrating hardware with smart software.</p>
-        </div>
-      </div>
-    </div>
-  );
+  const isSticky = scrolled || location.pathname !== "/";
 
   return (
     <>
-      {/* --- VISIBILITY FIX: Changed text-white to text-slate-900 --- */}
-      <nav className="absolute w-full h-[90px] flex justify-between items-center px-6 lg:px-12 bg-transparent text-slate-900 z-[100] font-sans">
+      <nav className={`fixed w-full h-[90px] flex items-center justify-between px-6 lg:px-12 z-[100] font-sans transition-all duration-300 
+        ${isSticky ? 'bg-white shadow-md' : 'bg-transparent'} text-slate-900`}> 
         
-        {/* LOGO - Added white box so it pops against any background */}
-        <Link to="/" className="flex items-center">
-          <div className="bg-white px-4 py-2 rounded-lg shadow-sm border border-slate-100 flex items-center justify-center hover:scale-105 transition-transform duration-300">
-            <img 
-              src="/logo.jpeg" 
-              alt="Bayes" 
-              className="h-8 md:h-10 w-auto object-contain"
-              onError={(e) => { if(e.target.src.endsWith('.jpeg')){ e.target.src = "/logo.jpg"; } }}
-            />
-          </div>
+        <div onClick={() => setNav(true)} className="xl:hidden cursor-pointer p-2 z-[200]">
+          <FaBars size={28} className="text-slate-900" />
+        </div>
+
+        <Link to="/" className="flex items-center xl:order-first order-last">
+          <img src="/logo.jpeg" alt="Bayes" className="h-8 md:h-10 w-auto object-contain" />
         </Link>
 
-        {/* ================= DESKTOP MENU ================= */}
+        {/* DESKTOP MENU */}
         <div className="hidden xl:flex items-center gap-8">
           
-          {/* 1. EMPOWERING WITH AI */}
           <div className="relative group">
-            <button className="bg-orange-500 text-white px-6 py-2.5 rounded-full flex items-center gap-2 font-bold hover:scale-105 transition-all shadow-lg shadow-orange-500/30">
+            <button className="bg-orange-500 text-white px-6 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg">
               Empowering With AI <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[50px] left-[-100px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 p-8">
-               <div className="grid grid-cols-3 gap-6">
-                  {aiServicesList.map((service, index) => (
-                    <div 
-                      key={index}
-                      onClick={() => openPopup(service.title, getPopupContent(service.title, service.desc, aiSolutionsList, true))}
-                      className="flex items-start gap-4 p-4 rounded-xl hover:bg-purple-50 transition-all cursor-pointer group/card hover:scale-105 border border-transparent hover:border-purple-100"
-                    >
-                      <div className="p-3 bg-gray-100 rounded-lg text-purple-600 group-hover/card:bg-white group-hover/card:text-purple-700 group-hover/card:shadow-md transition-all">
-                        <service.icon size={20} />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 group-hover/card:text-purple-700 transition-colors">{service.title}</h4>
-                        <p className="text-xs text-gray-500 mt-1">{service.desc}</p>
-                      </div>
+            <div className="absolute top-[50px] left-[-100px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden">
+               <div className="w-1/3 bg-slate-50 py-6">
+                  {aiDropdownOptions.map((item) => (
+                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-orange-500 border-l-4 border-orange-500 shadow-sm' : 'text-slate-600 hover:text-orange-500 border-l-4 border-transparent'}`}>
+                      {item.label}
+                      {activeAIItem.id === item.id && <FaArrowRight size={12}/>}
                     </div>
                   ))}
                </div>
-               <div className="mt-6 pt-4 border-t border-gray-100 text-center">
-                 <p className="text-xs text-purple-600 font-semibold uppercase tracking-widest">Data Analytics • Machine Learning • Intelligent Systems</p>
+               <div className="w-2/3 p-10 bg-white">
+                  <div className="h-full flex flex-col animate-fadeIn">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">{activeAIItem.title}</h3>
+                      <div className="relative w-full h-48 rounded-xl overflow-hidden mb-4 shadow-md"><img src={activeAIItem.image} alt="" className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div></div>
+                      <p className="text-slate-500 text-sm mb-6">{activeAIItem.desc}</p>
+                      <button onClick={() => handleNavigation(activeAIItem.path)} className="text-cyan-500 font-bold text-sm flex items-center gap-2 hover:underline">View Full Page <FaArrowRight/></button>
+                  </div>
                </div>
             </div>
           </div>
 
-          <ul className="flex items-center gap-8 text-[15px] font-bold tracking-wide">
+          <ul className="flex items-center gap-8 text-[15px] font-bold tracking-wide text-slate-900">
             
-            {/* 2. ABOUT */}
-            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
+            {/* --- ADDED HOME BUTTON FOR DESKTOP HERE --- */}
+            <li onClick={() => handleNavigation('/')} className="hover:text-orange-400 cursor-pointer py-4">Home</li>
+
+            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
               <div className="absolute top-[70px] w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-orange-500">
-                <button onClick={() => openPopup("About Us", aboutContent)} className="w-full text-left px-6 py-3 hover:bg-gray-100 hover:text-orange-500 border-b border-gray-50 font-semibold transition-colors">About Us</button>
-                {['Our Team', 'How We Work', 'Awards', 'Life @ Webskitters'].map(item => (
-                  <button key={item} onClick={() => openPopup(item, <p className="p-8 font-sans">Details about {item} go here.</p>)} className="w-full text-left px-6 py-3 hover:bg-gray-100 hover:text-orange-500 border-b border-gray-50 transition-colors">{item}</button>
+                {aboutLinks.map(link => (
+                  <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-3 hover:bg-slate-50 hover:text-orange-500 border-b border-slate-50 font-semibold transition-colors">
+                    {link.name}
+                  </button>
                 ))}
               </div>
             </li>
 
-            {/* 3. SERVICES */}
-            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
-              Services <FaChevronDown size={10}/>
-              <div className="absolute top-[70px] left-[-250px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8">
-                  <div className="grid grid-cols-3 gap-6">
-                    {itServicesList.map((service, index) => (
-                      <div 
-                        key={index}
-                        onClick={() => openPopup(service.title, getPopupContent(service.title, service.desc, itSolutionsList, false))}
-                        className="flex items-start gap-4 p-4 rounded-xl hover:bg-blue-50 transition-all cursor-pointer group/card hover:scale-105 border border-transparent hover:border-blue-100"
-                      >
-                        <div className="p-3 bg-gray-100 rounded-lg text-blue-600 group-hover/card:bg-white group-hover/card:text-orange-500 group-hover/card:shadow-md transition-all">
-                          <service.icon size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-gray-900 group-hover/card:text-blue-700 transition-colors">{service.title}</h4>
-                          <p className="text-xs text-gray-500 mt-1">{service.desc}</p>
-                        </div>
-                      </div>
-                    ))}
+            {/* SERVICES MEGA MENU */}
+            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
+              <span onClick={() => handleNavigation('/services')}>Services</span> <FaChevronDown size={10}/>
+              <div className="absolute top-[70px] left-[-400px] w-[1100px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8 flex cursor-default">
+                
+                <div className="w-1/3 pr-6 space-y-8">
+                  <div>
+                    <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaLaptopCode className="text-cyan-400"/> UI/UX Design</h4>
+                    <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
+                      <li onClick={() => handleNavigation('/ui-ux-design')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> UX Prototyping</li>
+                    </ul>
                   </div>
+                  <div>
+                    <h4 onClick={() => handleNavigation('/digital-marketing')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaBullhorn className="text-cyan-400"/> Digital Marketing</h4>
+                    <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
+                      {['SEO', 'SMM', 'PPC', 'ORM', 'Content Marketing', 'AEO', 'Amazon Seller Consulting'].map(item => (
+                        <li key={item} onClick={() => handleNavigation('/digital-marketing')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <h4 onClick={() => handleNavigation('/iot-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 cursor-pointer hover:text-orange-500"><FaNetworkWired className="text-cyan-400"/> Internet of Things</h4>
+                  <h4 onClick={() => handleNavigation('/game-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 cursor-pointer hover:text-orange-500"><FaGamepad className="text-cyan-400"/> Game Development</h4>
+                </div>
+
+                <div className="w-1/3 px-6 border-l border-r border-slate-100">
+                   <h4 onClick={() => handleNavigation('/web-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-6 cursor-pointer hover:text-orange-500"><FaCode className="text-cyan-400"/> Web Development</h4>
+                   <div className="space-y-2">
+                     {webDevSections.map((sec) => (
+                       <div key={sec.name} className="border-b border-slate-50 pb-2">
+                         <div className="flex justify-between items-center py-2 cursor-pointer font-bold text-slate-800 hover:text-orange-500" onClick={() => setActiveWebDev(activeWebDev === sec.name ? '' : sec.name)}>
+                           <span onClick={(e) => { e.stopPropagation(); handleNavigation('/web-development'); }}>{sec.name}</span>
+                           {activeWebDev === sec.name ? <FaMinus size={10} className="text-slate-400"/> : <FaPlus size={10} className="text-slate-400"/>}
+                         </div>
+                         {activeWebDev === sec.name && sec.items.length > 0 && (
+                           <ul className="pl-4 py-2 space-y-2 text-sm text-slate-500 font-medium animate-fadeIn">
+                             {sec.items.map(item => (
+                               <li key={item} onClick={() => handleNavigation('/web-development')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                             ))}
+                           </ul>
+                         )}
+                       </div>
+                     ))}
+                   </div>
+                </div>
+
+                <div className="w-1/3 pl-6 space-y-8">
+                  <div>
+                    <h4 onClick={() => handleNavigation('/mobile-app-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaMobileAlt className="text-cyan-400"/> Mobile App Development</h4>
+                    <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
+                      {['Hybrid', 'Swift', 'React Native', 'Kotlin', 'Flutter', 'Java', 'Native App Development', 'Objective-C'].map(item => (
+                        <li key={item} onClick={() => handleNavigation('/mobile-app-development')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="pt-4 border-t border-slate-100">
+                    <h4 onClick={() => handleNavigation('/ai-services')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaBrain className="text-cyan-400"/> Artificial Intelligence</h4>
+                    <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
+                      {['Deep Learning', 'Chatbot', 'Decision Management', 'Machine Learning', 'NLP'].map(item => (
+                        <li key={item} onClick={() => handleNavigation('/ai-services')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </li>
 
-            {/* 4. SOLUTIONS */}
-            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
-              Solutions <FaChevronDown size={10}/>
-              <div className="absolute top-[70px] left-[-450px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 grid grid-cols-3 gap-8">
-                {industries.map((ind, i) => (
-                  <div key={i} onClick={() => openPopup(ind.name, ind.info)} className="flex items-center gap-4 hover:text-orange-500 transition cursor-pointer group/ind p-2 rounded-lg hover:bg-gray-50">
-                    <div className="p-3 bg-blue-50 rounded-lg group-hover/ind:bg-orange-50 transition shadow-sm"><ind.icon className="text-blue-500 group-hover/ind:text-orange-500 text-xl"/></div>
-                    <span className="font-semibold text-sm">{ind.name}</span>
-                  </div>
-                ))}
+            {/* SOLUTIONS MEGA MENU */}
+            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
+              <span onClick={() => handleNavigation('/services')}>Solutions</span> <FaChevronDown size={10}/>
+              <div className="absolute top-[70px] left-[-450px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 cursor-default">
+                <div className="grid grid-rows-7 grid-flow-col gap-x-8 gap-y-6">
+                  {solutionsList.map((solution, index) => (
+                    <div key={index} onClick={() => handleNavigation(solution.path)} className="flex items-center gap-4 group/sol cursor-pointer">
+                       <solution.icon className="text-cyan-500 text-[22px] group-hover/sol:text-orange-500 transition-colors" />
+                       <span className="font-bold text-[15px] text-slate-800 group-hover/sol:text-orange-500 transition-colors">{solution.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </li>
 
-            <li className="hover:text-purple-600 cursor-pointer transition-colors">Case Studies</li>
-            <li className="hover:text-purple-600 cursor-pointer transition-colors">Blog</li>
+            <li onClick={() => handleNavigation('/case-studies')} className="hover:text-orange-400 cursor-pointer py-4">Case Studies</li>
+            <li onClick={() => handleNavigation('/blog')} className="hover:text-orange-400 cursor-pointer py-4">Blog</li>
           </ul>
         </div>
 
-        {/* HIRE US BUTTON (DESKTOP) */}
-        <div className="hidden xl:block">
-           <button 
-             onClick={() => setIsHireModalOpen(true)} 
-             className="bg-slate-900 text-white px-10 py-3 rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg hover:shadow-purple-200"
-           >
-             Hire Us ↗
-           </button>
-        </div>
-
-        {/* MOBILE TOGGLE ICON - Changed to dark color */}
-        <div onClick={() => setNav(true)} className="xl:hidden cursor-pointer p-2 z-[200] text-slate-900">
-          <FaBars size={28}/>
-        </div>
+        <button onClick={() => setIsHireModalOpen(true)} className="hidden xl:block bg-slate-900 text-white px-10 py-3 rounded-full font-bold hover:bg-orange-500 transition-all shadow-lg">Hire Us ↗</button>
       </nav>
 
-      {/* ================= MODALS & SIDEBAR (UNCHANGED) ================= */}
-      <InfoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={modalData.title}>
-        <div className="p-6 md:p-12 max-h-[70vh] overflow-y-auto custom-scrollbar">
-          {modalData.content}
-        </div>
-      </InfoModal>
+      <HireUsModal isOpen={isHireModalOpen} onClose={() => setIsHireModalOpen(false)} />
 
-      <HireUsModal 
-        isOpen={isHireModalOpen} 
-        onClose={() => setIsHireModalOpen(false)} 
-      />
+      {/* MOBILE SIDEBAR */}
+      <div className={`fixed top-0 left-0 h-full w-full bg-[#0b1c38] z-[300] transition-transform duration-500 ${nav ? 'translate-x-0' : '-translate-x-full'} overflow-y-auto`}>
+          <div className="flex flex-col p-6 text-white font-bold h-full min-h-screen">
+            <div className="flex justify-between items-center mb-10"><FaTimes onClick={() => setNav(false)} size={30}/><img src="/logo.jpeg" alt="Bayes" className="h-8 w-auto" /></div>
+            <div className="space-y-6 pb-20">
+              
+              {/* --- ADDED HOME BUTTON FOR MOBILE HERE --- */}
+              <button onClick={() => handleNavigation('/')} className="w-full text-left text-2xl py-3 border-b border-white/10 hover:text-orange-400 transition-colors">Home</button>
 
-      <div 
-        className={`fixed top-0 right-0 h-full w-full bg-[#0b1c38] z-[300] transition-transform duration-500 ease-in-out overflow-y-auto ${nav ? 'translate-x-0' : 'translate-x-full'}`}
-      >
-          <div className="flex flex-col p-6 text-white font-bold gap-4 h-full">
-            <div className="flex justify-between items-center mb-6">
-                <div className="bg-white px-3 py-1.5 rounded-lg shadow-lg"><img src="/logo.jpeg" alt="Bayes" className="h-6 w-auto" /></div>
-                <FaTimes onClick={() => setNav(false)} size={30} className="cursor-pointer hover:text-orange-500 transition"/>
+              <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-white/10 text-orange-400">AI Solutions <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'ai' && (
+                <div className="bg-[#112d5a] rounded-lg p-2 space-y-1">
+                  {aiDropdownOptions.map(item => (
+                    <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-3 text-sm font-normal text-gray-300 hover:text-white">{item.label}</div>
+                  ))}
+                </div>
+              )}
+
+              <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-white/10">Services <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'services' && (
+                <div className="bg-[#112d5a] rounded-lg p-4 space-y-4">
+                  <p onClick={() => handleNavigation('/ui-ux-design')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">UI/UX Design</p>
+                  <p onClick={() => handleNavigation('/web-development')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">Web Development</p>
+                  <p onClick={() => handleNavigation('/mobile-app-development')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">Mobile App Development</p>
+                  <p onClick={() => handleNavigation('/digital-marketing')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">Digital Marketing</p>
+                  <p onClick={() => handleNavigation('/iot-development')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">Internet of Things</p>
+                  <p onClick={() => handleNavigation('/game-development')} className="text-sm font-normal text-cyan-400 hover:text-white cursor-pointer">Game Development</p>
+                </div>
+              )}
+
+              <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-white/10">Solutions <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'solutions' && (
+                <div className="bg-[#112d5a] rounded-lg p-2 space-y-1 max-h-80 overflow-y-auto">
+                  {solutionsList.map((sol, index) => (
+                    <button key={index} onClick={() => handleNavigation(sol.path)} className="w-full flex items-center gap-3 text-left p-3 text-sm font-normal text-gray-300 hover:text-white border-b border-white/5 last:border-0">
+                      <sol.icon className="text-cyan-400 text-lg flex-shrink-0" /> {sol.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-white/10">About <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'about' && (
+                <div className="bg-[#112d5a] rounded-lg p-2 space-y-1">
+                  {aboutLinks.map(link => (
+                    <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-3 text-sm font-normal text-gray-300 hover:text-white">{link.name}</button>
+                  ))}
+                </div>
+              )}
+
+              <button onClick={() => handleNavigation('/case-studies')} className="w-full text-left text-2xl py-3 border-b border-white/10 hover:text-orange-400 transition-colors">Case Studies</button>
+              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-2xl py-3 border-b border-white/10 hover:text-orange-400 transition-colors">Blog</button>
+              
             </div>
-            
-            {/* ... Mobile Accordions kept exactly as they were ... */}
-            <div>
-                <button 
-                  onClick={() => toggleMobileSection('ai')} 
-                  className="w-full flex justify-between items-center text-xl py-3 border-b border-white/10 text-purple-300"
-                >
-                    Empowering With AI <FaChevronDown size={14} className={`transition-transform ${activeMobileSection === 'ai' ? 'rotate-180' : ''}`}/>
-                </button>
-                {activeMobileSection === 'ai' && (
-                    <div className="bg-[#112d5a] rounded-lg mt-2 p-2 space-y-2 animate-fadeIn">
-                        {aiServicesList.map((service, idx) => (
-                            <div 
-                                key={idx} 
-                                onClick={() => openPopup(service.title, getPopupContent(service.title, service.desc, aiSolutionsList, true))}
-                                className="flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer"
-                            >
-                                <service.icon className="text-purple-400" />
-                                <span className="text-sm font-normal">{service.title}</span>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            {/* Services Mobile */}
-            <div>
-                <button 
-                  onClick={() => toggleMobileSection('services')} 
-                  className="w-full flex justify-between items-center text-xl py-3 border-b border-white/10 hover:text-orange-500"
-                >
-                    Services <FaChevronDown size={14} className={`transition-transform ${activeMobileSection === 'services' ? 'rotate-180' : ''}`}/>
-                </button>
-                {activeMobileSection === 'services' && (
-                    <div className="bg-[#112d5a] rounded-lg mt-2 p-2 space-y-2 animate-fadeIn">
-                        {itServicesList.map((service, idx) => (
-                            <div 
-                                key={idx} 
-                                onClick={() => openPopup(service.title, getPopupContent(service.title, service.desc, itSolutionsList, false))}
-                                className="flex items-center gap-3 p-3 hover:bg-white/10 rounded-lg cursor-pointer"
-                            >
-                                <service.icon className="text-orange-400" />
-                                <span className="text-sm font-normal">{service.title}</span>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            {/* Solutions Mobile */}
-            <div>
-                <button 
-                  onClick={() => toggleMobileSection('solutions')} 
-                  className="w-full flex justify-between items-center text-xl py-3 border-b border-white/10 hover:text-orange-500"
-                >
-                    Solutions <FaChevronDown size={14} className={`transition-transform ${activeMobileSection === 'solutions' ? 'rotate-180' : ''}`}/>
-                </button>
-                {activeMobileSection === 'solutions' && (
-                    <div className="bg-[#112d5a] rounded-lg mt-2 p-2 grid grid-cols-2 gap-2 animate-fadeIn">
-                        {industries.map((ind, i) => (
-                            <div key={i} onClick={() => openPopup(ind.name, ind.info)} className="flex items-center gap-2 p-2 hover:bg-white/10 rounded-lg cursor-pointer">
-                                <ind.icon className="text-blue-400 text-sm"/>
-                                <span className="text-xs font-normal">{ind.name}</span>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-
-            {/* About Mobile */}
-            <div>
-                <button 
-                  onClick={() => toggleMobileSection('about')} 
-                  className="w-full flex justify-between items-center text-xl py-3 border-b border-white/10 hover:text-orange-500"
-                >
-                    About <FaChevronDown size={14} className={`transition-transform ${activeMobileSection === 'about' ? 'rotate-180' : ''}`}/>
-                </button>
-                {activeMobileSection === 'about' && (
-                    <div className="bg-[#112d5a] rounded-lg mt-2 p-2 space-y-2 animate-fadeIn">
-                        <div onClick={() => openPopup("About Us", aboutContent)} className="p-3 hover:bg-white/10 rounded-lg cursor-pointer font-normal text-sm">About Us</div>
-                        <div onClick={() => openPopup("Our Team", <p className="p-4">Team Info...</p>)} className="p-3 hover:bg-white/10 rounded-lg cursor-pointer font-normal text-sm">Our Team</div>
-                    </div>
-                )}
-            </div>
-
-            <div className="text-xl border-b border-white/10 py-3 cursor-pointer hover:text-orange-500">Case Studies</div>
-            <div className="text-xl border-b border-white/10 py-3 cursor-pointer hover:text-orange-500">Contact</div>
-            
-            <button 
-              onClick={() => {
-                setNav(false); 
-                setIsHireModalOpen(true); 
-              }}
-              className="bg-orange-500 py-4 rounded-xl mt-6 font-bold text-lg shadow-lg"
-            >
-              Hire Us
-            </button>
+            <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-orange-500 py-4 rounded-xl shadow-lg text-xl font-bold mt-auto mb-6">Hire Us</button>
           </div>
       </div>
     </>

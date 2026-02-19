@@ -1,133 +1,185 @@
-import React, { useEffect, useRef } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import React from 'react';
+
+const caseStudiesData = [
+  {
+    id: 1,
+    title: "A Dynamic Pay-Per-Click Marketing Campaign for a UK-based Waste Management Company",
+    desc: "Webskitters' Strategic PPC for Waste Management Delivering Big Wins In Lead Growth",
+    img: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80",
+    logoText: "enviro",
+    stats: [
+      { value: "45%", label: "Increase in Leads" },
+      { value: "35%", label: "Improved Lead Quality" },
+      { value: "28%", label: "Increased Conversion Rate" }
+    ]
+  },
+  {
+    id: 2,
+    title: "A High-Performance Fashion PPC Strategy Crafted By Webskitters",
+    desc: "Webskitters' Dynamic PPC Services For UK-Based Luxury Fashion Brand Delivered Strong Growth",
+    img: "https://images.unsplash.com/photo-1550614000-4b95dd2449bb?auto=format&fit=crop&w=800&q=80",
+    logoText: "BLACK",
+    stats: [
+      { value: "30%", label: "ROAS Increase" },
+      { value: "22%", label: "Reduced CPS" },
+      { value: "27%", label: "Sales Volume" }
+    ]
+  },
+  {
+    id: 3,
+    title: "Revolutionizing Mental Healthcare Through Seamless Digital Transformation",
+    desc: "Webskitters Transformed MHISA to Redefine Mental Healthcare through Strategic Web Development and Design Solutions",
+    img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=800&q=80",
+    logoText: "MHISA",
+    stats: [
+      { value: "200%", label: "Web Traffic Boost" },
+      { value: "45%", label: "Increased Engagement" },
+      { value: "76%", label: "More Leads" }
+    ]
+  },
+  {
+    id: 4,
+    title: "Embrace the Extraordinary Automotive Website Design for Mercedes with Webskitters",
+    desc: "Experience Excellence in Car Buying with High-end Interactive Web Development",
+    img: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
+    logoText: "Mercedes",
+    stats: [
+      { value: "233%", label: "Boost in Web Traffic" },
+      { value: "42%", label: "Reduced Bounce Rate" },
+      { value: "16%", label: "Boost in Engaged Session" }
+    ]
+  },
+  {
+    id: 5,
+    title: "Elevating LuvLap's Ecommerce Presence With Strategic Shopify Development",
+    desc: "Webskitters Helped Luvlap Dominate the Market with Top-Notch Baby Products Ecommerce Website Development Services",
+    img: "https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80",
+    logoText: "LuvLap",
+    stats: [
+      { value: "58%", label: "Reduction in Bounce Rate" },
+      { value: "10%", label: "Boost in Engaged Session" },
+      { value: "15%", label: "Increase in CTR" }
+    ]
+  },
+  {
+    id: 6,
+    title: "Revamping Liori Diamonds: Elevating E-commerce Success with Shopify",
+    desc: "How Strategic Web Design & Development Transformed Traffic, Sales & Brand Presence",
+    img: "https://images.unsplash.com/photo-1599643478524-fb66f54fce05?auto=format&fit=crop&w=800&q=80",
+    logoText: "LIORI",
+    stats: [
+      { value: "73%", label: "Surge in Web Traffic" },
+      { value: "35%", label: "Increase in Lead Conversion" },
+      { value: "40%", label: "Boost in Engaged Session" }
+    ]
+  }
+];
 
 const CaseStudies = () => {
-  const scrollRef = useRef(null);
-
-  const projects = [
-    { 
-      id: 1, 
-      title: 'Revolutionizing Mental Healthcare Through Seamless Digital Transformation', 
-      category: 'Healthcare', 
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80' 
-    },
-    { 
-      id: 2, 
-      title: 'Embrace the Extraordinary Automotive Website Design for Mercedes', 
-      category: 'Automotive', 
-      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
-    },
-    // --- REMOVED THE E-COMMERCE PROJECT FROM HERE ---
-    { 
-      id: 4, 
-      title: 'AI-Powered FinTech Solutions for Modern Banking', 
-      category: 'FinTech', 
-      image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80' 
-    },
-    // --- DUPLICATES FOR INFINITE SCROLL ---
-    { 
-      id: 5, 
-      title: 'Revolutionizing Mental Healthcare Through Seamless Digital Transformation', 
-      category: 'Healthcare', 
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80' 
-    },
-    { 
-      id: 6, 
-      title: 'Embrace the Extraordinary Automotive Website Design for Mercedes', 
-      category: 'Automotive', 
-      image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80' 
-    },
-    // --- REMOVED THE E-COMMERCE DUPLICATE FROM HERE TOO ---
-  ];
-
-  // --- AUTO SCROLL LOGIC ---
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    let scrollAmount = 0;
-    const speed = 1; // Speed of the auto-scroll
-
-    const scrollInterval = setInterval(() => {
-      if (scrollContainer) {
-        scrollContainer.scrollLeft += speed;
-        scrollAmount += speed;
-
-        // Infinite Scroll Reset: If we've scrolled past the first set of items, snap back
-        if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth / 2)) {
-           scrollContainer.scrollLeft = 0;
-        }
-      }
-    }, 20); 
-
-    return () => clearInterval(scrollInterval);
-  }, []);
-
   return (
-    <section className="py-24 bg-[#0b1c38] font-sans relative overflow-hidden">
+    <div className="font-sans bg-white pt-[90px]">
       
-      {/* Background Grid Decoration */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <div className="h-full w-full" 
-             style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-        </div>
-      </div>
-
-      <div className="max-w-[1400px] mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
-        
-        {/* --- LEFT SIDE: TEXT CONTENT --- */}
-        <div className="lg:col-span-4">
-          <h4 className="text-orange-500 font-bold uppercase tracking-widest text-sm mb-4">CASE STUDIES</h4>
-          
-          <h2 className="text-5xl font-extrabold text-white leading-tight mb-8">
-            Dive Into <br/>
-            QBayes <br/>
-            <span className="text-[#00c2ff]">Remarkable Portfolio</span>
-          </h2>
-          
-          <button className="bg-[#00c2ff] hover:bg-[#00a0d6] text-white px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-blue-500/30 transition-all flex items-center gap-2 group w-fit">
-            View All Case Studies 
-            <FaArrowRight className="transform group-hover:translate-x-1 transition-transform" />
+      {/* --- HERO SECTION --- */}
+      <section className="relative bg-[#020b24] text-white overflow-hidden flex flex-col lg:flex-row items-center">
+        {/* Left Content */}
+        <div className="w-full lg:w-1/2 px-6 lg:px-20 py-20 z-10">
+          <h1 className="text-5xl lg:text-7xl font-bold mb-6">
+            Case <span className="text-[#ff5c00]">Studies</span>
+          </h1>
+          <p className="text-slate-300 text-lg mb-8 max-w-lg leading-relaxed">
+            Take A Closer Look At How We've Helped Businesses Like Yours Achieve Measurable Results. Our Success Stories Show The Real Impact Of Our Work, Be It Web Development And Software Design To Digital Marketing Strategies That Deliver Lasting Value And Business Growth.
+          </p>
+          <button className="bg-[#00b0f0] hover:bg-cyan-500 transition-colors text-white font-semibold py-4 px-8 rounded-full flex items-center gap-2">
+            Consult Our AI Experts 
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
           </button>
         </div>
 
-        {/* --- RIGHT SIDE: AUTO-SCROLLING SLIDER --- */}
-        <div 
-          ref={scrollRef}
-          className="lg:col-span-8 flex gap-8 overflow-x-hidden pb-8 whitespace-nowrap"
-        >
-          {projects.map((project, index) => (
-            <div 
-              key={index} 
-              className="min-w-[350px] md:min-w-[400px] bg-[#102a52] rounded-3xl overflow-hidden shadow-2xl border border-white/5 hover:border-[#00c2ff]/50 transition-all duration-300 group inline-block whitespace-normal cursor-pointer"
-            >
-              {/* Card Image */}
-              <div className="h-64 overflow-hidden relative">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-                  {project.category}
+        {/* Right Image Background */}
+        <div className="w-full lg:w-1/2 h-[400px] lg:h-[600px] relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020b24] via-[#020b24]/50 to-transparent z-10 lg:hidden"></div>
+          <img 
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80" 
+            alt="Typing on laptop" 
+            className="w-full h-full object-cover opacity-70"
+          />
+        </div>
+      </section>
+
+      {/* --- CASE STUDIES GRID --- */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {caseStudiesData.map((study) => (
+            <div key={study.id} className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col group transition-transform hover:-translate-y-2">
+              
+              {/* Image & Logo */}
+              <div className="relative h-72 overflow-hidden">
+                <img src={study.img} alt={study.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute bottom-6 left-6 bg-white px-4 py-2 rounded-xl shadow-lg font-bold text-slate-800">
+                  {study.logoText}
                 </div>
               </div>
 
               {/* Card Content */}
-              <div className="p-8 relative">
-                <h3 className="text-xl font-bold text-white leading-snug mb-6 group-hover:text-[#00c2ff] transition-colors line-clamp-2">
-                  {project.title}
-                </h3>
+              <div className="p-8 flex-1 flex flex-col">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight">{study.title}</h3>
+                <p className="text-slate-500 mb-8 flex-1">{study.desc}</p>
                 
-                {/* Arrow Button Circle */}
-                <div className="w-12 h-12 rounded-full bg-[#00c2ff] flex items-center justify-center text-white shadow-lg shadow-blue-500/40 transform group-hover:scale-110 transition-transform">
-                  <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300" />
+                {/* Footer / Stats Block */}
+                <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 border-t border-slate-100 pt-6">
+                  <a href="#" className="text-[#00b0f0] font-bold flex items-center gap-2 hover:underline">
+                    View Case Study
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  </a>
+                  
+                  <div className="bg-[#f4f7fe] rounded-2xl p-4 flex items-center gap-6 xl:gap-8">
+                    {study.stats.map((stat, idx) => (
+                      <div key={idx} className="flex flex-col">
+                        <span className="text-[#00b0f0] font-bold text-xl">{stat.value}</span>
+                        <span className="text-slate-500 text-[11px] font-medium max-w-[70px] leading-tight">{stat.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
               </div>
             </div>
           ))}
         </div>
 
-      </div>
-    </section>
+        {/* Load More Button */}
+        <div className="flex justify-center mt-16">
+          <button className="bg-[#00b0f0] hover:bg-cyan-500 transition-colors text-white font-bold py-4 px-10 rounded-full flex items-center gap-2 shadow-lg shadow-cyan-500/30">
+            Load More
+            <svg className="w-4 h-4 transform -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          </button>
+        </div>
+      </section>
+
+      {/* --- BOTTOM CTA SPLIT SECTION --- */}
+      <section className="max-w-[1400px] mx-auto px-6 lg:px-12 pb-20">
+        <div className="flex flex-col lg:flex-row rounded-[2rem] overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.08)]">
+          
+          {/* Left CTA */}
+          <div className="lg:w-1/2 bg-gradient-to-br from-[#0b5bb1] to-[#0092d6] p-12 lg:p-20 text-white flex flex-col justify-center relative overflow-hidden">
+             {/* Decorative background lines/shapes could go here */}
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight relative z-10">Let's Build Something Extraordinary Together!</h2>
+            <p className="text-blue-100 text-lg relative z-10">Get a wide range of expert services from web development, software solutions, and digital strategies that drive measurable business growth.</p>
+          </div>
+
+          {/* Right CTA */}
+          <div className="lg:w-1/2 bg-[#fafbfd] p-12 lg:p-20 flex flex-col justify-center border border-slate-100">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Ready To Get Started?</h2>
+            <p className="text-slate-500 text-lg mb-8">Share your goals, and we'll help you design the right digital path.</p>
+            <button className="bg-[#de3275] hover:bg-pink-600 transition-colors text-white font-bold py-4 px-8 rounded-full self-start">
+              Consult Our AI Experts
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
   );
 };
 

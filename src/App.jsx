@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import OneSignal from 'react-onesignal'; 
-import AOS from 'aos';            // --- ADDED AOS ---
-import 'aos/dist/aos.css';       // --- ADDED AOS CSS ---
+import AOS from 'aos';            
+import 'aos/dist/aos.css';       
 
 // --- CORE COMPONENTS ---
 import Navbar from './components/Navbar';
@@ -39,6 +39,7 @@ import AIConsulting from './components/AIConsulting';
 import AIChatbot from './components/AIChatbot'; 
 import AIIntegration from './components/AIIntegration'; 
 import GenAIDevelopment from './components/GenAIDevelopment'; 
+import LLMDevelopment from './components/LLMDevelopment'; // <-- ADDED NEW LLM IMPORT
 
 // --- SECTION COMPONENTS ---
 import Clients from './components/Clients';
@@ -99,12 +100,12 @@ function App() {
     runOneSignal();
   }, []);
 
-  // --- AOS ANIMATION INITIALIZATION (ADDED HERE) ---
+  // --- AOS ANIMATION INITIALIZATION ---
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration in milliseconds
-      offset: 100,    // Offset from the original trigger point
-      once: false,    // Whether animation should happen only once - while scrolling down
+      duration: 1000, 
+      offset: 100,    
+      once: false,    
       easing: 'ease-in-out',
     });
   }, []);
@@ -161,6 +162,8 @@ function App() {
         <Route path="/ai-consulting" element={<div className="pt-[90px]"><AIConsulting /><ContactSection /></div>} />
         <Route path="/ai-services" element={<div className="pt-[90px]"><AISolutions /><ContactSection /></div>} />
         <Route path="/ai-development" element={<div className="pt-[90px]"><AIDevelopment /><ContactSection /></div>} />
+        {/* ADDED NEW LLM ROUTE */}
+        <Route path="/llm-development" element={<div><LLMDevelopment /><ContactSection /></div>} />
 
         <Route path="/solutions/sports" element={<div><SportsApp /><ContactSection /></div>} />
         <Route path="/solutions/social-media" element={<div><SocialMediaApp /><ContactSection /></div>} />

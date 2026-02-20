@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // --- ADDED IMPORT ---
 
 const MiscellaneousServices = () => {
-  // Data derived from your Screenshot
+  const navigate = useNavigate(); // --- INITIALIZE NAVIGATE ---
+
+  // Data derived from your Screenshot with added 'path' properties
   const miscServices = [
     { 
       id: "1", 
       title: "Academics/Education", 
+      path: "/misc/academics", // --- ADDED PATH ---
       desc: "Imparting Technical Knowledge, Vocational Training, EdTech Development, and Career Counselling.", 
-      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" // Education Image
+      image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       id: "2", 
       title: "Documentation", 
+      path: "/misc/documentation", // --- ADDED PATH ---
       desc: "Reports, Presentations, Brochures, Research Papers, Dissertations, and Thesis writing.", 
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" // Writing/Paperwork Image
+      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       id: "3", 
       title: "Event Management", 
+      path: "/misc/events", // --- ADDED PATH ---
       desc: "Conferences, Workshops, Seminars, Corporate Meetings, and Tech Fests.", 
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" // Event Image
+      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=800" 
     }
   ];
 
   const [activeId, setActiveId] = useState("1");
 
   return (
-    // Used the same background color #0b1c38 to match your theme
-    // Added 'border-t border-white/10' to create a subtle line between the two service sections
     <div className="w-full bg-[#0b1c38] py-20 relative overflow-hidden font-sans border-t border-white/10">
       
       {/* Background Gradient */}
@@ -52,6 +56,7 @@ const MiscellaneousServices = () => {
               <div 
                 key={service.id}
                 onMouseEnter={() => setActiveId(service.id)}
+                onClick={() => navigate(service.path)} // --- ADDED ONCLICK EVENT ---
                 className={`group relative p-6 rounded-xl transition-all duration-300 border cursor-pointer flex items-center gap-6
                   ${activeId === service.id 
                     ? 'bg-[#102a52] border-blue-500 shadow-xl' 
@@ -101,7 +106,7 @@ const MiscellaneousServices = () => {
         </div>
       </div>
 
-      {/* --- CUSTOM SCROLLBAR CSS (Same as your Services.jsx) --- */}
+      {/* --- CUSTOM SCROLLBAR CSS --- */}
       <style>{`
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;

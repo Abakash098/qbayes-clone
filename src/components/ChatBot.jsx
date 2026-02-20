@@ -1,69 +1,175 @@
-import React, { useState } from 'react';
-import { FaComments, FaTimes, FaPaperPlane } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
+import { FaComments, FaPaperPlane, FaTimes, FaRobot, FaUser, FaTrash, FaExternalLinkAlt } from 'react-icons/fa';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useNavigate } from 'react-router-dom'; // Added for page navigation
+
+const API_KEY = "AIzaSyDipDXflRvBcr0jjekr1dcNNUIDLrlvb34"; 
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 const ChatBot = () => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const scrollRef = useRef(null);
+  
+  // Updated Initial Message to include "actions"
+  const [messages, setMessages] = useState([
+    { 
+      role: "bot", 
+      text: "Hi! I'm your Bayes AI assistant. How may I help you?",
+      actions: [
+        { label: "About QBayes", path: "/about" },
+        { label: "Our Services", path: "/services" },
+        { label: "Contact Us", path: "/#contact" },
+        { label: "Support Option", path: "/misc/academics" }
+      ]
+    }
+  ]);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages, isTyping]);
+
+  const clearChat = () => {
+    setMessages([{ 
+      role: "bot", 
+      text: "How else can I help you?",
+      actions: [
+        { label: "About QBayes", path: "/about" },
+        { label: "Our Services", path: "/services" },
+        { label: "Contact Us", path: "/#contact" }
+      ]
+    }]);
+  };
+
+  // Function to handle clicking on the intersection buttons
+  const handleActionClick = (path) => {
+    setIsOpen(false); // Optional: Close chatbot when navigating
+    if (path.startsWith('/#')) {
+      const id = path.split('#')[1];
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      navigate(path);
+    }
+  };
+
+  const handleSend = async () => {
+    if (!input.trim()) return;
+    const userMessage = { role: "user", text: input };
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
+    setInput("");
+    setIsTyping(true);
+
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const chat = model.startChat({
+        history: [
+          {
+            role: "user",
+            parts: [{ text: "You are the Bayes AI Assistant. Bayes is a tech agency specializing in Web, App, and AI solutions. Be professional and concise. Do not use markdown." }],
+          },
+          {
+            role: "model",
+            parts: [{ text: "Understood. I am the Bayes AI assistant." }],
+          },
+        ],
+      });
+
+      const result = await chat.sendMessage(input);
+      const response = await result.response;
+      setMessages([...updatedMessages, { role: "bot", text: response.text() }]);
+    } catch (error) {
+      if (error.message?.includes("429")) {
+         setMessages([...updatedMessages, { role: "bot", text: "I'm receiving too many messages. Please wait 60 seconds." }]);
+      } else {
+         setMessages([...updatedMessages, { role: "bot", text: "I'm having trouble connecting. Please try again." }]);
+      }
+    } finally {
+      setIsTyping(false);
+    }
+  };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100] font-sans">
-      
-      {/* --- CHAT WINDOW --- */}
+    <div className="fixed bottom-6 right-6 z-[9999] font-sans">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="bg-orange-500 hover:bg-orange-600 text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110 active:scale-95"
+      >
+        {isOpen ? <FaTimes size={24} /> : <FaComments size={28} />}
+      </button>
+
       {isOpen && (
-        <div className="bg-white w-[350px] h-[520px] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-100 transition-all duration-300 transform scale-100">
+        <div className="absolute bottom-20 right-0 w-[350px] md:w-[400px] h-[550px] bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden border border-slate-100 animate-fadeIn">
           
-          {/* Support Agent Header */}
-          <div className="bg-[#0b1c38] p-5 flex items-center justify-between text-white">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="w-10 h-10 rounded-full border-2 border-white/20 overflow-hidden bg-gray-200">
-                  <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100" alt="Agent" className="w-full h-full object-cover" />
+          {/* Header */}
+          <div className="bg-[#020b24] p-6 text-white flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center shadow-lg rotate-3">
+                <FaRobot size={20} className="-rotate-3" />
+              </div>
+              <h3 className="font-bold text-lg leading-none">Bayes AI</h3>
+            </div>
+            <button onClick={clearChat} className="text-slate-400 hover:text-red-400 transition-colors p-2">
+              <FaTrash size={14} />
+            </button>
+          </div>
+
+          {/* Messages Area */}
+          <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 bg-[#f8fafc] scroll-smooth custom-scrollbar">
+            {messages.map((msg, i) => (
+              <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                <div className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${msg.role === 'user' ? 'bg-slate-200 text-slate-600' : 'bg-white text-orange-500'}`}>
+                    {msg.role === 'user' ? <FaUser size={12}/> : <FaRobot size={14}/>}
+                  </div>
+                  <div className={`max-w-[85%] p-4 rounded-3xl text-sm leading-relaxed whitespace-pre-wrap shadow-sm ${msg.role === 'user' ? 'bg-orange-500 text-white rounded-tr-none' : 'bg-white text-slate-700 rounded-tl-none border border-slate-100'}`}>
+                    {msg.text}
+                  </div>
                 </div>
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-[#0b1c38] rounded-full"></div>
+
+                {/* --- INTERSECTION BUTTONS (Quick Actions) --- */}
+                {msg.actions && (
+                  <div className="ml-11 mt-3 w-[80%] bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm">
+                    {msg.actions.map((action, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleActionClick(action.path)}
+                        className="w-full text-left px-5 py-3 text-[#4a90e2] text-sm font-medium hover:bg-blue-50 border-b border-slate-50 last:border-none transition-colors flex justify-between items-center group"
+                      >
+                        {action.label}
+                        <FaExternalLinkAlt size={10} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div>
-                <h4 className="font-bold text-sm">Akarshan</h4>
-                <p className="text-[10px] text-blue-300">We typically reply in a few minutes</p>
-              </div>
-            </div>
-            <button onClick={() => setIsOpen(false)} className="hover:text-orange-500 transition-colors">
-              <FaTimes />
-            </button>
+            ))}
+            {isTyping && <div className="text-xs text-slate-400 animate-pulse ml-11">AI is thinking...</div>}
           </div>
 
-          {/* Message Area */}
-          <div className="flex-1 p-5 bg-gray-50 overflow-y-auto flex flex-col gap-4">
-            <div className="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-xs text-gray-700 max-w-[85%] leading-relaxed">
-              Got any questions? I'm happy to help you with our services!
+          {/* Input Area */}
+          <div className="p-5 bg-white border-t border-slate-50">
+            <div className="flex items-center gap-2 bg-slate-100 rounded-full pl-5 pr-2 py-2 border border-transparent focus-within:border-orange-200 transition-all">
+              <input 
+                type="text" value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Ask Bayes..." 
+                className="flex-1 bg-transparent py-2 text-sm focus:outline-none"
+              />
+              <button onClick={handleSend} disabled={isTyping || !input.trim()} className="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center">
+                <FaPaperPlane size={14} />
+              </button>
             </div>
-          </div>
-
-          {/* Footer Input */}
-          <div className="p-4 bg-white border-t border-gray-100 flex items-center gap-3">
-            <input 
-              type="text" 
-              placeholder="Ask me anything..." 
-              className="flex-1 bg-gray-100 py-3 px-5 rounded-full text-xs outline-none focus:ring-1 focus:ring-blue-400"
-            />
-            <button className="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-orange-600 shadow-md">
-              <FaPaperPlane size={14} />
-            </button>
           </div>
         </div>
       )}
-
-      {/* --- FLOATING TOGGLE BUTTON --- */}
-      {!isOpen && (
-        <button 
-          onClick={() => setIsOpen(true)}
-          className="bg-orange-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-orange-600 transition-all group"
-        >
-          <FaComments size={30} />
-          {/* Tooltip */}
-          <div className="absolute right-20 bg-white text-[#0b1c38] px-4 py-2 rounded-xl shadow-2xl text-xs font-black whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all border border-gray-100">
-             Talk to an Expert
-          </div>
-        </button>
-      )}
+      <style>{`.custom-scrollbar::-webkit-scrollbar { width: 4px; } .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }`}</style>
     </div>
   );
 };

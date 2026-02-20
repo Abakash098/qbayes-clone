@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import OneSignal from 'react-onesignal'; 
+import AOS from 'aos';            // --- ADDED AOS ---
+import 'aos/dist/aos.css';       // --- ADDED AOS CSS ---
 
 // --- CORE COMPONENTS ---
 import Navbar from './components/Navbar';
@@ -23,7 +25,12 @@ import WebDevelopment from './components/services/WebDevelopment';
 import MobileAppDevelopment from './components/services/MobileAppDevelopment'; 
 import IoTDevelopment from './components/services/IoTDevelopment'; 
 import GameDevelopment from './components/services/GameDevelopment'; 
-import ITConsultancy from './components/services/ITConsultancy'; // ADDED IT CONSULTANCY IMPORT
+import ITConsultancy from './components/services/ITConsultancy'; 
+
+// --- MISCELLANEOUS SERVICES ---
+import AcademicsEducation from './components/misc/AcademicsEducation';
+import Documentation from './components/misc/Documentation';
+import EventManagement from './components/misc/EventManagement';
 
 // --- AI PAGES ---
 import AISolutions from './components/AISolutions'; 
@@ -84,13 +91,22 @@ function App() {
           appId: "d434a54a-a9ba-4edf-b905-dcd793a8e5e6", 
           allowLocalhostAsSecureOrigin: true, 
         });
-        console.log("OneSignal Initialized Successfully");
         OneSignal.Slidedown.promptPush();
       } catch (error) {
         console.error("OneSignal error:", error);
       }
     };
     runOneSignal();
+  }, []);
+
+  // --- AOS ANIMATION INITIALIZATION (ADDED HERE) ---
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      offset: 100,    // Offset from the original trigger point
+      once: false,    // Whether animation should happen only once - while scrolling down
+      easing: 'ease-in-out',
+    });
   }, []);
 
   return (
@@ -124,19 +140,20 @@ function App() {
         <Route path="/about" element={<div className="pt-[90px]"><About /><ContactSection /></div>} />
         <Route path="/how-we-work" element={<div className="pt-[90px]"><HowWeWork /><ContactSection /></div>} />
         <Route path="/services" element={<div className="pt-[90px]"><Services /><ContactSection /></div>} />
-        
         <Route path="/case-studies" element={<div><CaseStudies /><ContactSection /></div>} />
         <Route path="/blog" element={<div><Blog /><ContactSection /></div>} />
 
-        {/* --- ADDED IT CONSULTANCY ROUTE --- */}
         <Route path="/it-consultancy" element={<div><ITConsultancy /><ContactSection /></div>} />
-        
         <Route path="/ui-ux-design" element={<div><UIUXDesign /><ContactSection /></div>} />
         <Route path="/digital-marketing" element={<div><DigitalMarketing /><ContactSection /></div>} /> 
         <Route path="/web-development" element={<div><WebDevelopment /><ContactSection /></div>} /> 
         <Route path="/mobile-app-development" element={<div><MobileAppDevelopment /><ContactSection /></div>} /> 
         <Route path="/iot-development" element={<div><IoTDevelopment /><ContactSection /></div>} /> 
         <Route path="/game-development" element={<div><GameDevelopment /><ContactSection /></div>} /> 
+
+        <Route path="/misc/academics" element={<div><AcademicsEducation /><ContactSection /></div>} />
+        <Route path="/misc/documentation" element={<div><Documentation /><ContactSection /></div>} />
+        <Route path="/misc/events" element={<div><EventManagement /><ContactSection /></div>} />
 
         <Route path="/ai-integration" element={<div className="pt-[90px]"><AIIntegration /><ContactSection /></div>} />
         <Route path="/ai-chatbot" element={<div className="pt-[90px]"><AIChatbot /><ContactSection /></div>} />

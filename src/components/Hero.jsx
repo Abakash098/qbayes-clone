@@ -4,6 +4,17 @@ import { FaArrowRight, FaPlay, FaTimes } from 'react-icons/fa';
 const Hero = () => {
   const [showVideo, setShowVideo] = useState(false);
 
+  // --- HELPER: Smooth scroll to the booking section ---
+  const scrollToBooking = () => {
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      // Fallback if the ID isn't found on the current view
+      window.location.href = "/#booking"; 
+    }
+  };
+
   // --- HELPER: Splits text into animated words ---
   const WordReveal = ({ text, delayStart = 0, className = "" }) => {
     return text.split(" ").map((word, index) => (
@@ -65,7 +76,7 @@ const Hero = () => {
             🚀 Accelerating Digital Transformation
           </div>
           
-          {/* HEADLINE: UPDATED TO USE WordReveal AND PURE BLACK */}
+          {/* HEADLINE */}
           <h2 className="text-5xl md:text-7xl font-black text-black mb-6 leading-tight flex flex-wrap">
             <WordReveal text="Future-Proof With" delayStart={0.2} />
             <br/>
@@ -74,7 +85,7 @@ const Hero = () => {
             </span>
           </h2>
           
-          {/* PARAGRAPH: WORD BY WORD ANIMATION */}
+          {/* PARAGRAPH */}
           <div className="text-slate-600 text-lg md:text-xl leading-relaxed mb-10 max-w-xl font-medium flex flex-wrap">
             <WordReveal 
               text="QBayes empowers enterprises with cutting-edge AI, seamless IT solutions, and data-driven strategies." 
@@ -82,9 +93,13 @@ const Hero = () => {
             />
           </div>
 
-          {/* Buttons (Fade in last) */}
+          {/* Buttons */}
           <div className="opacity-0 animate-reveal flex flex-col sm:flex-row gap-4" style={{ animationDelay: '1.8s' }}>
-            <button className="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-purple-200 transition-all flex items-center justify-center gap-2 group active:scale-[0.98]">
+            {/* UPDATED: Get Started now scrolls to BookingSection */}
+            <button 
+              onClick={scrollToBooking}
+              className="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-purple-200 transition-all flex items-center justify-center gap-2 group active:scale-[0.98]"
+            >
               Get Started 
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
@@ -101,7 +116,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* --- RIGHT SIDE: HERO IMAGE (Floating Animation) --- */}
+        {/* --- RIGHT SIDE: HERO IMAGE --- */}
         <div className="relative hidden lg:block opacity-0 animate-reveal" style={{ animationDelay: '1.2s' }}>
           <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-2xl bg-white p-3 transform transition-transform hover:scale-[1.01] duration-500">
              <img 
@@ -122,7 +137,6 @@ const Hero = () => {
              </div>
           </div>
           
-          {/* Decorative Backdrops */}
           <div className="absolute -top-8 -right-8 w-full h-full border-2 border-purple-100 rounded-[3rem] -z-10"></div>
           <div className="absolute top-1/2 left-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-purple-100/50 to-blue-50/50 rounded-full blur-3xl -z-20 -translate-x-1/2 -translate-y-1/2"></div>
         </div>

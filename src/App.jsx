@@ -39,7 +39,10 @@ import AIConsulting from './components/AIConsulting';
 import AIChatbot from './components/AIChatbot'; 
 import AIIntegration from './components/AIIntegration'; 
 import GenAIDevelopment from './components/GenAIDevelopment'; 
-import LLMDevelopment from './components/LLMDevelopment'; // <-- ADDED NEW LLM IMPORT
+import LLMDevelopment from './components/LLMDevelopment'; 
+
+// --- IOT SPECIFIC PAGES ---
+import AgriculturalAiBot from './components/InternetofThings/AgriculturalAiBot'; // <-- UPDATED IMPORT
 
 // --- SECTION COMPONENTS ---
 import Clients from './components/Clients';
@@ -152,6 +155,9 @@ function App() {
         <Route path="/iot-development" element={<div><IoTDevelopment /><ContactSection /></div>} /> 
         <Route path="/game-development" element={<div><GameDevelopment /><ContactSection /></div>} /> 
 
+        {/* UPDATED ROUTE COMPONENT */}
+        <Route path="/agricultural-ai-bot" element={<div><AgriculturalAiBot /><ContactSection /></div>} />
+
         <Route path="/misc/academics" element={<div><AcademicsEducation /><ContactSection /></div>} />
         <Route path="/misc/documentation" element={<div><Documentation /><ContactSection /></div>} />
         <Route path="/misc/events" element={<div><EventManagement /><ContactSection /></div>} />
@@ -162,7 +168,6 @@ function App() {
         <Route path="/ai-consulting" element={<div className="pt-[90px]"><AIConsulting /><ContactSection /></div>} />
         <Route path="/ai-services" element={<div className="pt-[90px]"><AISolutions /><ContactSection /></div>} />
         <Route path="/ai-development" element={<div className="pt-[90px]"><AIDevelopment /><ContactSection /></div>} />
-        {/* ADDED NEW LLM ROUTE */}
         <Route path="/llm-development" element={<div><LLMDevelopment /><ContactSection /></div>} />
 
         <Route path="/solutions/sports" element={<div><SportsApp /><ContactSection /></div>} />

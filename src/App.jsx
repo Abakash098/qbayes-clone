@@ -42,8 +42,12 @@ import GenAIDevelopment from './components/GenAIDevelopment';
 import LLMDevelopment from './components/LLMDevelopment'; 
 
 // --- IOT SPECIFIC PAGES ---
-import AgriculturalAiBot from './components/InternetofThings/AgriculturalAiBot'; // <-- UPDATED IMPORT
-
+import AgriculturalAiBot from './components/InternetofThings/AgriculturalAiBot'; 
+import AquisherWaterMonitor from './components/InternetofThings/AquisherWaterMonitor'; 
+import AutonomousBeachCleaner from './components/InternetofThings/AutonomousBeachCleaner'; 
+import HazeRainRemoval from './components/InternetofThings/Haze&RainRemoval'; 
+import SoilParameterEstimation from './components/InternetofThings/SoilParameterEstimation'; // NEW IMPORT
+import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; // NEW IMPORT
 // --- SECTION COMPONENTS ---
 import Clients from './components/Clients';
 import MiscellaneousServices from './components/MiscellaneousServices'; 
@@ -87,7 +91,6 @@ const ScrollToTop = () => {
 };
 
 function App() {
-  // --- ONESIGNAL INITIALIZATION ---
   useEffect(() => {
     const runOneSignal = async () => {
       try {
@@ -103,7 +106,6 @@ function App() {
     runOneSignal();
   }, []);
 
-  // --- AOS ANIMATION INITIALIZATION ---
   useEffect(() => {
     AOS.init({
       duration: 1000, 
@@ -155,9 +157,15 @@ function App() {
         <Route path="/iot-development" element={<div><IoTDevelopment /><ContactSection /></div>} /> 
         <Route path="/game-development" element={<div><GameDevelopment /><ContactSection /></div>} /> 
 
-        {/* UPDATED ROUTE COMPONENT */}
+        {/* IOT SPECIFIC ROUTES */}
         <Route path="/agricultural-ai-bot" element={<div><AgriculturalAiBot /><ContactSection /></div>} />
-
+        <Route path="/aquisher-water-monitor" element={<div><AquisherWaterMonitor /><ContactSection /></div>} />
+        <Route path="/autonomous-beach-cleaner" element={<div><AutonomousBeachCleaner /><ContactSection /></div>} />
+        <Route path="/haze-rain-removal" element={<div><HazeRainRemoval /><ContactSection /></div>} />
+        
+        {/* NEW SOIL PARAMETER ROUTE */}
+        <Route path="/soil-parameter-estimation" element={<div><SoilParameterEstimation /><ContactSection /></div>} />
+        <Route path="/gps-asset-tracking" element={<div><GPSAssetTracking /><ContactSection/></div>} />
         <Route path="/misc/academics" element={<div><AcademicsEducation /><ContactSection /></div>} />
         <Route path="/misc/documentation" element={<div><Documentation /><ContactSection /></div>} />
         <Route path="/misc/events" element={<div><EventManagement /><ContactSection /></div>} />

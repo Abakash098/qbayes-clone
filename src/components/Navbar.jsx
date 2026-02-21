@@ -19,7 +19,6 @@ const Navbar = () => {
   const location = useLocation(); 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({ title: '', content: null });
   const [isHireModalOpen, setIsHireModalOpen] = useState(false);
   const [activeMobileSection, setActiveMobileSection] = useState(null);
   const [activeWebDev, setActiveWebDev] = useState('PHP Framework');
@@ -34,18 +33,17 @@ const Navbar = () => {
     { id: 'llm', label: 'LLM Development', path: '/llm-development', title: 'Large Language Models', desc: 'Custom model fine-tuning, RAG, and prompt engineering.', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600' }
   ];
 
-  // --- UPDATED IOT DROPDOWN OPTIONS DATA ---
   const iotDropdownOptions = [
     { id: 'iot-1', label: 'Agricultural AI Bot', path: '/agricultural-ai-bot', title: 'Agricultural Monitoring System', desc: 'Autonomous field operations with 81.8% disease detection accuracy.', image: '/agri-bot.png' },
-    { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/iot-development', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },
-    // UPDATED AQUISHER ENTRY
+    // UPDATED BEACH CLEANER PATH
+    { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/autonomous-beach-cleaner', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },
     { id: 'iot-3', label: 'Aquisher Water Monitor', path: '/aquisher-water-monitor', title: 'Aquisher Fish Cultivation', desc: 'Predicts fish suitability and monitors TDS, oxygen, and pH levels.', image: '/aquisher.png' },
-    { id: 'iot-4', label: 'Haze & Rain Removal', path: '/iot-development', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.jpg' },
-    { id: 'iot-5', label: 'Soil Parameter Estimation', path: '/iot-development', title: 'Soil Fertility Analysis', desc: 'AI-powered accuracy for instant NPK estimation in the field.', image: '/soil-estimation.jpg' },
-    { id: 'iot-6', label: 'Solar Agri-Dashboard', path: '/iot-development', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.jpg' },
-    { id: 'iot-7', label: 'Patient Monitoring', path: '/iot-development', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.jpg' },
-    { id: 'iot-8', label: 'RFID Inventory System', path: '/iot-development', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.jpg' },
-    { id: 'iot-9', label: 'GPS Asset Tracking', path: '/iot-development', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.jpg' }
+    { id: 'iot-4', label: 'Haze & Rain Removal', path: '/haze-rain-removal', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.png' },
+    { id: 'iot-5', label: 'Soil Parameter Estimation', path: '/soil-parameter-estimation', title: 'Soil Fertility Analysis', desc: 'AI-powered accuracy for instant NPK estimation in the field.', image: '/soil-estimation.png' },
+    { id: 'iot-6', label: 'Solar Agri-Dashboard', path: '/iot- development', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.png' },
+    { id: 'iot-7', label: 'Patient Monitoring', path: '/iot-development', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
+    { id: 'iot-8', label: 'RFID Inventory System', path: '/iot-development', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.png' },
+    { id: 'iot-9', label: 'GPS Asset Tracking', path: '/GPS-Asset-Tracking', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.png' }
   ];
 
   const [activeAIItem, setActiveAIItem] = useState(aiDropdownOptions[0]);
@@ -126,15 +124,15 @@ const Navbar = () => {
         {/* DESKTOP MENU */}
         <div className="hidden xl:flex items-center gap-6">
           
-          {/* AI BUTTON */}
+          {/* AI DROPDOWN */}
           <div className="relative group">
-            <button className="bg-orange-500 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm">
+            <button className="bg-purple-500 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
               Empowering With AI <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[50px] left-[-100px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden">
+            <div className="absolute top-[60px] left-[-100px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden">
                <div className="w-1/3 bg-slate-50 py-6">
                   {aiDropdownOptions.map((item) => (
-                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-orange-500 border-l-4 border-orange-500 shadow-sm' : 'text-slate-600 hover:text-orange-500 border-l-4 border-transparent'}`}>
+                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
                       {item.label}
                       {activeAIItem.id === item.id && <FaArrowRight size={12}/>}
                     </div>
@@ -151,13 +149,13 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* IOT BUTTON - MEGA MENU */}
+          {/* IOT MEGA MENU */}
           <div className="relative group">
-            <button className="bg-purple-600 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm">
+            <button className="bg-purple-600 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
               Internet of Things <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[50px] left-[-200px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 flex overflow-hidden">
-               <div className="w-1/3 bg-purple-50 py-6 max-h-[400px] overflow-y-auto custom-scrollbar">
+            <div className="absolute top-[60px] left-[-200px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 flex overflow-hidden">
+               <div className="w-1/3 bg-purple-50 py-6 max-h-[450px] overflow-y-auto custom-scrollbar">
                   {iotDropdownOptions.map((item) => (
                     <div key={item.id} onMouseEnter={() => setActiveIoTItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeIoTItem.id === item.id ? 'bg-white text-purple-600 border-l-4 border-purple-600 shadow-sm' : 'text-slate-600 hover:text-purple-600 border-l-4 border-transparent'}`}>
                       {item.label}
@@ -169,10 +167,10 @@ const Navbar = () => {
                   <div className="h-full flex flex-col animate-fadeIn">
                       <h3 className="text-2xl font-bold text-slate-900 mb-4">{activeIoTItem.title}</h3>
                       <div className="relative w-full h-56 rounded-xl overflow-hidden mb-4 shadow-md border border-slate-100 bg-white flex items-center justify-center">
-                        <img src={activeIoTItem.image} alt="" className="w-full h-full object-contain p-4"/>
+                        <img src={activeIoTItem.image} alt={activeIoTItem.title} className="w-full h-full object-contain p-4 transition-opacity duration-300" />
                       </div>
-                      <p className="text-slate-500 text-sm mb-6">{activeIoTItem.desc}</p>
-                      <button onClick={() => handleNavigation(activeIoTItem.path)} className="text-purple-600 font-bold text-sm flex items-center gap-2 hover:underline">View IoT Hardware <FaArrowRight/></button>
+                      <p className="text-slate-500 text-sm mb-6 leading-relaxed">{activeIoTItem.desc}</p>
+                      <button onClick={() => handleNavigation(activeIoTItem.path)} className="mt-auto text-purple-600 font-bold text-sm flex items-center gap-2 hover:underline">View IoT Hardware <FaArrowRight/></button>
                   </div>
                </div>
             </div>
@@ -180,6 +178,7 @@ const Navbar = () => {
 
           <ul className="flex items-center gap-6 text-[14px] font-bold tracking-wide text-slate-900">
             <li onClick={() => handleNavigation('/')} className="hover:text-orange-400 cursor-pointer py-4">Home</li>
+            
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
               <div className="absolute top-[70px] w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-orange-500">
@@ -278,6 +277,7 @@ const Navbar = () => {
             </div>
             <div className="space-y-6 pb-20">
               <button onClick={() => handleNavigation('/')} className="w-full text-left text-2xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Home</button>
+              
               <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50 text-orange-500">AI Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'ai' && (
                 <div className="bg-orange-50 rounded-lg p-2 space-y-1">
@@ -286,6 +286,7 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+
               <button onClick={() => toggleMobileSection('iot')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50 text-purple-600">Internet of Things <FaChevronDown size={14}/></button>
               {activeMobileSection === 'iot' && (
                 <div className="bg-purple-50 rounded-lg p-2 space-y-1">
@@ -294,6 +295,7 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+
               <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">Services <FaChevronDown size={14}/></button>
               {activeMobileSection === 'services' && (
                 <div className="bg-slate-50 rounded-lg p-4 space-y-4">
@@ -304,6 +306,7 @@ const Navbar = () => {
                   <p onClick={() => handleNavigation('/game-development')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">Game Development</p>
                 </div>
               )}
+
               <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'solutions' && (
                 <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-80 overflow-y-auto">
@@ -314,6 +317,7 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+
               <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">About <FaChevronDown size={14}/></button>
               {activeMobileSection === 'about' && (
                 <div className="bg-slate-50 rounded-lg p-2 space-y-1">
@@ -322,6 +326,7 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
+
               <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-2xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Blog</button>
             </div>
             <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-purple-600 text-white py-4 rounded-xl shadow-lg shadow-purple-200 text-xl font-bold mt-auto mb-6">Hire Us</button>

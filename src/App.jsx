@@ -48,6 +48,8 @@ import AutonomousBeachCleaner from './components/InternetofThings/AutonomousBeac
 import HazeRainRemoval from './components/InternetofThings/Haze&RainRemoval'; 
 import SoilParameterEstimation from './components/InternetofThings/SoilParameterEstimation'; // NEW IMPORT
 import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; // NEW IMPORT
+import RFIDInventorySystem from './components/InternetofThings/RFIDInventorySystem';
+import SolarAgriDashboard from './components/InternetofThings/SolarAgriDashboard';
 // --- SECTION COMPONENTS ---
 import Clients from './components/Clients';
 import MiscellaneousServices from './components/MiscellaneousServices'; 
@@ -166,6 +168,16 @@ function App() {
         {/* NEW SOIL PARAMETER ROUTE */}
         <Route path="/soil-parameter-estimation" element={<div><SoilParameterEstimation /><ContactSection /></div>} />
         <Route path="/gps-asset-tracking" element={<div><GPSAssetTracking /><ContactSection/></div>} />
+        <Route 
+         path="/rfid-inventory-system" 
+         element={
+         <>
+         <RFIDInventorySystem />
+         <ContactSection />
+         </>
+         } 
+         />
+         <Route path="/solar-agri-dashboard" element={<div><SolarAgriDashboard/><ContactSection/></div>} />
         <Route path="/misc/academics" element={<div><AcademicsEducation /><ContactSection /></div>} />
         <Route path="/misc/documentation" element={<div><Documentation /><ContactSection /></div>} />
         <Route path="/misc/events" element={<div><EventManagement /><ContactSection /></div>} />

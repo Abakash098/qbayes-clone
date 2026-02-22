@@ -35,14 +35,13 @@ const Navbar = () => {
 
   const iotDropdownOptions = [
     { id: 'iot-1', label: 'Agricultural AI Bot', path: '/agricultural-ai-bot', title: 'Agricultural Monitoring System', desc: 'Autonomous field operations with 81.8% disease detection accuracy.', image: '/agri-bot.png' },
-    // UPDATED BEACH CLEANER PATH
     { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/autonomous-beach-cleaner', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },
     { id: 'iot-3', label: 'Aquisher Water Monitor', path: '/aquisher-water-monitor', title: 'Aquisher Fish Cultivation', desc: 'Predicts fish suitability and monitors TDS, oxygen, and pH levels.', image: '/aquisher.png' },
     { id: 'iot-4', label: 'Haze & Rain Removal', path: '/haze-rain-removal', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.png' },
     { id: 'iot-5', label: 'Soil Parameter Estimation', path: '/soil-parameter-estimation', title: 'Soil Fertility Analysis', desc: 'AI-powered accuracy for instant NPK estimation in the field.', image: '/soil-estimation.png' },
-    { id: 'iot-6', label: 'Solar Agri-Dashboard', path: '/iot- development', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.png' },
+    { id: 'iot-6', label: 'Solar Agri Dashboard', path: '/solar-agri-dashboard', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.png' },
     { id: 'iot-7', label: 'Patient Monitoring', path: '/iot-development', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
-    { id: 'iot-8', label: 'RFID Inventory System', path: '/iot-development', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.png' },
+    { id: 'iot-8', label: 'RFID Inventory System', path: '/rfid-inventory-system', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.png' },
     { id: 'iot-9', label: 'GPS Asset Tracking', path: '/GPS-Asset-Tracking', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.png' }
   ];
 
@@ -129,7 +128,7 @@ const Navbar = () => {
             <button className="bg-purple-500 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
               Empowering With AI <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[60px] left-[-100px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden">
+            <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden z-50">
                <div className="w-1/3 bg-slate-50 py-6">
                   {aiDropdownOptions.map((item) => (
                     <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
@@ -154,7 +153,7 @@ const Navbar = () => {
             <button className="bg-purple-600 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
               Internet of Things <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[60px] left-[-200px] w-[900px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 flex overflow-hidden">
+            <div className="absolute top-[50px] left-[-100px] w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 flex overflow-hidden z-50">
                <div className="w-1/3 bg-purple-50 py-6 max-h-[450px] overflow-y-auto custom-scrollbar">
                   {iotDropdownOptions.map((item) => (
                     <div key={item.id} onMouseEnter={() => setActiveIoTItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeIoTItem.id === item.id ? 'bg-white text-purple-600 border-l-4 border-purple-600 shadow-sm' : 'text-slate-600 hover:text-purple-600 border-l-4 border-transparent'}`}>
@@ -181,7 +180,7 @@ const Navbar = () => {
             
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
-              <div className="absolute top-[70px] w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-orange-500">
+              <div className="absolute top-[50px] left-0 w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-orange-500 z-50">
                 {aboutLinks.map(link => (
                   <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-3 hover:bg-slate-50 hover:text-orange-500 border-b border-slate-50 font-semibold transition-colors">
                     {link.name}
@@ -190,9 +189,10 @@ const Navbar = () => {
               </div>
             </li>
 
+            {/* SERVICES DROPDOWN - FIXED */}
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Services</span> <FaChevronDown size={10}/>
-              <div className="absolute top-[70px] left-[-400px] w-[1100px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8 flex cursor-default">
+              <div className="absolute top-[50px] right-[-100px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8 flex cursor-default z-50">
                 <div className="w-1/3 pr-6 space-y-8">
                   <div>
                     <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaLaptopCode className="text-cyan-400"/> UI/UX Design</h4>
@@ -245,9 +245,10 @@ const Navbar = () => {
               </div>
             </li>
 
+            {/* SOLUTIONS DROPDOWN - FIXED */}
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Solutions</span> <FaChevronDown size={10}/>
-              <div className="absolute top-[70px] left-[-450px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 cursor-default">
+              <div className="absolute top-[50px] right-[-50px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 cursor-default z-50">
                 <div className="grid grid-rows-7 grid-flow-col gap-x-8 gap-y-6">
                   {solutionsList.map((solution, index) => (
                     <div key={index} onClick={() => handleNavigation(solution.path)} className="flex items-center gap-4 group/sol cursor-pointer">

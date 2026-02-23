@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react'; // Added useState
 import { FaBrain, FaArrowRight, FaDatabase, FaCogs, FaProjectDiagram, FaServer } from 'react-icons/fa';
+import HireUsModal from './HireUsModal'; // Ensure this path points to your modal file
 
 const LLMDevelopment = () => {
+  // 1. State to manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const services = [
     { title: "Custom LLM Fine-Tuning", desc: "We train open-source models (like Llama 3 or Mistral) on your proprietary company data so the AI understands your specific industry jargon and business logic.", icon: FaCogs },
     { title: "RAG Architecture (Retrieval-Augmented Generation)", desc: "Eliminate AI hallucinations. We build systems that allow LLMs to securely search through your live databases and documents before answering.", icon: FaDatabase },
@@ -10,7 +14,7 @@ const LLMDevelopment = () => {
   ];
 
   return (
-    <div className="w-full bg-white font-sans animate-fadeIn">
+    <div className="w-full bg-white font-sans animate-fadeIn relative">
       {/* Hero Section */}
       <div className="relative bg-[#020b2d] py-32 px-6 overflow-hidden min-h-[60vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -27,7 +31,12 @@ const LLMDevelopment = () => {
           <p className="text-lg text-gray-300 mb-10 leading-relaxed font-medium">
             Harness the reasoning power of Large Language Models. We build, fine-tune, and deploy intelligent AI systems that understand, generate, and process human language at an enterprise scale.
           </p>
-          <button className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full transition-all flex items-center gap-2 w-fit shadow-lg shadow-purple-500/30">
+          
+          {/* 2. Added onClick event to trigger the modal */}
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full transition-all flex items-center gap-2 w-fit shadow-lg shadow-purple-500/30 cursor-pointer"
+          >
             Talk to an AI Engineer <FaArrowRight />
           </button>
         </div>
@@ -39,6 +48,9 @@ const LLMDevelopment = () => {
           <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">Our LLM <span className="text-purple-600">Capabilities</span></h2>
           <p className="text-slate-500 font-medium text-lg max-w-3xl mx-auto">From foundational model selection to secure private deployment, we engineer AI systems tailored to your workflows.</p>
         </div>
+        
+        {/* Visualizing LLM logic for the user */}
+        
         
         <div className="grid md:grid-cols-2 gap-8">
           {services.map((srv, idx) => (
@@ -54,6 +66,9 @@ const LLMDevelopment = () => {
           ))}
         </div>
       </div>
+
+      {/* 3. The Modal Component rendered at the bottom */}
+      <HireUsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

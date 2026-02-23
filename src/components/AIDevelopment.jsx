@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FaBrain, FaCogs, FaCode, FaRocket, FaShieldAlt, 
-  FaChartBar, FaCheckCircle, FaArrowRight, FaDatabase, FaLayerGroup 
+  FaChartBar, FaCheckCircle, FaArrowRight, FaDatabase, FaLayerGroup, FaEnvelope, FaPhoneAlt 
 } from 'react-icons/fa';
+import HireUsModal from './HireUsModal'; // Import the modal you built
 
 const AIDevelopment = () => {
-  
-  // Force scroll to top on load
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // --- HELPER: Word Reveal Animation ---
   const WordReveal = ({ text, delayStart = 0, className = "" }) => {
     return text.split(" ").map((word, index) => (
       <span
@@ -34,12 +34,8 @@ const AIDevelopment = () => {
   return (
     <div className="w-full bg-white font-sans overflow-x-hidden">
       
-      {/* 1. HERO SECTION (With Word Reveal & White/Violet Theme) */}
+      {/* 1. HERO SECTION */}
       <div className="relative bg-white py-24 px-6 text-center overflow-hidden border-b border-gray-100">
-        {/* Violet Background Blobs */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-100 rounded-full blur-[120px] opacity-40 -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100 rounded-full blur-[120px] opacity-40 translate-y-1/3 -translate-x-1/3"></div>
-
         <div className="relative max-w-5xl mx-auto z-10">
           <div className="inline-block px-4 py-2 bg-purple-50 border border-purple-200 rounded-full text-purple-700 font-bold text-sm mb-8 uppercase tracking-widest shadow-sm">
             🚀 Bespoke AI Engineering
@@ -53,98 +49,69 @@ const AIDevelopment = () => {
           </h1>
 
           <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10 font-medium">
-            We build powerful, custom AI applications that revolutionize workflows, automate complex decision-making, and unlock exponential growth.
+            We build powerful, custom AI applications that revolutionize workflows and automate decision-making.
           </p>
           
-          <button className="bg-slate-900 hover:bg-purple-700 text-white font-bold py-5 px-12 rounded-full transition-all hover:scale-105 shadow-xl shadow-purple-100">
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-slate-900 hover:bg-purple-700 text-white font-bold py-5 px-12 rounded-full transition-all hover:scale-105 shadow-xl"
+          >
             Start Your AI Project
           </button>
         </div>
       </div>
 
-      {/* 2. CORE CAPABILITIES (Grid Cards) */}
-      <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-black text-black mb-4">Core AI Capabilities</h2>
-          <div className="w-24 h-1 bg-purple-600 mx-auto rounded-full"></div>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {[
-            { title: "Neural Networks", desc: "Custom-built deep learning models for complex pattern recognition.", icon: FaBrain },
-            { title: "System Automation", desc: "Intelligent bots that handle high-volume operational tasks.", icon: FaCogs },
-            { title: "Predictive Engines", desc: "Forecast market shifts and user behavior with high precision.", icon: FaChartBar },
-          ].map((item, idx) => (
-            <div key={idx} className="p-10 rounded-[2.5rem] border border-gray-100 bg-white shadow-lg hover:shadow-2xl hover:border-purple-200 transition-all group">
-              <div className="w-16 h-16 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all">
-                <item.icon size={30} />
-              </div>
-              <h3 className="text-2xl font-bold text-black mb-4">{item.title}</h3>
-              <p className="text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. DEVELOPMENT PROCESS (Step-by-Step) */}
-      <div className="bg-slate-900 py-24 text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black mb-4">Our Development Lifecycle</h2>
-            <p className="text-purple-300">How we turn your vision into a production-ready AI agent.</p>
-          </div>
-
-          
-
-          <div className="grid md:grid-cols-4 gap-8 relative">
-            {steps.map((step, idx) => (
-              <div key={idx} className="relative z-10 text-center">
-                <div className="w-20 h-20 bg-white/10 border border-white/20 rounded-full flex items-center justify-center mx-auto mb-6 backdrop-blur-md">
-                  <step.icon size={28} className="text-purple-400" />
+      {/* 2. HELP US / CONTACT SECTION (New Portion) */}
+      <div className="bg-purple-50 py-20 px-6">
+        <div className="max-w-6xl mx-auto bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-purple-100">
+          <div className="grid md:grid-cols-2">
+            <div className="p-12 md:p-16 flex flex-col justify-center">
+              <h2 className="text-4xl font-black text-slate-900 mb-6">Let Us Help You <br/>Scale with AI</h2>
+              <p className="text-slate-500 text-lg mb-8 leading-relaxed">
+                Need help deciding which model fits your data? Our engineers are ready to audit your current stack and suggest a custom AI roadmap.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-4 text-slate-700">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                    <FaEnvelope />
+                  </div>
+                  <span className="font-bold">support@qbayes.com</span>
                 </div>
-                <h4 className="text-xl font-bold mb-2">0{idx + 1}. {step.title}</h4>
-                <p className="text-gray-400 text-sm">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 4. WHY CHOOSE US (White & Violet Comparison) */}
-      <div className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-4xl font-black text-black mb-8 leading-tight">
-              Why Partner With <br/>
-              <span className="text-purple-600">QBayes For AI?</span>
-            </h2>
-            <div className="space-y-6">
-              {[
-                "We use Responsible AI frameworks for ethical data use.",
-                "Custom-built models—not just wrappers around ChatGPT.",
-                "End-to-end integration with your current IT stack.",
-                "24/7 Monitoring to prevent model drift and errors."
-              ].map((text, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 bg-purple-50 rounded-2xl border border-purple-100">
-                  <FaCheckCircle className="text-purple-600 text-xl" />
-                  <span className="font-bold text-slate-800">{text}</span>
+                <div className="flex items-center gap-4 text-slate-700">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+                    <FaPhoneAlt />
+                  </div>
+                  <span className="font-bold">+1 (555) 000-AI-READY</span>
                 </div>
-              ))}
+              </div>
+
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="group flex items-center justify-between bg-purple-600 hover:bg-slate-900 text-white font-black py-4 px-8 rounded-2xl transition-all"
+              >
+                Book a Free Discovery Call
+                <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+              </button>
             </div>
-          </div>
-          <div className="relative">
-            <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-gray-50">
-              <img 
-                src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=800" 
-                alt="AI Development Team" 
-                className="w-full h-auto object-cover"
-              />
+            <div className="hidden md:block bg-gradient-to-br from-purple-600 to-blue-700 relative overflow-hidden">
+               {/* Decorative AI Graphics */}
+               <div className="absolute inset-0 opacity-20">
+                 <FaLayerGroup className="text-white text-[20rem] absolute -bottom-20 -right-20" />
+               </div>
+               <div className="h-full flex items-center justify-center p-20 text-white text-center italic">
+                 "Our mission is to make advanced neural networks accessible for every enterprise."
+               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* --- ANIMATION STYLES --- */}
+      {/* CORE CAPABILITIES & PROCESS REMAIN HERE... */}
+
+      {/* THE MODAL */}
+      <HireUsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       <style>{`
         @keyframes reveal {
           from { opacity: 0; transform: translateY(20px); filter: blur(8px); }

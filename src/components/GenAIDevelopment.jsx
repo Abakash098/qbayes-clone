@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react'; // Added useState
 import { FaCheckCircle, FaArrowRight, FaPlay, FaMagic, FaImage, FaVideo, FaCode } from 'react-icons/fa';
+import HireUsModal from './HireUsModal'; // Ensure this path matches your folder structure!
 
 const GenAIDevelopment = () => {
+  // 1. State to control the Hire Us popup
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const capabilities = [
     { title: "Synthetic Content", text: "Generate high-quality text and documentation automatically.", icon: FaMagic },
     { title: "Image Generation", text: "Create custom visuals and marketing assets with DALL-E and Midjourney.", icon: FaImage },
@@ -10,7 +14,7 @@ const GenAIDevelopment = () => {
   ];
 
   return (
-    <div className="w-full bg-white animate-fadeIn font-sans">
+    <div className="w-full bg-white animate-fadeIn font-sans relative">
       
       {/* --- BRANDED HERO OPENING --- */}
       <div className="max-w-7xl mx-auto px-6 py-20">
@@ -32,9 +36,14 @@ const GenAIDevelopment = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
-               <button className="bg-purple-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-xl shadow-purple-200 hover:bg-slate-900 transition-all flex items-center justify-center gap-2 group">
+               {/* 2. Added onClick event here */}
+               <button 
+                 onClick={() => setIsModalOpen(true)}
+                 className="bg-purple-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-xl shadow-purple-200 hover:bg-slate-900 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+               >
                  Launch GenAI Project <FaArrowRight className="group-hover:translate-x-1 transition-transform"/>
                </button>
+               
                <button className="border-2 border-slate-100 text-slate-800 px-10 py-5 rounded-full font-bold text-lg flex items-center gap-4 justify-center hover:bg-slate-50 transition-all">
                  <div className="w-10 h-10 bg-purple-700 text-white rounded-full flex items-center justify-center">
                    <FaPlay className="ml-1 text-[10px]"/>
@@ -58,6 +67,8 @@ const GenAIDevelopment = () => {
           </div>
         </div>
       </div>
+      
+      
 
       {/* Capabilities Grid */}
       <div className="max-w-7xl mx-auto px-6 py-24 border-t border-slate-100 bg-slate-50/50">
@@ -78,6 +89,10 @@ const GenAIDevelopment = () => {
           ))}
         </div>
       </div>
+
+      {/* 3. The Modal Component rendered at the bottom */}
+      <HireUsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </div>
   );
 };

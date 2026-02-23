@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCheckCircle, FaArrowRight, FaPlay } from 'react-icons/fa';
+import HireUsModal from './HireUsModal'; // Verify this path is correct for your project!
 
 const AIChatbot = () => {
+  // 1. State to control the popup visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const features = [
     { title: "24/7 Support", text: "Automate customer service around the clock." },
     { title: "Natural Language", text: "Understand customer intent accurately." },
@@ -10,7 +14,7 @@ const AIChatbot = () => {
   ];
 
   return (
-    <div className="w-full bg-white animate-fadeIn font-sans">
+    <div className="w-full bg-white animate-fadeIn font-sans relative">
       
       {/* --- BRANDED HERO OPENING --- */}
       <div className="max-w-7xl mx-auto px-6 py-20">
@@ -32,9 +36,14 @@ const AIChatbot = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5">
-               <button className="bg-purple-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-xl shadow-purple-200 hover:bg-slate-900 transition-all flex items-center justify-center gap-2 group">
+               {/* 2. Added onClick event here */}
+               <button 
+                 onClick={() => setIsModalOpen(true)} 
+                 className="bg-purple-700 text-white px-10 py-5 rounded-full font-bold text-lg shadow-xl shadow-purple-200 hover:bg-slate-900 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+               >
                  Build Your Chatbot <FaArrowRight className="group-hover:translate-x-1 transition-transform"/>
                </button>
+               
                <button className="border-2 border-slate-100 text-slate-800 px-10 py-5 rounded-full font-bold text-lg flex items-center gap-4 justify-center hover:bg-slate-50 transition-all">
                  <div className="w-10 h-10 bg-purple-700 text-white rounded-full flex items-center justify-center">
                    <FaPlay className="ml-1 text-[10px]"/>
@@ -82,7 +91,6 @@ const AIChatbot = () => {
           </div>
           
           <div className="relative h-[600px] bg-slate-50 rounded-[3rem] overflow-hidden shadow-inner border border-slate-100 p-8">
-             {/* Decorative Chat UI mock-up element */}
              <div className="w-full h-full bg-white rounded-[2rem] shadow-2xl flex flex-col p-6">
                 <div className="flex items-center gap-3 border-b border-slate-50 pb-4 mb-4">
                    <div className="w-10 h-10 rounded-full bg-purple-700"></div>
@@ -104,6 +112,10 @@ const AIChatbot = () => {
           </div>
         </div>
       </div>
+
+      {/* 3. The Modal Component rendered securely at the bottom */}
+      <HireUsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </div>
   );
 };

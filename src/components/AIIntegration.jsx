@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react'; // Added useState
 import { FaCheckCircle, FaArrowRight, FaPlug, FaDatabase, FaCloud, FaNetworkWired } from 'react-icons/fa';
+import HireUsModal from './HireUsModal'; // Ensure this path matches your project structure
 
 const AIIntegration = () => {
+  // 1. State to manage the modal popup
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const benefits = [
     { title: "Seamless Connectivity", text: "Connect GPT-4, Claude, or custom models directly into your CRM & ERP.", icon: FaPlug },
     { title: "Data Synchronization", text: "Real-time data flow between your legacy systems and new AI engines.", icon: FaDatabase },
@@ -10,9 +14,9 @@ const AIIntegration = () => {
   ];
 
   return (
-    <div className="w-full bg-white animate-fadeIn font-sans">
+    <div className="w-full bg-white animate-fadeIn font-sans relative">
       
-      {/* --- HERO SECTION (Dark Theme as requested) --- */}
+      {/* --- HERO SECTION --- */}
       <div className="relative bg-slate-900 py-24 px-6 text-center text-white overflow-hidden">
         {/* Animated Background Gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-slate-900 to-purple-900 opacity-90"></div>
@@ -20,7 +24,7 @@ const AIIntegration = () => {
         
         <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-blue-300 font-bold text-xs uppercase tracking-wider mb-8 backdrop-blur-md">
-             🚀 Accelerating Digital Transformation
+              🚀 Accelerating Digital Transformation
           </div>
 
           <h1 className="text-5xl md:text-7xl font-black mb-8 tracking-tight leading-tight">
@@ -34,7 +38,11 @@ const AIIntegration = () => {
             Seamlessly embed artificial intelligence into your existing software ecosystem. We bridge the gap between legacy systems and the future.
           </p>
           
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2">
+          {/* 2. Added onClick to trigger the modal */}
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-full transition-all hover:scale-105 shadow-lg shadow-blue-500/30 flex items-center gap-2 cursor-pointer"
+          >
             Consult Our AI Experts <FaArrowRight />
           </button>
         </div>
@@ -72,12 +80,16 @@ const AIIntegration = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-8 left-8 text-white">
-                 <p className="font-bold text-xl">System Synced</p>
-                 <p className="text-blue-300 text-sm">Latency: 12ms</p>
+                  <p className="font-bold text-xl">System Synced</p>
+                  <p className="text-blue-300 text-sm">Latency: 12ms</p>
               </div>
            </div>
         </div>
       </div>
+
+      {/* 3. The Modal Component rendered securely */}
+      <HireUsModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
     </div>
   );
 };

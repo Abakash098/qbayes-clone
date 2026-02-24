@@ -12,7 +12,7 @@ import ContactSection from './components/ContactSection';
 
 // --- MAIN PAGES ---
 import Hero from './components/Hero';
-import About from './components/About'; 
+import AboutUs from './components/AboutUs'; 
 import HowWeWork from './components/HowWeWork'; 
 import Services from './components/Services';
 import Blog from './components/Blog';
@@ -46,11 +46,15 @@ import AgriculturalAiBot from './components/InternetofThings/AgriculturalAiBot';
 import AquisherWaterMonitor from './components/InternetofThings/AquisherWaterMonitor'; 
 import AutonomousBeachCleaner from './components/InternetofThings/AutonomousBeachCleaner'; 
 import HazeRainRemoval from './components/InternetofThings/Haze&RainRemoval'; 
-import SoilParameterEstimation from './components/InternetofThings/SoilParameterEstimation'; // NEW IMPORT
-import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; // NEW IMPORT
+import SoilParameterEstimation from './components/InternetofThings/SoilParameterEstimation'; 
+import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; 
 import RFIDInventorySystem from './components/InternetofThings/RFIDInventorySystem';
 import SolarAgriDashboard from './components/InternetofThings/SolarAgriDashboard';
+// ADDED IMPORT FOR PATIENT MONITORING
+import PatientMonitoring from './components/InternetofThings/PatientMonitoring'; 
+
 // --- SECTION COMPONENTS ---
+import About from './components/About'; 
 import Clients from './components/Clients';
 import MiscellaneousServices from './components/MiscellaneousServices'; 
 import Stats from './components/Stats';
@@ -86,13 +90,23 @@ import DatingApp from './components/solutions/DatingApp';
 import HealthcareApp from './components/solutions/HealthcareApp';
 import JobPortalApp from './components/solutions/JobPortalApp';
 
+// --- HELPER COMPONENTS ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
   return null;
 };
 
+// Professional Page Wrapper to clean up repetitive code
+const PageLayout = ({ children, showPadding = true }) => (
+  <div className={showPadding ? "pt-[90px]" : ""}>
+    {children}
+    <ContactSection />
+  </div>
+);
+
 function App() {
+  // Initialize OneSignal
   useEffect(() => {
     const runOneSignal = async () => {
       try {
@@ -108,6 +122,7 @@ function App() {
     runOneSignal();
   }, []);
 
+  // Initialize AOS (Animate on Scroll)
   useEffect(() => {
     AOS.init({
       duration: 1000, 
@@ -118,13 +133,14 @@ function App() {
   }, []);
 
   return (
-    <div className="font-sans text-slate-900 bg-white min-h-screen overflow-x-hidden">
+    <div className="font-sans text-slate-900 bg-white min-h-screen overflow-x-hidden selection:bg-purple-100 selection:text-purple-900">
       <ScrollToTop />
       <Navbar />
 
       <Routes>
+        {/* 1. HOME PAGE */}
         <Route path="/" element={
-          <>
+          <div className="animate-fadeIn">
             <Hero />
             <About /> 
             <Services />
@@ -142,74 +158,119 @@ function App() {
             <div id="booking"><BookingSection /></div>
             <div id="location"><Locations /></div>
             <ContactSection />
-          </>
+          </div>
         } />
 
-        <Route path="/about" element={<div className="pt-[90px]"><About /><ContactSection /></div>} />
-        <Route path="/how-we-work" element={<div className="pt-[90px]"><HowWeWork /><ContactSection /></div>} />
-        <Route path="/services" element={<div className="pt-[90px]"><Services /><ContactSection /></div>} />
-        <Route path="/case-studies" element={<div><CaseStudies /><ContactSection /></div>} />
-        <Route path="/blog" element={<div><Blog /><ContactSection /></div>} />
+        {/* 2. CORPORATE PAGES */}
+        <Route path="/about" element={<PageLayout showPadding={false}><AboutUs /><Clients /></PageLayout>} />
+        <Route path="/how-we-work" element={<PageLayout><HowWeWork /></PageLayout>} />
+        <Route path="/services" element={<PageLayout><Services /></PageLayout>} />
+        <Route path="/case-studies" element={<PageLayout showPadding={false}><CaseStudies /></PageLayout>} />
+        <Route path="/blog" element={<PageLayout showPadding={false}><Blog /></PageLayout>} />
 
-        <Route path="/it-consultancy" element={<div><ITConsultancy /><ContactSection /></div>} />
-        <Route path="/ui-ux-design" element={<div><UIUXDesign /><ContactSection /></div>} />
-        <Route path="/digital-marketing" element={<div><DigitalMarketing /><ContactSection /></div>} /> 
-        <Route path="/web-development" element={<div><WebDevelopment /><ContactSection /></div>} /> 
-        <Route path="/mobile-app-development" element={<div><MobileAppDevelopment /><ContactSection /></div>} /> 
-        <Route path="/iot-development" element={<div><IoTDevelopment /><ContactSection /></div>} /> 
-        <Route path="/game-development" element={<div><GameDevelopment /><ContactSection /></div>} /> 
+        {/* 3. CORE SERVICE ROUTES */}
+        <Route path="/it-consultancy" element={<PageLayout showPadding={false}><ITConsultancy /></PageLayout>} />
+        <Route path="/ui-ux-design" element={<PageLayout showPadding={false}><UIUXDesign /></PageLayout>} />
+        <Route path="/digital-marketing" element={<PageLayout showPadding={false}><DigitalMarketing /></PageLayout>} /> 
+        <Route path="/web-development" element={<PageLayout showPadding={false}><WebDevelopment /></PageLayout>} /> 
+        <Route path="/mobile-app-development" element={<PageLayout showPadding={false}><MobileAppDevelopment /></PageLayout>} /> 
+        <Route path="/game-development" element={<PageLayout showPadding={false}><GameDevelopment /></PageLayout>} /> 
 
-        {/* IOT SPECIFIC ROUTES */}
-        <Route path="/agricultural-ai-bot" element={<div><AgriculturalAiBot /><ContactSection /></div>} />
-        <Route path="/aquisher-water-monitor" element={<div><AquisherWaterMonitor /><ContactSection /></div>} />
-        <Route path="/autonomous-beach-cleaner" element={<div><AutonomousBeachCleaner /><ContactSection /></div>} />
-        <Route path="/haze-rain-removal" element={<div><HazeRainRemoval /><ContactSection /></div>} />
-        
-        {/* NEW SOIL PARAMETER ROUTE */}
-        <Route path="/soil-parameter-estimation" element={<div><SoilParameterEstimation /><ContactSection /></div>} />
-        <Route path="/gps-asset-tracking" element={<div><GPSAssetTracking /><ContactSection/></div>} />
+        {/* 4. IOT PRODUCT ROUTES - UPDATED FLAGSHIP PRODUCTS */}
         <Route 
-         path="/rfid-inventory-system" 
-         element={
-         <>
-         <RFIDInventorySystem />
-         <ContactSection />
-         </>
-         } 
-         />
-         <Route path="/solar-agri-dashboard" element={<div><SolarAgriDashboard/><ContactSection/></div>} />
-        <Route path="/misc/academics" element={<div><AcademicsEducation /><ContactSection /></div>} />
-        <Route path="/misc/documentation" element={<div><Documentation /><ContactSection /></div>} />
-        <Route path="/misc/events" element={<div><EventManagement /><ContactSection /></div>} />
+          path="/agricultural-ai-bot" 
+          element={
+            <PageLayout showPadding={false}>
+              <AgriculturalAiBot />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
 
-        <Route path="/ai-integration" element={<div className="pt-[90px]"><AIIntegration /><ContactSection /></div>} />
-        <Route path="/ai-chatbot" element={<div className="pt-[90px]"><AIChatbot /><ContactSection /></div>} />
-        <Route path="/gen-ai-development" element={<div className="pt-[90px]"><GenAIDevelopment /><ContactSection /></div>} />
-        <Route path="/ai-consulting" element={<div className="pt-[90px]"><AIConsulting /><ContactSection /></div>} />
-        <Route path="/ai-services" element={<div className="pt-[90px]"><AISolutions /><ContactSection /></div>} />
-        <Route path="/ai-development" element={<div className="pt-[90px]"><AIDevelopment /><ContactSection /></div>} />
-        <Route path="/llm-development" element={<div><LLMDevelopment /><ContactSection /></div>} />
+        <Route 
+          path="/autonomous-beach-cleaner" 
+          element={
+            <PageLayout showPadding={false}>
+              <AutonomousBeachCleaner />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
 
-        <Route path="/solutions/sports" element={<div><SportsApp /><ContactSection /></div>} />
-        <Route path="/solutions/social-media" element={<div><SocialMediaApp /><ContactSection /></div>} />
-        <Route path="/solutions/ride-sharing" element={<div><RideSharingApp /><ContactSection /></div>} />
-        <Route path="/solutions/fintech" element={<div><FintechApp /><ContactSection /></div>} />
-        <Route path="/solutions/bfsi" element={<div><BFSIApp /><ContactSection /></div>} />
-        <Route path="/solutions/food-delivery" element={<div><FoodDeliveryApp /><ContactSection /></div>} />
-        <Route path="/solutions/salon-spa" element={<div><SalonSpaApp /><ContactSection /></div>} />
-        <Route path="/solutions/real-estate" element={<div><RealEstateApp /><ContactSection /></div>} />
-        <Route path="/solutions/online-ordering" element={<div><OnlineOrderingApp /><ContactSection /></div>} />
-        <Route path="/solutions/on-demand" element={<div><OnDemandApp /><ContactSection /></div>} />
-        <Route path="/solutions/elearning" element={<div><ElearningApp /><ContactSection /></div>} />
-        <Route path="/solutions/crowdfunding" element={<div><CrowdfundingApp /><ContactSection /></div>} />
-        <Route path="/solutions/fitness" element={<div><FitnessApp /><ContactSection /></div>} />
-        <Route path="/solutions/logistics" element={<div><LogisticsApp /><ContactSection /></div>} />
-        <Route path="/solutions/marketplace" element={<div><MarketplaceApp /><ContactSection /></div>} />
-        <Route path="/solutions/travel-engine" element={<div><TravelEngineApp /><ContactSection /></div>} />
-        <Route path="/solutions/travel-tourism" element={<div><TravelTourismApp /><ContactSection /></div>} />
-        <Route path="/solutions/dating" element={<div><DatingApp /><ContactSection /></div>} />
-        <Route path="/solutions/healthcare" element={<div><HealthcareApp /><ContactSection /></div>} />
-        <Route path="/solutions/job-portal" element={<div><JobPortalApp /><ContactSection /></div>} />
+        <Route 
+          path="/aquisher-water-monitor" 
+          element={
+            <PageLayout showPadding={false}>
+              <AquisherWaterMonitor />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
+
+        {/* UPDATED: FLAGSHIP PATIENT MONITORING ROUTE */}
+        <Route 
+          path="/iot-development" 
+          element={
+            <PageLayout showPadding={false}>
+              <PatientMonitoring />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
+        {/* Updated Soil Estimation Route */}
+        <Route 
+          path="/soil-parameter-estimation" 
+          element={
+            <PageLayout showPadding={false}>
+              <SoilParameterEstimation />
+              <div className="bg-slate-50 py-10 border-t border-slate-100">
+                <Clients />
+              </div>
+            </PageLayout>
+          } 
+        />
+
+        <Route path="/haze-rain-removal" element={<PageLayout showPadding={false}><HazeRainRemoval /></PageLayout>} />
+        
+        <Route path="/gps-asset-tracking" element={<PageLayout showPadding={false}><GPSAssetTracking /></PageLayout>} />
+        <Route path="/rfid-inventory-system" element={<PageLayout showPadding={false}><RFIDInventorySystem /></PageLayout>} />
+        <Route path="/solar-agri-dashboard" element={<PageLayout showPadding={false}><SolarAgriDashboard /></PageLayout>} />
+
+        {/* 5. AI PAGES */}
+        <Route path="/ai-integration" element={<PageLayout><AIIntegration /></PageLayout>} />
+        <Route path="/ai-chatbot" element={<PageLayout><AIChatbot /></PageLayout>} />
+        <Route path="/gen-ai-development" element={<PageLayout><GenAIDevelopment /></PageLayout>} />
+        <Route path="/ai-consulting" element={<PageLayout><AIConsulting /></PageLayout>} />
+        <Route path="/ai-services" element={<PageLayout><AISolutions /></PageLayout>} />
+        <Route path="/ai-development" element={<PageLayout><AIDevelopment /></PageLayout>} />
+        <Route path="/llm-development" element={<PageLayout showPadding={false}><LLMDevelopment /></PageLayout>} />
+
+        {/* 6. INDUSTRY SOLUTIONS */}
+        <Route path="/solutions/sports" element={<PageLayout showPadding={false}><SportsApp /></PageLayout>} />
+        <Route path="/solutions/social-media" element={<PageLayout showPadding={false}><SocialMediaApp /></PageLayout>} />
+        <Route path="/solutions/ride-sharing" element={<PageLayout showPadding={false}><RideSharingApp /></PageLayout>} />
+        <Route path="/solutions/fintech" element={<PageLayout showPadding={false}><FintechApp /></PageLayout>} />
+        <Route path="/solutions/bfsi" element={<PageLayout showPadding={false}><BFSIApp /></PageLayout>} />
+        <Route path="/solutions/food-delivery" element={<PageLayout showPadding={false}><FoodDeliveryApp /></PageLayout>} />
+        <Route path="/solutions/salon-spa" element={<PageLayout showPadding={false}><SalonSpaApp /></PageLayout>} />
+        <Route path="/solutions/real-estate" element={<PageLayout showPadding={false}><RealEstateApp /></PageLayout>} />
+        <Route path="/solutions/online-ordering" element={<PageLayout showPadding={false}><OnlineOrderingApp /></PageLayout>} />
+        <Route path="/solutions/on-demand" element={<PageLayout showPadding={false}><OnDemandApp /></PageLayout>} />
+        <Route path="/solutions/elearning" element={<PageLayout showPadding={false}><ElearningApp /></PageLayout>} />
+        <Route path="/solutions/crowdfunding" element={<PageLayout showPadding={false}><CrowdfundingApp /></PageLayout>} />
+        <Route path="/solutions/fitness" element={<PageLayout showPadding={false}><FitnessApp /></PageLayout>} />
+        <Route path="/solutions/logistics" element={<PageLayout showPadding={false}><LogisticsApp /></PageLayout>} />
+        <Route path="/solutions/marketplace" element={<PageLayout showPadding={false}><MarketplaceApp /></PageLayout>} />
+        <Route path="/solutions/travel-engine" element={<PageLayout showPadding={false}><TravelEngineApp /></PageLayout>} />
+        <Route path="/solutions/travel-tourism" element={<PageLayout showPadding={false}><TravelTourismApp /></PageLayout>} />
+        <Route path="/solutions/dating" element={<PageLayout showPadding={false}><DatingApp /></PageLayout>} />
+        <Route path="/solutions/healthcare" element={<PageLayout showPadding={false}><HealthcareApp /></PageLayout>} />
+        <Route path="/solutions/job-portal" element={<PageLayout showPadding={false}><JobPortalApp /></PageLayout>} />
+
+        {/* 7. MISC ROUTES */}
+        <Route path="/misc/academics" element={<PageLayout showPadding={false}><AcademicsEducation /></PageLayout>} />
+        <Route path="/misc/documentation" element={<PageLayout showPadding={false}><Documentation /></PageLayout>} />
+        <Route path="/misc/events" element={<PageLayout showPadding={false}><EventManagement /></PageLayout>} />
       </Routes>
 
       <Footer />

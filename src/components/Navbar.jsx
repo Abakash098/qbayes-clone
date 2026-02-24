@@ -5,7 +5,7 @@ import {
   FaBullhorn, FaNetworkWired, FaGamepad, FaCode, FaMobileAlt, FaBrain, FaDatabase,
   FaRunning, FaShareAlt, FaCar, FaCoins, FaUniversity, FaMotorcycle, FaCut,
   FaHome, FaHandPointer, FaCogs, FaGraduationCap, FaUsers, FaHeartbeat, FaBox,
-  FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase, FaMicrochip
+  FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase, FaMicrochip, FaFlask
 } from 'react-icons/fa';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom'; 
@@ -43,6 +43,38 @@ const Navbar = () => {
     { id: 'iot-7', label: 'Patient Monitoring', path: '/iot-development', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
     { id: 'iot-8', label: 'RFID Inventory System', path: '/rfid-inventory-system', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.png' },
     { id: 'iot-9', label: 'GPS Asset Tracking', path: '/GPS-Asset-Tracking', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.png' }
+  ];
+
+  // --- Research & Innovation Data ---
+  const researchServices = [
+    "Consultancy",
+    "Pursuit of problem statement through Innovation and Novelty in Investigation",
+    "Transparent, Interpretable & Responsible Reporting of Findings",
+    "Ethical Compliance",
+    "Knowledge Incubation",
+    "Concept Development",
+    "Research Skill Development"
+  ];
+
+  const researchOutcomes = [
+    "Research Documentations",
+    "Patents",
+    "Software/Web based Intelligent Systems",
+    "Statistical/Empirical Reports",
+    "AI & Deep Learning based Systems",
+    "Other Research and Advanced Analytics"
+  ];
+
+  const researchDomains = [
+    "Image Processing/Computer Vision",
+    "Natural Language Processing/LLMs",
+    "Time Series Analysis",
+    "Remote Sensing",
+    "Education Technology",
+    "Population Analysis",
+    "Medical Technologies",
+    "Knowledge & Information Distillation",
+    "Sustainable/Renewable Technologies"
   ];
 
   const [activeAIItem, setActiveAIItem] = useState(aiDropdownOptions[0]);
@@ -121,11 +153,11 @@ const Navbar = () => {
         </Link>
 
         {/* DESKTOP MENU */}
-        <div className="hidden xl:flex items-center gap-6">
+        <div className="hidden xl:flex items-center gap-4 2xl:gap-6">
           
           {/* AI DROPDOWN */}
           <div className="relative group">
-            <button className="bg-purple-500 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
+            <button className="bg-purple-500 text-white px-4 2xl:px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-[13px] 2xl:text-sm transition-transform hover:scale-105">
               Empowering With AI <FaChevronDown size={10}/>
             </button>
             <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden z-50">
@@ -150,7 +182,7 @@ const Navbar = () => {
 
           {/* IOT MEGA MENU */}
           <div className="relative group">
-            <button className="bg-purple-600 text-white px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-sm transition-transform hover:scale-105">
+            <button className="bg-purple-600 text-white px-4 2xl:px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-[13px] 2xl:text-sm transition-transform hover:scale-105">
               Internet of Things <FaChevronDown size={10}/>
             </button>
             <div className="absolute top-[50px] left-[-100px] w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-600 flex overflow-hidden z-50">
@@ -175,7 +207,72 @@ const Navbar = () => {
             </div>
           </div>
 
-          <ul className="flex items-center gap-6 text-[14px] font-bold tracking-wide text-slate-900">
+          {/* UPGRADED: RESEARCH & INNOVATION MEGA MENU */}
+          <div className="relative group">
+            <button className="bg-purple-700 text-white px-4 2xl:px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-[13px] 2xl:text-sm transition-transform hover:scale-105">
+              Research & Innovation <FaChevronDown size={10}/>
+            </button>
+            <div className="absolute top-[50px] left-[-200px] w-[1000px] bg-white shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-700 overflow-hidden z-50 flex flex-col">
+               
+               {/* Header Section */}
+               <div className="bg-purple-50 p-6 border-b border-purple-100">
+                 <h2 className="text-2xl font-bold text-purple-900 text-center">Research and Innovation</h2>
+                 <p className="text-center text-purple-600 text-sm mt-1 font-medium">Driving the future of technology through advanced research and analysis</p>
+               </div>
+               
+               <div className="p-8 grid grid-cols-3 gap-8 bg-white">
+                 {/* Column 1 */}
+                 <div>
+                   <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
+                     <FaFlask className="text-purple-600 text-lg"/>
+                     <h3 className="text-lg font-bold text-slate-900">Services</h3>
+                   </div>
+                   <ul className="space-y-4">
+                     {researchServices.map((item, idx) => (
+                       <li key={idx} onClick={() => handleNavigation('/research-services')} className="group flex items-start gap-3 cursor-pointer text-sm text-slate-600 font-medium leading-relaxed hover:text-purple-700 transition-colors">
+                         <FaArrowRight className="text-purple-300 mt-1 flex-shrink-0 group-hover:text-purple-600 transition-colors text-[10px]"/>
+                         <span>{item}</span>
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+
+                 {/* Column 2 */}
+                 <div className="border-l border-r border-slate-100 px-6">
+                   <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
+                     <FaMicrochip className="text-purple-600 text-lg"/>
+                     <h3 className="text-lg font-bold text-slate-900">Solutions & Outcomes</h3>
+                   </div>
+                   <ul className="space-y-4">
+                     {researchOutcomes.map((item, idx) => (
+                       <li key={idx} onClick={() => handleNavigation('/research-outcomes')} className="group flex items-start gap-3 cursor-pointer text-sm text-slate-600 font-medium leading-relaxed hover:text-purple-700 transition-colors">
+                         <FaArrowRight className="text-purple-300 mt-1 flex-shrink-0 group-hover:text-purple-600 transition-colors text-[10px]"/>
+                         <span>{item}</span>
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+
+                 {/* Column 3 */}
+                 <div>
+                   <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
+                     <FaBrain className="text-purple-600 text-lg"/>
+                     <h3 className="text-lg font-bold text-slate-900">Domains Covered</h3>
+                   </div>
+                   <ul className="space-y-4">
+                     {researchDomains.map((item, idx) => (
+                       <li key={idx} onClick={() => handleNavigation('/research-domains')} className="group flex items-start gap-3 cursor-pointer text-sm text-slate-600 font-medium leading-relaxed hover:text-purple-700 transition-colors">
+                         <FaArrowRight className="text-purple-300 mt-1 flex-shrink-0 group-hover:text-purple-600 transition-colors text-[10px]"/>
+                         <span>{item}</span>
+                       </li>
+                     ))}
+                   </ul>
+                 </div>
+               </div>
+            </div>
+          </div>
+
+          <ul className="flex items-center gap-4 2xl:gap-6 text-[13px] 2xl:text-[14px] font-bold tracking-wide text-slate-900">
             <li onClick={() => handleNavigation('/')} className="hover:text-orange-400 cursor-pointer py-4">Home</li>
             
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
@@ -189,7 +286,6 @@ const Navbar = () => {
               </div>
             </li>
 
-            {/* SERVICES DROPDOWN - FIXED */}
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Services</span> <FaChevronDown size={10}/>
               <div className="absolute top-[50px] right-[-100px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8 flex cursor-default z-50">
@@ -245,7 +341,6 @@ const Navbar = () => {
               </div>
             </li>
 
-            {/* SOLUTIONS DROPDOWN - FIXED */}
             <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Solutions</span> <FaChevronDown size={10}/>
               <div className="absolute top-[50px] right-[-50px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 cursor-default z-50">
@@ -277,9 +372,9 @@ const Navbar = () => {
               <img src="/logo.png" alt="Bayes" className="h-12 w-auto" />
             </div>
             <div className="space-y-6 pb-20">
-              <button onClick={() => handleNavigation('/')} className="w-full text-left text-2xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Home</button>
+              <button onClick={() => handleNavigation('/')} className="w-full text-left text-xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Home</button>
               
-              <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50 text-orange-500">AI Solutions <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-orange-500">AI Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'ai' && (
                 <div className="bg-orange-50 rounded-lg p-2 space-y-1">
                   {aiDropdownOptions.map(item => (
@@ -288,7 +383,7 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('iot')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50 text-purple-600">Internet of Things <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('iot')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Internet of Things <FaChevronDown size={14}/></button>
               {activeMobileSection === 'iot' && (
                 <div className="bg-purple-50 rounded-lg p-2 space-y-1">
                   {iotDropdownOptions.map(item => (
@@ -297,7 +392,36 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">Services <FaChevronDown size={14}/></button>
+              {/* UPGRADED: Mobile Research & Innovation Toggle */}
+              <button onClick={() => toggleMobileSection('research')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-700">Research & Innovation <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'research' && (
+                <div className="bg-purple-50 rounded-lg p-3 space-y-4 max-h-[60vh] overflow-y-auto">
+                  
+                  <div>
+                    <h3 className="font-bold text-purple-900 border-b border-purple-200 pb-2 mb-2">Services</h3>
+                    {researchServices.map((item, idx) => (
+                      <div key={idx} onClick={() => handleNavigation('/research-services')} className="p-2 text-sm font-medium text-slate-600 hover:text-purple-700 hover:bg-white rounded-md cursor-pointer leading-tight">{item}</div>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h3 className="font-bold text-purple-900 border-b border-purple-200 pb-2 mb-2">Outcomes & Solutions</h3>
+                    {researchOutcomes.map((item, idx) => (
+                      <div key={idx} onClick={() => handleNavigation('/research-outcomes')} className="p-2 text-sm font-medium text-slate-600 hover:text-purple-700 hover:bg-white rounded-md cursor-pointer leading-tight">{item}</div>
+                    ))}
+                  </div>
+
+                  <div>
+                    <h3 className="font-bold text-purple-900 border-b border-purple-200 pb-2 mb-2">Domains</h3>
+                    {researchDomains.map((item, idx) => (
+                      <div key={idx} onClick={() => handleNavigation('/research-domains')} className="p-2 text-sm font-medium text-slate-600 hover:text-purple-700 hover:bg-white rounded-md cursor-pointer leading-tight">{item}</div>
+                    ))}
+                  </div>
+
+                </div>
+              )}
+
+              <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">Services <FaChevronDown size={14}/></button>
               {activeMobileSection === 'services' && (
                 <div className="bg-slate-50 rounded-lg p-4 space-y-4">
                   <p onClick={() => handleNavigation('/ui-ux-design')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">UI/UX Design</p>
@@ -308,7 +432,7 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">Solutions <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'solutions' && (
                 <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-80 overflow-y-auto">
                   {solutionsList.map((sol, index) => (
@@ -319,7 +443,7 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-2xl py-3 border-b border-purple-50">About <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">About <FaChevronDown size={14}/></button>
               {activeMobileSection === 'about' && (
                 <div className="bg-slate-50 rounded-lg p-2 space-y-1">
                   {aboutLinks.map(link => (
@@ -328,7 +452,7 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-2xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Blog</button>
+              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Blog</button>
             </div>
             <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-purple-600 text-white py-4 rounded-xl shadow-lg shadow-purple-200 text-xl font-bold mt-auto mb-6">Hire Us</button>
           </div>

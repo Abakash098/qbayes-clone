@@ -1,78 +1,199 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { 
+  FaSun, FaDatabase, FaWifi, FaBatteryFull, FaChartLine, 
+  FaLeaf, FaCheckCircle, FaArrowRight, FaThermometerHalf, FaCloudSun 
+} from 'react-icons/fa';
 
 const SolarAgriDashboard = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
+  const features = [
+    {
+      icon: FaDatabase,
+      title: "Real-Time Nutrient Tracking",
+      description: "Integrated NPK sensors continuously monitor Nitrogen, Phosphorus, and Potassium levels to maintain optimal soil fertility levels."
+    },
+    {
+      icon: FaCloudSun,
+      title: "Climate & Ambient Analysis",
+      description: "Advanced meteorological sensors track temperature, humidity, and solar radiation to provide a complete picture of the micro-climate."
+    },
+    {
+      icon: FaWifi,
+      title: "Hybrid LoRa & Wi-Fi Link",
+      description: "Dual-mode transmission ensures unbreakable data flow even in remote acreage without cellular coverage or standard internet."
+    },
+    {
+      icon: FaBatteryFull,
+      title: "Intelligent Power Management",
+      description: "An integrated solar-to-battery ecosystem that manages energy consumption for uninterrupted 24/7 field analysis and reporting."
+    }
+  ];
+
+  const techSpecs = [
+    "Monocrystalline High-Efficiency Solar Panel Array",
+    "Deep-cycle Lithium Iron Phosphate (LiFePO4) Battery",
+    "Long-Range (LoRa) telemetry with 10km+ field radius",
+    "Multi-parameter Soil Probe (NPK, Moisture, pH, EC)",
+    "Industrial-grade MCU with low-power sleep modes",
+    "Encrypted End-to-End Cloud Data Synchronization"
+  ];
 
   return (
-    <div className="min-h-screen bg-[#0a192f] text-white pt-[120px] pb-20 px-6">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Side: Technical Schematic */}
-        <div className="relative group" data-aos="fade-right">
-          <div className="absolute -inset-1 bg-gradient-to-r from-yellow-500 to-orange-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-          <div className="relative bg-[#112240] rounded-2xl overflow-hidden border border-slate-700 p-8">
-            <img 
-              src="/agri-dashboard.png" 
-              alt="Agricultural Monitoring System Workflow" 
-              className="w-full h-auto object-contain rounded-lg"
-            />
-            <div className="absolute top-6 right-6 bg-yellow-500 text-slate-900 text-xs px-3 py-1 rounded-full font-bold tracking-widest">
-              SOLAR POWERED
+    <div className="bg-white font-sans overflow-hidden">
+      
+      {/* --- 1. HERO SECTION --- */}
+      <section className="pt-32 pb-20 bg-gradient-to-b from-amber-50/50 to-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Text Content */}
+            <div className="animate-fadeIn">
+              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                Off-Grid Agri-IoT
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 leading-[1.1] tracking-tight">
+                Solar-Powered <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-500">
+                  Agri-Monitoring
+                </span>
+              </h1>
+              <p className="text-slate-600 text-lg md:text-xl mb-10 leading-relaxed max-w-lg">
+                Achieve continuous field surveillance without the need for fixed power infrastructure. Our solar-powered system delivers real-time soil and climate analytics directly to your dashboard.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-8 mb-10">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-amber-100 flex items-center justify-center flex-shrink-0">
+                    <FaSun className="text-amber-500 text-2xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg">Off-Grid</h4>
+                    <p className="text-sm text-slate-500 font-medium">100% Solar Powered</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-amber-100 flex items-center justify-center flex-shrink-0">
+                    <FaDatabase className="text-amber-500 text-2xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg">24/7</h4>
+                    <p className="text-sm text-slate-500 font-medium">Live Data Logging</p>
+                  </div>
+                </div>
+              </div>
+
+              <button className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-amber-600/30 transition-all flex items-center gap-3 group">
+                Request Specifications
+                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
+
+            {/* Hero Image */}
+            <div className="relative animate-fadeIn" style={{ animationDelay: '0.2s' }}>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-orange-200/40 to-amber-100/40 rounded-full blur-3xl -z-10"></div>
+              
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-500 rounded-3xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/50 bg-white p-2">
+                  <img 
+                    src="/agri-dashboard.png" 
+                    alt="Agricultural Monitoring System Workflow" 
+                    className="rounded-xl w-full h-auto object-cover transform transition-transform duration-700 hover:scale-[1.02]"
+                    onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&q=80&w=800" }}
+                  />
+                  
+                  {/* Floating Tech Tag */}
+                  <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-xl border border-slate-100 flex items-center gap-3">
+                    <FaLeaf className="text-amber-500 text-xl" />
+                    <div>
+                      <p className="text-slate-900 font-bold leading-none">Smart Farming</p>
+                      <p className="text-slate-500 text-xs mt-1">Solar Ready</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+      </section>
 
-        {/* Right Side: Content */}
-        <div className="space-y-8" data-aos="fade-left">
-          <div className="inline-block px-4 py-1 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-sm font-bold tracking-widest uppercase">
-            Product 06
-          </div>
-          
-          <div>
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3">
-              Solar-Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-300">Agri-Monitoring System</span>
-            </h1>
-            <p className="text-xl text-gray-300">
-              Continuous off-grid field surveillance with real-time nutrient and climate analytics.
-            </p>
+      {/* --- 2. CORE CAPABILITIES GRID --- */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Precision Off-Grid Intelligence</h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto">Replacing manual field inspections with a sustainable, automated stream of accurate environmental data to drive yield growth.</p>
           </div>
 
-          <div className="space-y-6">
-            <AgriFeature 
-              title="Nutrient Tracking (NPK)" 
-              desc="Advanced sensors monitor Nitrogen, Phosphorus, and Potassium levels to ensure optimal soil fertility."
-            />
-            <AgriFeature 
-              title="Wi-Fi & LoRa Connectivity" 
-              desc="Dual-mode wireless transmission ensures reliable data flow even in remote locations without cellular coverage."
-            />
-            <AgriFeature 
-              title="Battery Backup System" 
-              desc="Solar-powered design with integrated battery storage for uninterrupted 24/7 analysis and reporting."
-            />
-          </div>
-
-          <div className="pt-6">
-            <button className="bg-gradient-to-r from-yellow-600 to-orange-500 hover:from-yellow-500 hover:to-orange-400 text-white px-10 py-4 rounded-full font-bold transition-all shadow-lg shadow-yellow-500/20">
-              Explore Dashboard
-            </button>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="bg-slate-50 rounded-2xl p-8 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                <div className="w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-600 transition-colors duration-300">
+                  <feature.icon className="text-amber-600 text-2xl group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed text-sm">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* --- 3. TECH SPECS & ROI SECTION --- */}
+      <section className="py-24 bg-slate-900 text-white overflow-hidden relative">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-[150px] opacity-20"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Tech Specs */}
+            <div>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">Technical Specifications</h2>
+              <p className="text-slate-400 mb-10 text-lg">Designed for rugged outdoor deployment, featuring weather-proof components and long-range connectivity for large-scale operations.</p>
+              
+              <ul className="space-y-4">
+                {techSpecs.map((spec, index) => (
+                  <li key={index} className="flex items-center gap-4 bg-slate-800/50 p-4 rounded-xl border border-slate-700 backdrop-blur-sm">
+                    <FaCheckCircle className="text-amber-400 flex-shrink-0 text-lg" />
+                    <span className="text-slate-200 font-medium">{spec}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Business Value / ROI */}
+            <div className="bg-white rounded-3xl p-10 text-slate-900 shadow-2xl">
+              <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                <FaChartLine className="text-amber-600" /> Operational ROI
+              </h3>
+              
+              <div className="space-y-8">
+                <div>
+                  <h4 className="font-bold text-lg mb-2">Zero Infrastructure Costs</h4>
+                  <p className="text-slate-600 text-sm">Eliminate the massive expense of running power cables to remote fields. Our system is entirely self-sufficient.</p>
+                </div>
+                <div className="w-full h-px bg-slate-100"></div>
+                <div>
+                  <h4 className="font-bold text-lg mb-2">Optimized Resource Usage</h4>
+                  <p className="text-slate-600 text-sm">Use precise NPK data to apply fertilizers only where needed, reducing chemical costs and environmental impact.</p>
+                </div>
+                <div className="w-full h-px bg-slate-100"></div>
+                <div>
+                  <h4 className="font-bold text-lg mb-2">Reduced Crop Stress</h4>
+                  <p className="text-slate-600 text-sm">Real-time climate alerts allow you to take immediate action against frost, heatwaves, or unexpected drought conditions.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
-
-const AgriFeature = ({ title, desc }) => (
-  <div className="flex gap-4 group">
-    <div className="flex-shrink-0 w-1 bg-gradient-to-b from-yellow-500 to-transparent rounded-full h-8 group-hover:h-full transition-all"></div>
-    <div>
-      <h3 className="text-xl font-bold text-white mb-1">{title}</h3>
-      <p className="text-gray-400 leading-relaxed text-sm">{desc}</p>
-    </div>
-  </div>
-);
 
 export default SolarAgriDashboard;

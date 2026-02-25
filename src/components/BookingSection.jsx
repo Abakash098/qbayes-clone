@@ -15,10 +15,14 @@ const BookingSection = () => {
     setStatus('Sending...');
     
     try {
-      // LINKED TO LIVE RENDER BACKEND
-      const LIVE_BACKEND_URL = 'https://qbayes-backend-1.onrender.com/api/contact';
+      // --- BACKEND URL CONFIGURATION ---
+      // Commented out the live URL for now
+      // const BACKEND_URL = 'https://qbayes-backend-1.onrender.com/api/contact';
+      
+      // Using the local server URL for testing
+      const BACKEND_URL = 'http://localhost:5000/api/contact';
 
-      const response = await fetch(LIVE_BACKEND_URL, {
+      const response = await fetch(BACKEND_URL, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -39,7 +43,7 @@ const BookingSection = () => {
       }
     } catch (error) {
       console.error("Connection Error:", error);
-      setStatus('Failed to connect to the server. Check if the live backend is awake.');
+      setStatus('Failed to connect to the server. Check if the local backend is running.');
     }
   };
 

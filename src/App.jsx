@@ -42,10 +42,10 @@ import GenAIDevelopment from './components/GenAIDevelopment';
 import LLMDevelopment from './components/LLMDevelopment'; 
 
 // --- IOT SPECIFIC PAGES ---
-import AgriculturalAiBot from './components/InternetofThings/AgriculturalAiBot'; 
+import AgriculturalAiBot from './components/InternetofThings/AgriculturalAIBot';
 import AquisherWaterMonitor from './components/InternetofThings/AquisherWaterMonitor'; 
 import AutonomousBeachCleaner from './components/InternetofThings/AutonomousBeachCleaner'; 
-import HazeRainRemoval from './components/InternetofThings/Haze&RainRemoval'; 
+import HazeRainRemoval from './components/InternetofThings/HazeAndRainRemoval';
 import SoilParameterEstimation from './components/InternetofThings/SoilParameterEstimation'; 
 import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; 
 import RFIDInventorySystem from './components/InternetofThings/RFIDInventorySystem';

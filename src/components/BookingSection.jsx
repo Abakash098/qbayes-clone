@@ -16,7 +16,7 @@ const BookingSection = () => {
     
     try {
       // LINKED TO LIVE RENDER BACKEND
-      const LIVE_BACKEND_URL = 'https://qbayes-backend.onrender.com/api/contact';
+      const LIVE_BACKEND_URL = 'https://qbayes-backend-1.onrender.com/api/contact';
 
       const response = await fetch(LIVE_BACKEND_URL, {
         method: 'POST',

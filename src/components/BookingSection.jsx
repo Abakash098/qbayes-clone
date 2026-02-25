@@ -15,8 +15,14 @@ const BookingSection = () => {
     setStatus('Sending...');
     
     try {
-      // Points to your Node.js backend running on port 5000
-      const response = await fetch('http://localhost:5000/api/contact', {
+      /**
+       * IMPORTANT FOR LIVE DEPLOYMENT:
+       * Replace 'https://your-backend-service.onrender.com' with your actual live backend URL.
+       * Do not use 'http://localhost:5000' for the Netlify version.
+       */
+      const LIVE_BACKEND_URL = 'https://your-backend-service.onrender.com/api/contact';
+
+      const response = await fetch(LIVE_BACKEND_URL, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -28,6 +34,7 @@ const BookingSection = () => {
       const result = await response.json();
 
       if (response.ok) {
+        // Confirms successful delivery to info@qbayes.com
         setStatus('Success! Your request has been sent to info@qbayes.com.');
         setFormData({ first_name: '', last_name: '', email: '', phone: '', message: '' }); 
         setTimeout(() => setStatus(''), 6000);
@@ -36,7 +43,7 @@ const BookingSection = () => {
       }
     } catch (error) {
       console.error("Connection Error:", error);
-      setStatus('Failed to connect to the server. Is your backend running?');
+      setStatus('Failed to connect to the server. Check if the live backend is awake.');
     }
   };
 
@@ -55,8 +62,7 @@ const BookingSection = () => {
           </p>
         </div>
 
-        {/* --- CENTERED CONTACT FORM (Demand 22 Fix) --- */}
-        {/* Removed 'Book A Schedule' section as per requirement 22 */}
+        {/* --- CENTERED CONTACT FORM (Demand 21 & 22) --- */}
         <div className="flex justify-center">
           <div className="w-full max-w-2xl bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-blue-500/10 border border-slate-100 relative">
             

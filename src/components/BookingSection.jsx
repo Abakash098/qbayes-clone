@@ -15,12 +15,8 @@ const BookingSection = () => {
     setStatus('Sending...');
     
     try {
-      /**
-       * IMPORTANT FOR LIVE DEPLOYMENT:
-       * Replace 'https://your-backend-service.onrender.com' with your actual live backend URL.
-       * Do not use 'http://localhost:5000' for the Netlify version.
-       */
-      const LIVE_BACKEND_URL = 'https://your-backend-service.onrender.com/api/contact';
+      // LINKED TO LIVE RENDER BACKEND
+      const LIVE_BACKEND_URL = 'https://qbayes-backend.onrender.com/api/contact';
 
       const response = await fetch(LIVE_BACKEND_URL, {
         method: 'POST',
@@ -62,7 +58,7 @@ const BookingSection = () => {
           </p>
         </div>
 
-        {/* --- CENTERED CONTACT FORM (Demand 21 & 22) --- */}
+        {/* --- CENTERED CONTACT FORM --- */}
         <div className="flex justify-center">
           <div className="w-full max-w-2xl bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-blue-500/10 border border-slate-100 relative">
             

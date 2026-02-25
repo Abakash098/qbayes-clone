@@ -1,104 +1,138 @@
 import React, { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const BookingSection = () => {
-  // Simple calendar state
-  const [currentMonth, setCurrentMonth] = useState('February 2026');
-  
-  // Fake calendar days generator
-  const renderCalendarDays = () => {
-    const days = [];
-    for (let i = 1; i <= 28; i++) {
-      days.push(
-        <div 
-          key={i} 
-          className={`h-10 w-10 flex items-center justify-center rounded-full text-sm font-medium cursor-pointer hover:bg-blue-100 transition-colors
-            ${i === 15 ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-600'}
-          `}
-        >
-          {i}
-        </div>
-      );
+  const [formData, setFormData] = useState({ 
+    first_name: '', 
+    last_name: '', 
+    email: '', 
+    phone: '', 
+    message: '' 
+  });
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Sending...');
+    
+    try {
+      // Points to your Node.js backend running on port 5000
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json' 
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus('Success! Your request has been sent to info@qbayes.com.');
+        setFormData({ first_name: '', last_name: '', email: '', phone: '', message: '' }); 
+        setTimeout(() => setStatus(''), 6000);
+      } else {
+        setStatus(result.error || 'Error sending request. Please check your backend.');
+      }
+    } catch (error) {
+      console.error("Connection Error:", error);
+      setStatus('Failed to connect to the server. Is your backend running?');
     }
-    return days;
   };
 
   return (
-    <section id="booking-section" className="py-24 bg-gradient-to-b from-white to-blue-50 font-sans">
+    <section id="booking-section" className="py-24 bg-gradient-to-b from-white to-slate-50 font-sans overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* HEADER */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
-            Let's Talk: Discovery & <span className="text-[#00c2ff]">Alignment Meeting</span>
+        <div className="text-center mb-16 animate-fadeIn">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Let's Talk: Discovery & <span className="text-blue-600">Alignment Meeting</span>
           </h2>
-          <p className="text-gray-500 text-lg">
-            Get all your questions answered by our business development team.
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
+            Get all your questions answered by our business development team. 
+            Direct inquiries are sent to <span className="font-semibold text-slate-700 underline decoration-blue-500/30">info@qbayes.com</span>.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          
-          {/* --- LEFT SIDE: FORM --- */}
-          <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100">
-            <h3 className="text-3xl font-bold text-gray-900 mb-2">Ready To Get Started?</h3>
-            <p className="text-gray-500 mb-8">Share your goals, and we'll help you design the right digital path.</p>
+        {/* --- CENTERED CONTACT FORM (Demand 22 Fix) --- */}
+        {/* Removed 'Book A Schedule' section as per requirement 22 */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-2xl bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl shadow-blue-500/10 border border-slate-100 relative">
             
-            <form className="space-y-6">
-              <div className="grid grid-cols-2 gap-6">
-                <input type="text" placeholder="First Name *" className="w-full bg-gray-50 px-6 py-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-200 transition" />
-                <input type="text" placeholder="Last Name *" className="w-full bg-gray-50 px-6 py-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-200 transition" />
+            <h3 className="text-3xl font-bold text-slate-900 mb-2">Ready To Get Started?</h3>
+            <p className="text-slate-500 mb-8">Share your goals, and we'll help you design the right digital path.</p>
+            
+            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <input 
+                  type="text" 
+                  placeholder="First Name *" 
+                  value={formData.first_name}
+                  onChange={(e) => setFormData({...formData, first_name: e.target.value})}
+                  className="w-full bg-slate-50 px-6 py-4 rounded-2xl outline-none border border-transparent focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/5 transition-all" 
+                  required
+                />
+                <input 
+                  type="text" 
+                  placeholder="Last Name *" 
+                  value={formData.last_name}
+                  onChange={(e) => setFormData({...formData, last_name: e.target.value})}
+                  className="w-full bg-slate-50 px-6 py-4 rounded-2xl outline-none border border-transparent focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/5 transition-all" 
+                  required
+                />
               </div>
-              <input type="email" placeholder="Email *" className="w-full bg-gray-50 px-6 py-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-200 transition" />
-              <input type="tel" placeholder="Phone *" className="w-full bg-gray-50 px-6 py-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-200 transition" />
-              <textarea placeholder="Message *" rows="4" className="w-full bg-gray-50 px-6 py-4 rounded-xl outline-none focus:ring-2 focus:ring-blue-200 transition"></textarea>
               
-              <button type="button" className="w-full bg-gray-900 text-white font-bold py-4 rounded-xl hover:bg-gray-800 transition shadow-lg">
-                Submit Request
+              <input 
+                type="email" 
+                placeholder="Email Address *" 
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                className="w-full bg-slate-50 px-6 py-4 rounded-2xl outline-none border border-transparent focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/5 transition-all" 
+                required
+              />
+              
+              <input 
+                type="tel" 
+                placeholder="Phone Number *" 
+                value={formData.phone}
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                className="w-full bg-slate-50 px-6 py-4 rounded-2xl outline-none border border-transparent focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/5 transition-all" 
+                required
+              />
+              
+              <textarea 
+                placeholder="Tell us about your project or goals *" 
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+                rows="4" 
+                className="w-full bg-slate-50 px-6 py-4 rounded-2xl outline-none border border-transparent focus:border-blue-500/50 focus:ring-4 focus:ring-blue-500/5 transition-all resize-none"
+                required
+              ></textarea>
+              
+              <button 
+                type="submit" 
+                disabled={status === 'Sending...'}
+                className={`w-full text-white font-bold py-5 rounded-2xl transition-all shadow-xl flex items-center justify-center gap-3 
+                  ${status === 'Sending...' ? 'bg-slate-400 cursor-not-allowed' : 'bg-slate-900 hover:bg-slate-800 active:scale-[0.98]'}`}
+              >
+                {status === 'Sending...' ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Processing Request...
+                  </span>
+                ) : (
+                  <>Submit Request</>
+                )}
               </button>
+
+              {status && status !== 'Sending...' && (
+                <div className={`mt-4 p-4 rounded-xl text-center text-sm font-bold animate-fadeIn ${status.includes('Success') ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                  {status}
+                </div>
+              )}
             </form>
           </div>
-
-          {/* --- RIGHT SIDE: CALENDAR --- */}
-          <div className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100 flex flex-col">
-             <h3 className="text-3xl font-bold text-gray-900 mb-2">Book A Schedule</h3>
-             <p className="text-gray-500 mb-8">Select a Date and Time for the Meeting at Your Convenience</p>
-             
-             {/* Calendar UI */}
-             <div className="bg-[#f8faff] p-8 rounded-2xl flex-1">
-                
-                {/* Month Header */}
-                <div className="flex justify-between items-center mb-8">
-                  <button className="p-2 hover:bg-gray-200 rounded-full transition"><FaChevronLeft className="text-gray-600"/></button>
-                  <h4 className="text-xl font-bold text-gray-800">{currentMonth}</h4>
-                  <button className="p-2 hover:bg-gray-200 rounded-full transition"><FaChevronRight className="text-gray-600"/></button>
-                </div>
-
-                {/* Days Header */}
-                <div className="grid grid-cols-7 text-center mb-4 text-gray-400 text-sm font-semibold">
-                  <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                </div>
-
-                {/* Days Grid */}
-                <div className="grid grid-cols-7 gap-y-4 justify-items-center">
-                  {renderCalendarDays()}
-                </div>
-
-                {/* Time Slots (Mock) */}
-                <div className="mt-8 pt-8 border-t border-gray-200">
-                   <h5 className="text-sm font-bold text-gray-700 mb-4">Available Slots</h5>
-                   <div className="flex flex-wrap gap-3">
-                     {['10:00 AM', '11:30 AM', '02:00 PM', '04:30 PM'].map(time => (
-                       <button key={time} className="px-4 py-2 bg-white border border-blue-200 text-blue-600 rounded-lg text-sm font-bold hover:bg-blue-600 hover:text-white transition">
-                         {time}
-                       </button>
-                     ))}
-                   </div>
-                </div>
-
-             </div>
-          </div>
-
         </div>
       </div>
     </section>

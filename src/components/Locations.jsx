@@ -63,7 +63,7 @@ const Locations = () => {
 
             <div className="space-y-3 pt-4 border-t border-white/10">
               <p className="text-white font-bold flex gap-4"><span>📞</span> +91 9038389108</p>
-              <p className="text-white font-bold flex gap-4"><span>✉️</span> connect2qbayes@gmail.com</p>
+              <p className="text-white font-bold flex gap-4"><span>✉️</span>info@qbayes.com</p>
             </div>
           </div>
         </div>

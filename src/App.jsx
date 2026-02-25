@@ -50,7 +50,6 @@ import SoilParameterEstimation from './components/InternetofThings/SoilParameter
 import GPSAssetTracking from './components/InternetofThings/GPSAssetTracking'; 
 import RFIDInventorySystem from './components/InternetofThings/RFIDInventorySystem';
 import SolarAgriDashboard from './components/InternetofThings/SolarAgriDashboard';
-// ADDED IMPORT FOR PATIENT MONITORING
 import PatientMonitoring from './components/InternetofThings/PatientMonitoring'; 
 
 // --- SECTION COMPONENTS ---
@@ -174,6 +173,7 @@ function App() {
         <Route path="/digital-marketing" element={<PageLayout showPadding={false}><DigitalMarketing /></PageLayout>} /> 
         <Route path="/web-development" element={<PageLayout showPadding={false}><WebDevelopment /></PageLayout>} /> 
         <Route path="/mobile-app-development" element={<PageLayout showPadding={false}><MobileAppDevelopment /></PageLayout>} /> 
+        <Route path="/iot-development" element={<PageLayout showPadding={false}><IoTDevelopment /></PageLayout>} /> 
         <Route path="/game-development" element={<PageLayout showPadding={false}><GameDevelopment /></PageLayout>} /> 
 
         {/* 4. IOT PRODUCT ROUTES - UPDATED FLAGSHIP PRODUCTS */}
@@ -207,9 +207,9 @@ function App() {
           } 
         />
 
-        {/* UPDATED: FLAGSHIP PATIENT MONITORING ROUTE */}
+        {/* FIX: Changed path to avoid collision with IoTDevelopment route above */}
         <Route 
-          path="/iot-development" 
+          path="/patient-monitoring" 
           element={
             <PageLayout showPadding={false}>
               <PatientMonitoring />
@@ -217,24 +217,57 @@ function App() {
             </PageLayout>
           } 
         />
-        {/* Updated Soil Estimation Route */}
+        
         <Route 
           path="/soil-parameter-estimation" 
           element={
             <PageLayout showPadding={false}>
               <SoilParameterEstimation />
-              <div className="bg-slate-50 py-10 border-t border-slate-100">
-                <Clients />
-              </div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
             </PageLayout>
           } 
         />
 
-        <Route path="/haze-rain-removal" element={<PageLayout showPadding={false}><HazeRainRemoval /></PageLayout>} />
+        {/* FIX: Applied the Clients wrapper to the remaining IoT pages */}
+        <Route 
+          path="/haze-rain-removal" 
+          element={
+            <PageLayout showPadding={false}>
+              <HazeRainRemoval />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
         
-        <Route path="/gps-asset-tracking" element={<PageLayout showPadding={false}><GPSAssetTracking /></PageLayout>} />
-        <Route path="/rfid-inventory-system" element={<PageLayout showPadding={false}><RFIDInventorySystem /></PageLayout>} />
-        <Route path="/solar-agri-dashboard" element={<PageLayout showPadding={false}><SolarAgriDashboard /></PageLayout>} />
+        <Route 
+          path="/gps-asset-tracking" 
+          element={
+            <PageLayout showPadding={false}>
+              <GPSAssetTracking />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
+
+        <Route 
+          path="/rfid-inventory-system" 
+          element={
+            <PageLayout showPadding={false}>
+              <RFIDInventorySystem />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
+
+        <Route 
+          path="/solar-agri-dashboard" 
+          element={
+            <PageLayout showPadding={false}>
+              <SolarAgriDashboard />
+              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+            </PageLayout>
+          } 
+        />
 
         {/* 5. AI PAGES */}
         <Route path="/ai-integration" element={<PageLayout><AIIntegration /></PageLayout>} />

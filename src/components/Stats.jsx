@@ -1,17 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Import the navigation hook
 
 const Stats = () => {
+  const navigate = useNavigate(); // 2. Initialize the hook
+
   const statsData = [
     { number: "2026", label: "Founded & Growing Fast" },
-    { number: "1500+", label: "Clients Worldwide" },
-    { number: "800+", label: "Skilled Professionals" },
+    { number: "20+", label: "Skilled Professionals" },
     { number: "98.5%", label: "Client Retention Rate" },
-    { number: "8000+", label: "Projects Executed" },
-    { number: "4", label: "Global Location Presence" }
+    { number: "1", label: "Global Location Presence" }
   ];
 
   return (
-    // Increased padding from py-24 to py-32 for a larger page section
     <section className="py-28 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden font-sans">
       
       {/* Background Decorative Pattern */}
@@ -33,7 +33,6 @@ const Stats = () => {
           {statsData.map((stat, index) => (
             <div 
               key={index} 
-              // Increased padding inside cards (p-8) for a bigger look
               className={`bg-white p-8 rounded-3xl shadow-xl border border-blue-50 flex flex-col sm:flex-row items-center sm:items-start gap-5 hover:-translate-y-2 transition-transform duration-300
                 ${index % 2 !== 0 ? 'lg:translate-y-16' : ''} 
               `}
@@ -64,7 +63,11 @@ const Stats = () => {
             We move beyond maintenance, giving businesses sharp insights, useful data, and real momentum to stay ahead in a constantly shifting digital world.
           </p>
           
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg shadow-orange-500/30 transition-all transform hover:scale-105">
+          {/* 3. Add the onClick event to trigger the navigation */}
+          <button 
+            onClick={() => navigate('/about')} 
+            className="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg shadow-orange-500/30 transition-all transform hover:scale-105"
+          >
             Learn More About Us
           </button>
         </div>

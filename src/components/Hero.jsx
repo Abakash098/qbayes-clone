@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { FaArrowRight, FaPlay, FaTimes, FaChartLine } from 'react-icons/fa';
+import React from 'react';
+import { FaArrowRight, FaChartLine } from 'react-icons/fa';
 
 const Hero = () => {
-  const [showVideo, setShowVideo] = useState(false);
-
-  // --- HELPER: Smooth scroll to the booking section ---
+  // --- HELPER: Smooth scroll to the contact/booking section ---
   const scrollToBooking = () => {
-    const bookingSection = document.getElementById('booking');
+    const bookingSection = document.getElementById('booking-section');
     if (bookingSection) {
       bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      window.location.href = "/#booking"; 
+      // Fallback if not on the home page
+      window.location.href = "/#booking-section"; 
     }
   };
 
@@ -49,7 +48,7 @@ const Hero = () => {
         ></div>
       </div>
 
-      {/* --- BRAND COLOR BLOBS (Kept exactly as requested) --- */}
+      {/* --- BRAND COLOR BLOBS --- */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-100 rounded-full blur-[120px] opacity-60 -translate-y-1/2 translate-x-1/3 mix-blend-multiply pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-50 rounded-full blur-[120px] opacity-60 translate-y-1/3 -translate-x-1/3 mix-blend-multiply pointer-events-none"></div>
 
@@ -69,7 +68,7 @@ const Hero = () => {
             Empower Your Enterprise
             <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-orange-500 pb-2 inline-block mt-2">
-               With Intelligent AI
+                With Intelligent AI
             </span>
           </h1>
           
@@ -78,24 +77,14 @@ const Hero = () => {
             QBayes delivers cutting-edge AI solutions, seamless IT infrastructure, and data-driven strategies to automate workflows and secure your competitive advantage.
           </p>
 
-          {/* BUTTONS */}
+          {/* BUTTONS (Focused Call-to-Action) */}
           <div className="animate-fade-up-4 flex flex-col sm:flex-row w-full sm:w-auto gap-5">
             <button 
               onClick={scrollToBooking}
-              className="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-purple-700/20 transition-all flex items-center justify-center gap-3 group"
+              className="bg-purple-700 hover:bg-purple-800 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl shadow-purple-700/20 transition-all flex items-center justify-center gap-3 group"
             >
               Partner With Us
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            
-            <button 
-              onClick={() => setShowVideo(true)}
-              className="bg-white border border-slate-200 hover:border-orange-300 hover:bg-orange-50 hover:text-orange-600 text-slate-700 px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center justify-center gap-3 group"
-            >
-              <div className="w-10 h-10 bg-slate-50 group-hover:bg-orange-100 rounded-full flex items-center justify-center text-sm transition-colors shadow-sm">
-                <FaPlay className="text-orange-500 ml-1" />
-              </div>
-              See How It Works
             </button>
           </div>
         </div>
@@ -127,31 +116,6 @@ const Hero = () => {
         </div>
 
       </div>
-
-      {/* --- VIDEO MODAL POPUP --- */}
-      {showVideo && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/95 backdrop-blur-md p-4 animate-fade-up-1">
-          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-            <button 
-              onClick={() => setShowVideo(false)}
-              className="absolute top-6 right-6 z-10 bg-white/10 hover:bg-white/30 text-white p-3 rounded-full transition-all backdrop-blur-md"
-              aria-label="Close video"
-            >
-              <FaTimes size={20} />
-            </button>
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&rel=0" 
-              title="QBayes Innovation Video" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      )}
-
     </section>
   );
 };

@@ -13,7 +13,7 @@ import ContactSection from './components/ContactSection';
 // --- MAIN PAGES ---
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs'; 
-import OurTeam from './components/OurTeam'; // <-- ADDED OUR TEAM IMPORT
+import OurTeam from './components/OurTeam'; 
 import HowWeWork from './components/HowWeWork'; 
 import Services from './components/Services';
 import Blog from './components/Blog';
@@ -38,9 +38,6 @@ import AISolutions from './components/AISolutions';
 import AIDevelopment from './components/AIDevelopment';
 import AIConsulting from './components/AIConsulting'; 
 import AIChatbot from './components/AIChatbot'; 
-import AIIntegration from './components/AIIntegration'; 
-import GenAIDevelopment from './components/GenAIDevelopment'; 
-import LLMDevelopment from './components/LLMDevelopment'; 
 
 // --- IOT SPECIFIC PAGES ---
 import AgriculturalAiBot from './components/InternetofThings/AgriculturalAIBot';
@@ -153,7 +150,6 @@ function App() {
             <FutureProofAI />
             <CaseStudies />
             
-            
             <ROISection />
             <div id="booking"><BookingSection /></div>
             <div id="location"><Locations /></div>
@@ -163,10 +159,7 @@ function App() {
 
         {/* 2. CORPORATE PAGES */}
         <Route path="/about" element={<PageLayout showPadding={false}><AboutUs /><Clients /></PageLayout>} />
-        
-        {/* --> ADDED OUR TEAM ROUTE HERE <-- */}
         <Route path="/our-team" element={<PageLayout showPadding={false}><OurTeam /></PageLayout>} /> 
-        
         <Route path="/how-we-work" element={<PageLayout><HowWeWork /></PageLayout>} />
         <Route path="/services" element={<PageLayout><Services /></PageLayout>} />
         <Route path="/case-studies" element={<PageLayout showPadding={false}><CaseStudies /></PageLayout>} />
@@ -273,13 +266,10 @@ function App() {
         />
 
         {/* 5. AI PAGES */}
-        <Route path="/ai-integration" element={<PageLayout><AIIntegration /></PageLayout>} />
         <Route path="/ai-chatbot" element={<PageLayout><AIChatbot /></PageLayout>} />
-        <Route path="/gen-ai-development" element={<PageLayout><GenAIDevelopment /></PageLayout>} />
         <Route path="/ai-consulting" element={<PageLayout><AIConsulting /></PageLayout>} />
         <Route path="/ai-services" element={<PageLayout><AISolutions /></PageLayout>} />
         <Route path="/ai-development" element={<PageLayout><AIDevelopment /></PageLayout>} />
-        <Route path="/llm-development" element={<PageLayout showPadding={false}><LLMDevelopment /></PageLayout>} />
 
         {/* 6. INDUSTRY SOLUTIONS */}
         <Route path="/solutions/sports" element={<PageLayout showPadding={false}><SportsApp /></PageLayout>} />

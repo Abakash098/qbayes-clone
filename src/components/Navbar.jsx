@@ -27,10 +27,7 @@ const Navbar = () => {
     { id: 'sol', label: 'AI Services & Solutions', path: '/ai-services', title: 'AI Services & Solutions', desc: 'Transform your business with cutting-edge AI.', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=600' },
     { id: 'dev', label: 'AI Development', path: '/ai-development', title: 'Custom AI Development', desc: 'Build scalable AI models.', image: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=600' },
     { id: 'con', label: 'AI Consulting', path: '/ai-consulting', title: 'Strategic AI Consulting', desc: 'Expert guidance to navigate the AI landscape.', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600' },
-    { id: 'chat', label: 'AI Chatbot Development', path: '/ai-chatbot', title: 'Intelligent Chatbots', desc: 'Enhance customer engagement with NLP.', image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600' }, 
-    { id: 'gen-dev', label: 'Generative AI Development', path: '/gen-ai-development', title: 'Generative AI Models', desc: 'Unlock creativity with GenAI.', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600' },
-    { id: 'int', label: 'AI Integration', path: '/ai-integration', title: 'Seamless AI Integration', desc: 'Embed AI into your existing ecosystem.', image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600' },
-    { id: 'llm', label: 'LLM Development', path: '/llm-development', title: 'Large Language Models', desc: 'Custom model fine-tuning, RAG, and prompt engineering.', image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=600' }
+    { id: 'chat', label: 'AI Chatbot Development', path: '/ai-chatbot', title: 'Intelligent Chatbots', desc: 'Enhance customer engagement with NLP.', image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600' }
   ];
 
   const iotDropdownOptions = [
@@ -79,7 +76,6 @@ const Navbar = () => {
   const [activeAIItem, setActiveAIItem] = useState(aiDropdownOptions[0]);
   const [activeIoTItem, setActiveIoTItem] = useState(iotDropdownOptions[0]);
 
-  // UPDATED: 'Our Team' now points to '/our-team' instead of '/about'
   const aboutLinks = [
     { name: 'About Us', path: '/about' },
     { name: 'Our Team', path: '/our-team' }, 
@@ -163,7 +159,7 @@ const Navbar = () => {
             <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 flex overflow-hidden z-50">
                <div className="w-1/3 bg-slate-50 py-6 max-h-[450px] overflow-y-auto custom-scrollbar">
                   {aiDropdownOptions.map((item) => (
-                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
+                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-5 cursor-pointer text-base font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
                       {item.label}
                       {activeAIItem.id === item.id && <FaArrowRight size={12}/>}
                     </div>
@@ -213,15 +209,12 @@ const Navbar = () => {
               Research & Innovation <FaChevronDown size={10}/>
             </button>
             <div className="absolute top-[50px] left-[-200px] w-[1000px] bg-white shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-700 overflow-hidden z-50 flex flex-col">
-               
-               {/* Header Section */}
                <div className="bg-purple-50 p-6 border-b border-purple-100">
                  <h2 className="text-2xl font-bold text-purple-900 text-center">Research and Innovation</h2>
                  <p className="text-center text-purple-600 text-sm mt-1 font-medium">Driving the future of technology through advanced research and analysis</p>
                </div>
                
                <div className="p-8 grid grid-cols-3 gap-8 bg-white max-h-[450px] overflow-y-auto custom-scrollbar">
-                 {/* Column 1 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaFlask className="text-purple-600 text-lg"/>
@@ -237,7 +230,6 @@ const Navbar = () => {
                    </ul>
                  </div>
 
-                 {/* Column 2 */}
                  <div className="border-l border-r border-slate-100 px-6">
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaMicrochip className="text-purple-600 text-lg"/>
@@ -253,7 +245,6 @@ const Navbar = () => {
                    </ul>
                  </div>
 
-                 {/* Column 3 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaBrain className="text-purple-600 text-lg"/>
@@ -369,7 +360,7 @@ const Navbar = () => {
               {activeMobileSection === 'ai' && (
                 <div className="bg-purple-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
                   {aiDropdownOptions.map(item => (
-                    <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-3 text-sm font-normal text-purple-800 hover:bg-white rounded-md cursor-pointer">{item.label}</div>
+                    <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-4 text-base font-medium text-purple-800 hover:bg-white rounded-md cursor-pointer">{item.label}</div>
                   ))}
                 </div>
               )}
@@ -383,11 +374,9 @@ const Navbar = () => {
                 </div>
               )}
 
-              {/* RESEARCH & INNOVATION Toggle */}
-              <button onClick={() => toggleMobileSection('research')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Research & Innovation <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('research')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-700">Research & Innovation <FaChevronDown size={14}/></button>
               {activeMobileSection === 'research' && (
                 <div className="bg-purple-50 rounded-lg p-3 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
-                  
                   <div>
                     <h3 className="font-bold text-purple-900 border-b border-purple-200 pb-2 mb-2">Services</h3>
                     {researchServices.map((item, idx) => (
@@ -408,7 +397,6 @@ const Navbar = () => {
                       <div key={idx} onClick={() => handleNavigation('/research-domains')} className="p-2 text-sm font-medium text-slate-600 hover:text-purple-700 hover:bg-white rounded-md cursor-pointer leading-tight">{item}</div>
                     ))}
                   </div>
-
                 </div>
               )}
 

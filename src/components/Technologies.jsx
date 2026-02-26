@@ -1,27 +1,30 @@
 import React from 'react';
 import { 
-  FaWordpress, FaReact, FaAngular, FaNodeJs, FaShopify, FaPython, FaPhp, FaLaravel, FaSquarespace, FaMagento, FaHubspot 
+  FaReact, FaAngular, FaNodeJs, FaPhp, FaLaravel, FaPython 
 } from 'react-icons/fa';
-import { SiWoo, SiWebflow, SiFlutter, SiKotlin, SiGo } from 'react-icons/si';
+import { 
+  SiNextdotjs, SiFlutter, SiDjango, SiFastapi, SiFlask, SiC 
+} from 'react-icons/si';
 
 const Technologies = () => {
   const techs = [
-    { icon: FaWordpress, name: "WordPress", color: "text-blue-600" },
     { icon: FaReact, name: "React", color: "text-cyan-400" },
     { icon: FaAngular, name: "Angular", color: "text-red-600" },
     { icon: FaNodeJs, name: "Node.js", color: "text-green-600" },
-    { icon: SiWoo, name: "WooCommerce", color: "text-purple-600" },
-    { icon: SiWebflow, name: "Webflow", color: "text-blue-500" },
-    { icon: FaShopify, name: "Shopify", color: "text-green-500" },
+    { icon: SiNextdotjs, name: "Next.js", color: "text-black" },
+    
     { icon: FaReact, name: "React Native", color: "text-cyan-500" },
+    { icon: SiFlutter, name: "Flutter", color: "text-cyan-400" },
+    
     { icon: FaPhp, name: "PHP", color: "text-indigo-600" },
-    { icon: FaSquarespace, name: "Squarespace", color: "text-black" },
-    { icon: FaPython, name: "Python", color: "text-yellow-500" },
-    { icon: FaMagento, name: "Magento", color: "text-orange-600" },
-    { icon: SiGo, name: "GoHighLevel", color: "text-blue-400" }, 
-    { icon: FaHubspot, name: "HubSpot", color: "text-orange-500" },
     { icon: FaLaravel, name: "Laravel", color: "text-red-500" },
-    { icon: SiFlutter, name: "Flutter", color: "text-cyan-400" }
+    
+    { icon: FaPython, name: "Python", color: "text-yellow-500" },
+    { icon: SiDjango, name: "Django", color: "text-green-800" },
+    { icon: SiFastapi, name: "FastAPI", color: "text-teal-500" },
+    { icon: SiFlask, name: "Flask", color: "text-slate-800" },
+    
+    { icon: SiC, name: "Embedded C", color: "text-blue-700" }
   ];
 
   return (
@@ -38,8 +41,8 @@ const Technologies = () => {
           Our Tech <span className="text-[#00c2ff]">Capabilities</span>
         </h2>
 
-        {/* Tech Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-10 justify-items-center">
+        {/* Tech Grid - Adjusted grid columns for 13 items */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 justify-items-center">
           {techs.map((tech, index) => (
             <div 
               key={index} 

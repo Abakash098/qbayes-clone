@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ContactSection = () => {
-  const contactData = [
+  const contactData = [ 
     {
       title: "Mobile No.",
       value: "+91 9038389108",
@@ -14,7 +14,7 @@ const ContactSection = () => {
     },
     {
       title: "Email",
-      value: "connect2qbayes@gmail.com",
+      value: "info@qbayes.com",
       gradient: "from-blue-500 to-purple-600",
       icon: (
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-8 h-8">

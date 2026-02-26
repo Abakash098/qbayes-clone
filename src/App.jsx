@@ -16,8 +16,8 @@ import AboutUs from './components/AboutUs';
 import OurTeam from './components/OurTeam'; 
 import HowWeWork from './components/HowWeWork'; 
 import Services from './components/Services';
-import Blog from './components/Blog';
 import CaseStudies from './components/CaseStudies'; 
+// Note: Blog was removed based on previous instructions
 
 // --- CORE SERVICES ---
 import UIUXDesign from './components/services/UIUXDesign'; 
@@ -33,7 +33,7 @@ import AcademicsEducation from './components/misc/AcademicsEducation';
 import Documentation from './components/misc/Documentation';
 import EventManagement from './components/misc/EventManagement';
 
-// --- AI PAGES ---
+// --- AI PAGES (Cleaned up dead imports) ---
 import AISolutions from './components/AISolutions'; 
 import AIDevelopment from './components/AIDevelopment';
 import AIConsulting from './components/AIConsulting'; 
@@ -59,8 +59,6 @@ import FutureProofAI from './components/FutureProofAI';
 import BookingSection from './components/BookingSection';
 import ResearchInnovation from './components/ResearchInnovation';
 import IoTService from './components/IoTService'; 
-import PortfolioGrid from './components/PortfolioGrid'; 
-import Testimonials from './components/Testimonials'; 
 import ROISection from './components/ROISection'; 
 import Technologies from './components/Technologies'; 
 import Locations from './components/Locations'; 
@@ -163,7 +161,6 @@ function App() {
         <Route path="/how-we-work" element={<PageLayout><HowWeWork /></PageLayout>} />
         <Route path="/services" element={<PageLayout><Services /></PageLayout>} />
         <Route path="/case-studies" element={<PageLayout showPadding={false}><CaseStudies /></PageLayout>} />
-        <Route path="/blog" element={<PageLayout showPadding={false}><Blog /></PageLayout>} />
 
         {/* 3. CORE SERVICE ROUTES */}
         <Route path="/it-consultancy" element={<PageLayout showPadding={false}><ITConsultancy /></PageLayout>} />
@@ -174,13 +171,13 @@ function App() {
         <Route path="/iot-development" element={<PageLayout showPadding={false}><IoTDevelopment /></PageLayout>} /> 
         <Route path="/game-development" element={<PageLayout showPadding={false}><GameDevelopment /></PageLayout>} /> 
 
-        {/* 4. IOT PRODUCT ROUTES - UPDATED FLAGSHIP PRODUCTS */}
+        {/* 4. IOT PRODUCT ROUTES */}
         <Route 
           path="/agricultural-ai-bot" 
           element={
             <PageLayout showPadding={false}>
               <AgriculturalAiBot />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -190,7 +187,7 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <AutonomousBeachCleaner />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -200,27 +197,31 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <AquisherWaterMonitor />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
-
-        <Route 
-          path="/patient-monitoring" 
-          element={
-            <PageLayout showPadding={false}>
-              <PatientMonitoring />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
-            </PageLayout>
-          } 
-        />
+       // App.jsx
+       <Route 
+       path="/patient-monitoring" 
+       element={
+      <PageLayout showPadding={false}>
+      <PatientMonitoring />
+      <div className="bg-slate-50 py-10 border-t border-slate-100">
+      
+      </div>
+      </PageLayout>
+      } 
+      />
+        
+        
         
         <Route 
           path="/soil-parameter-estimation" 
           element={
             <PageLayout showPadding={false}>
               <SoilParameterEstimation />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -230,7 +231,7 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <HazeRainRemoval />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -240,7 +241,7 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <GPSAssetTracking />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -250,7 +251,7 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <RFIDInventorySystem />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />
@@ -260,7 +261,7 @@ function App() {
           element={
             <PageLayout showPadding={false}>
               <SolarAgriDashboard />
-              <div className="bg-slate-50 py-10 border-t border-slate-100"><Clients /></div>
+              <div className="bg-slate-50 py-10 border-t border-slate-100"></div>
             </PageLayout>
           } 
         />

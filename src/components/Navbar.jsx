@@ -31,13 +31,13 @@ const Navbar = () => {
   ];
 
   const iotDropdownOptions = [
-    { id: 'iot-1', label: 'Agricultural AI Bot', path: '/agricultural-ai-bot', title: 'Agricultural Monitoring System', desc: 'Autonomous field operations with 81.8% disease detection accuracy.', image: '/agri-bot.png' },
-    { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/autonomous-beach-cleaner', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },
-    { id: 'iot-3', label: 'Aquisher Water Monitor', path: '/aquisher-water-monitor', title: 'Aquisher Fish Cultivation', desc: 'Predicts fish suitability and monitors TDS, oxygen, and pH levels.', image: '/aquisher.png' },
-    { id: 'iot-4', label: 'Haze & Rain Removal', path: '/haze-rain-removal', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.png' },
+   /* { id: 'iot-1', label: 'Agricultural AI Bot', path: '/agricultural-ai-bot', title: 'Agricultural Monitoring System', desc: 'Autonomous field operations with 81.8% disease detection accuracy.', image: '/agri-bot.png' },*/
+   /* { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/autonomous-beach-cleaner', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },*/
+   /* { id: 'iot-3', label: 'Aquisher Water Monitor', path: '/aquisher-water-monitor', title: 'Aquisher Fish Cultivation', desc: 'Predicts fish suitability and monitors TDS, oxygen, and pH levels.', image: '/aquisher.png' },*/
+   /* { id: 'iot-4', label: 'Haze & Rain Removal', path: '/haze-rain-removal', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.png' },*/
     { id: 'iot-5', label: 'Soil Parameter Estimation', path: '/soil-parameter-estimation', title: 'Soil Fertility Analysis', desc: 'AI-powered accuracy for instant NPK estimation in the field.', image: '/soil-estimation.png' },
     { id: 'iot-6', label: 'Solar Agri Dashboard', path: '/solar-agri-dashboard', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.png' },
-    { id: 'iot-7', label: 'Patient Monitoring', path: '/iot-development', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
+    { id: 'iot-7', label: 'Patient Monitoring', path: '/patient-monitoring', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
     { id: 'iot-8', label: 'RFID Inventory System', path: '/rfid-inventory-system', title: 'RFID Warehouse Control', desc: 'Automates asset tracking and stock control to reduce manual errors.', image: '/rfid-inventory.png' },
     { id: 'iot-9', label: 'GPS Asset Tracking', path: '/GPS-Asset-Tracking', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.png' }
   ];
@@ -159,7 +159,7 @@ const Navbar = () => {
             <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 flex overflow-hidden z-50">
                <div className="w-1/3 bg-slate-50 py-6 max-h-[450px] overflow-y-auto custom-scrollbar">
                   {aiDropdownOptions.map((item) => (
-                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-5 cursor-pointer text-base font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
+                    <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-5 cursor-pointer text-base font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-600 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
                       {item.label}
                       {activeAIItem.id === item.id && <FaArrowRight size={12}/>}
                     </div>
@@ -170,7 +170,7 @@ const Navbar = () => {
                       <h3 className="text-2xl font-bold text-slate-900 mb-4">{activeAIItem.title}</h3>
                       <div className="relative w-full h-48 rounded-xl overflow-hidden mb-4 shadow-md"><img src={activeAIItem.image} alt="" className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div></div>
                       <p className="text-slate-500 text-sm mb-6">{activeAIItem.desc}</p>
-                      <button onClick={() => handleNavigation(activeAIItem.path)} className="text-cyan-500 font-bold text-sm flex items-center gap-2 hover:underline">View Full Page <FaArrowRight/></button>
+                      <button onClick={() => handleNavigation(activeAIItem.path)} className="text-purple-600 font-bold text-sm flex items-center gap-2 hover:underline">View Full Page <FaArrowRight/></button>
                   </div>
                </div>
             </div>
@@ -209,12 +209,15 @@ const Navbar = () => {
               Research & Innovation <FaChevronDown size={10}/>
             </button>
             <div className="absolute top-[50px] left-[-200px] w-[1000px] bg-white shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-700 overflow-hidden z-50 flex flex-col">
+               
+               {/* Header Section */}
                <div className="bg-purple-50 p-6 border-b border-purple-100">
                  <h2 className="text-2xl font-bold text-purple-900 text-center">Research and Innovation</h2>
                  <p className="text-center text-purple-600 text-sm mt-1 font-medium">Driving the future of technology through advanced research and analysis</p>
                </div>
                
                <div className="p-8 grid grid-cols-3 gap-8 bg-white max-h-[450px] overflow-y-auto custom-scrollbar">
+                 {/* Column 1 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaFlask className="text-purple-600 text-lg"/>
@@ -230,6 +233,7 @@ const Navbar = () => {
                    </ul>
                  </div>
 
+                 {/* Column 2 */}
                  <div className="border-l border-r border-slate-100 px-6">
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaMicrochip className="text-purple-600 text-lg"/>
@@ -245,6 +249,7 @@ const Navbar = () => {
                    </ul>
                  </div>
 
+                 {/* Column 3 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaBrain className="text-purple-600 text-lg"/>
@@ -282,15 +287,15 @@ const Navbar = () => {
               <div className="absolute top-[50px] right-[-100px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 p-8 flex cursor-default z-50 max-h-[450px] overflow-y-auto custom-scrollbar">
                 <div className="w-1/3 pr-6 space-y-8">
                   <div>
-                    <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaLaptopCode className="text-cyan-400"/> UI/UX Design</h4>
+                    <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaLaptopCode className="text-purple-500"/> UI/UX Design</h4>
                     <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
-                      <li onClick={() => handleNavigation('/ui-ux-design')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> UX Prototyping</li>
+                      <li onClick={() => handleNavigation('/ui-ux-design')} className="hover:text-purple-600 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-purple-400 rounded-full"></span> UX Prototyping</li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="w-1/3 px-6 border-l border-r border-slate-100">
-                   <h4 onClick={() => handleNavigation('/web-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-6 cursor-pointer hover:text-purple-600"><FaCode className="text-cyan-400"/> Web Development</h4>
+                   <h4 onClick={() => handleNavigation('/web-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-6 cursor-pointer hover:text-purple-600"><FaCode className="text-purple-500"/> Web Development</h4>
                    <div className="space-y-2">
                      {webDevSections.map((sec) => (
                        <div key={sec.name} className="border-b border-slate-50 pb-2">
@@ -301,7 +306,7 @@ const Navbar = () => {
                          {activeWebDev === sec.name && sec.items.length > 0 && (
                            <ul className="pl-4 py-2 space-y-2 text-sm text-slate-500 font-medium animate-fadeIn">
                              {sec.items.map(item => (
-                               <li key={item} onClick={() => handleNavigation('/web-development')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                               <li key={item} onClick={() => handleNavigation('/web-development')} className="hover:text-purple-600 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-purple-400 rounded-full"></span> {item}</li>
                              ))}
                            </ul>
                          )}
@@ -312,10 +317,10 @@ const Navbar = () => {
 
                 <div className="w-1/3 pl-6 space-y-8">
                   <div>
-                    <h4 onClick={() => handleNavigation('/mobile-app-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaMobileAlt className="text-cyan-400"/> Mobile App Development</h4>
+                    <h4 onClick={() => handleNavigation('/mobile-app-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaMobileAlt className="text-purple-500"/> Mobile App Development</h4>
                     <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
                       {['Hybrid', 'Swift', 'React Native', 'Kotlin', 'Flutter', 'Java', 'Native App Development', 'Objective-C'].map(item => (
-                        <li key={item} onClick={() => handleNavigation('/mobile-app-development')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
+                        <li key={item} onClick={() => handleNavigation('/mobile-app-development')} className="hover:text-purple-600 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-purple-400 rounded-full"></span> {item}</li>
                       ))}
                     </ul>
                   </div>
@@ -329,15 +334,13 @@ const Navbar = () => {
                 <div className="grid grid-rows-7 grid-flow-col gap-x-8 gap-y-6">
                   {solutionsList.map((solution, index) => (
                     <div key={index} onClick={() => handleNavigation(solution.path)} className="flex items-center gap-4 group/sol cursor-pointer">
-                       <solution.icon className="text-cyan-500 text-[22px] group-hover/sol:text-purple-600 transition-colors" />
+                       <solution.icon className="text-purple-500 text-[22px] group-hover/sol:text-purple-600 transition-colors" />
                        <span className="font-bold text-[15px] text-slate-800 group-hover/sol:text-purple-600 transition-colors">{solution.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </li>
-
-            <li onClick={() => handleNavigation('/blog')} className="hover:text-purple-600 cursor-pointer py-4">Blog</li>
           </ul>
         </div>
 
@@ -428,8 +431,6 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
-
-              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-xl py-3 border-b border-purple-50 text-purple-600 transition-colors">Blog</button>
             </div>
             <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-purple-600 text-white py-4 rounded-xl shadow-lg shadow-purple-200 text-xl font-bold mt-auto mb-6">Hire Us</button>
           </div>

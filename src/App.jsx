@@ -13,6 +13,7 @@ import ContactSection from './components/ContactSection';
 // --- MAIN PAGES ---
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs'; 
+import OurTeam from './components/OurTeam'; // <-- ADDED OUR TEAM IMPORT
 import HowWeWork from './components/HowWeWork'; 
 import Services from './components/Services';
 import Blog from './components/Blog';
@@ -148,11 +149,11 @@ function App() {
             <IoTService />
             <Technologies />
             <Stats />
-            <Clients />
+            
             <FutureProofAI />
             <CaseStudies />
-            <PortfolioGrid />
-            <Testimonials />
+            
+            
             <ROISection />
             <div id="booking"><BookingSection /></div>
             <div id="location"><Locations /></div>
@@ -162,6 +163,10 @@ function App() {
 
         {/* 2. CORPORATE PAGES */}
         <Route path="/about" element={<PageLayout showPadding={false}><AboutUs /><Clients /></PageLayout>} />
+        
+        {/* --> ADDED OUR TEAM ROUTE HERE <-- */}
+        <Route path="/our-team" element={<PageLayout showPadding={false}><OurTeam /></PageLayout>} /> 
+        
         <Route path="/how-we-work" element={<PageLayout><HowWeWork /></PageLayout>} />
         <Route path="/services" element={<PageLayout><Services /></PageLayout>} />
         <Route path="/case-studies" element={<PageLayout showPadding={false}><CaseStudies /></PageLayout>} />
@@ -207,7 +212,6 @@ function App() {
           } 
         />
 
-        {/* FIX: Changed path to avoid collision with IoTDevelopment route above */}
         <Route 
           path="/patient-monitoring" 
           element={
@@ -228,7 +232,6 @@ function App() {
           } 
         />
 
-        {/* FIX: Applied the Clients wrapper to the remaining IoT pages */}
         <Route 
           path="/haze-rain-removal" 
           element={

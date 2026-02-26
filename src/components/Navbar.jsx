@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   FaBars, FaTimes, FaChevronDown, FaArrowRight, FaPlus, FaMinus,
   FaHandshake, FaPaintBrush, FaLaptopCode, FaRocket, FaArrowUp, 
-  FaBullhorn, FaNetworkWired, FaGamepad, FaCode, FaMobileAlt, FaBrain, FaDatabase,
+  FaNetworkWired, FaCode, FaMobileAlt, FaBrain, FaDatabase,
   FaRunning, FaShareAlt, FaCar, FaCoins, FaUniversity, FaMotorcycle, FaCut,
   FaHome, FaHandPointer, FaCogs, FaGraduationCap, FaUsers, FaHeartbeat, FaBox,
   FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase, FaMicrochip, FaFlask
@@ -45,7 +45,6 @@ const Navbar = () => {
     { id: 'iot-9', label: 'GPS Asset Tracking', path: '/GPS-Asset-Tracking', title: 'Global Asset Visibility', desc: 'Satellite networking for live location updates and movement history.', image: '/gps-tracking.png' }
   ];
 
-  // --- Research & Innovation Data ---
   const researchServices = [
     "Consultancy",
     "Pursuit of problem statement through Innovation and Novelty in Investigation",
@@ -80,9 +79,10 @@ const Navbar = () => {
   const [activeAIItem, setActiveAIItem] = useState(aiDropdownOptions[0]);
   const [activeIoTItem, setActiveIoTItem] = useState(iotDropdownOptions[0]);
 
+  // UPDATED: 'Our Team' now points to '/our-team' instead of '/about'
   const aboutLinks = [
     { name: 'About Us', path: '/about' },
-    { name: 'Our Team', path: '/about' },
+    { name: 'Our Team', path: '/our-team' }, 
     { name: 'How We Work', path: '/how-we-work' } 
   ];
 
@@ -160,8 +160,8 @@ const Navbar = () => {
             <button className="bg-purple-500 text-white px-4 2xl:px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-[13px] 2xl:text-sm transition-transform hover:scale-105">
               Empowering With AI <FaChevronDown size={10}/>
             </button>
-            <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 flex overflow-hidden z-50">
-               <div className="w-1/3 bg-slate-50 py-6">
+            <div className="absolute top-[50px] left-0 w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 flex overflow-hidden z-50">
+               <div className="w-1/3 bg-slate-50 py-6 max-h-[450px] overflow-y-auto custom-scrollbar">
                   {aiDropdownOptions.map((item) => (
                     <div key={item.id} onMouseEnter={() => setActiveAIItem(item)} onClick={() => handleNavigation(item.path)} className={`px-8 py-3.5 cursor-pointer text-sm font-bold flex justify-between items-center transition-all ${activeAIItem.id === item.id ? 'bg-white text-purple-500 border-l-4 border-purple-500 shadow-sm' : 'text-slate-600 hover:text-purple-500 border-l-4 border-transparent'}`}>
                       {item.label}
@@ -207,7 +207,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* UPGRADED: RESEARCH & INNOVATION MEGA MENU */}
+          {/* RESEARCH & INNOVATION MEGA MENU */}
           <div className="relative group">
             <button className="bg-purple-700 text-white px-4 2xl:px-5 py-2.5 rounded-full flex items-center gap-2 font-bold shadow-lg text-[13px] 2xl:text-sm transition-transform hover:scale-105">
               Research & Innovation <FaChevronDown size={10}/>
@@ -220,7 +220,7 @@ const Navbar = () => {
                  <p className="text-center text-purple-600 text-sm mt-1 font-medium">Driving the future of technology through advanced research and analysis</p>
                </div>
                
-               <div className="p-8 grid grid-cols-3 gap-8 bg-white">
+               <div className="p-8 grid grid-cols-3 gap-8 bg-white max-h-[450px] overflow-y-auto custom-scrollbar">
                  {/* Column 1 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
@@ -273,46 +273,37 @@ const Navbar = () => {
           </div>
 
           <ul className="flex items-center gap-4 2xl:gap-6 text-[13px] 2xl:text-[14px] font-bold tracking-wide text-slate-900">
-            <li onClick={() => handleNavigation('/')} className="hover:text-orange-400 cursor-pointer py-4">Home</li>
+            <li onClick={() => handleNavigation('/')} className="hover:text-purple-600 cursor-pointer py-4">Home</li>
             
-            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
+            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
-              <div className="absolute top-[50px] left-0 w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-orange-500 z-50">
+              <div className="absolute top-[50px] left-0 w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-purple-500 z-50 max-h-[300px] overflow-y-auto custom-scrollbar">
                 {aboutLinks.map(link => (
-                  <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-3 hover:bg-slate-50 hover:text-orange-500 border-b border-slate-50 font-semibold transition-colors">
+                  <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-3 hover:bg-slate-50 hover:text-purple-600 border-b border-slate-50 font-semibold transition-colors">
                     {link.name}
                   </button>
                 ))}
               </div>
             </li>
 
-            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
+            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Services</span> <FaChevronDown size={10}/>
-              <div className="absolute top-[50px] right-[-100px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-8 flex cursor-default z-50">
+              <div className="absolute top-[50px] right-[-100px] w-[1000px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 p-8 flex cursor-default z-50 max-h-[450px] overflow-y-auto custom-scrollbar">
                 <div className="w-1/3 pr-6 space-y-8">
                   <div>
-                    <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaLaptopCode className="text-cyan-400"/> UI/UX Design</h4>
+                    <h4 onClick={() => handleNavigation('/ui-ux-design')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaLaptopCode className="text-cyan-400"/> UI/UX Design</h4>
                     <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
                       <li onClick={() => handleNavigation('/ui-ux-design')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> UX Prototyping</li>
                     </ul>
                   </div>
-                  <div>
-                    <h4 onClick={() => handleNavigation('/digital-marketing')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaBullhorn className="text-cyan-400"/> Digital Marketing</h4>
-                    <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
-                      {['SEO', 'SMM', 'PPC', 'ORM', 'Content Marketing', 'AEO', 'Amazon Seller Consulting'].map(item => (
-                        <li key={item} onClick={() => handleNavigation('/digital-marketing')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <h4 onClick={() => handleNavigation('/game-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 cursor-pointer hover:text-orange-500"><FaGamepad className="text-cyan-400"/> Game Development</h4>
                 </div>
 
                 <div className="w-1/3 px-6 border-l border-r border-slate-100">
-                   <h4 onClick={() => handleNavigation('/web-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-6 cursor-pointer hover:text-orange-500"><FaCode className="text-cyan-400"/> Web Development</h4>
+                   <h4 onClick={() => handleNavigation('/web-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-6 cursor-pointer hover:text-purple-600"><FaCode className="text-cyan-400"/> Web Development</h4>
                    <div className="space-y-2">
                      {webDevSections.map((sec) => (
                        <div key={sec.name} className="border-b border-slate-50 pb-2">
-                         <div className="flex justify-between items-center py-2 cursor-pointer font-bold text-slate-800 hover:text-orange-500" onClick={() => setActiveWebDev(activeWebDev === sec.name ? '' : sec.name)}>
+                         <div className="flex justify-between items-center py-2 cursor-pointer font-bold text-slate-800 hover:text-purple-600" onClick={() => setActiveWebDev(activeWebDev === sec.name ? '' : sec.name)}>
                            <span onClick={(e) => { e.stopPropagation(); handleNavigation('/web-development'); }}>{sec.name}</span>
                            {activeWebDev === sec.name ? <FaMinus size={10} className="text-slate-400"/> : <FaPlus size={10} className="text-slate-400"/>}
                          </div>
@@ -330,7 +321,7 @@ const Navbar = () => {
 
                 <div className="w-1/3 pl-6 space-y-8">
                   <div>
-                    <h4 onClick={() => handleNavigation('/mobile-app-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-orange-500"><FaMobileAlt className="text-cyan-400"/> Mobile App Development</h4>
+                    <h4 onClick={() => handleNavigation('/mobile-app-development')} className="flex items-center gap-3 font-bold text-lg text-slate-900 mb-4 cursor-pointer hover:text-purple-600"><FaMobileAlt className="text-cyan-400"/> Mobile App Development</h4>
                     <ul className="space-y-2 pl-8 text-sm text-slate-500 font-medium">
                       {['Hybrid', 'Swift', 'React Native', 'Kotlin', 'Flutter', 'Java', 'Native App Development', 'Objective-C'].map(item => (
                         <li key={item} onClick={() => handleNavigation('/mobile-app-development')} className="hover:text-cyan-500 cursor-pointer flex items-center gap-2"><span className="w-1 h-1 bg-cyan-400 rounded-full"></span> {item}</li>
@@ -341,25 +332,25 @@ const Navbar = () => {
               </div>
             </li>
 
-            <li className="relative group cursor-pointer hover:text-orange-400 flex items-center gap-1 py-4">
+            <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
               <span onClick={() => handleNavigation('/services')}>Solutions</span> <FaChevronDown size={10}/>
-              <div className="absolute top-[50px] right-[-50px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-orange-500 p-10 cursor-default z-50">
+              <div className="absolute top-[50px] right-[-50px] w-[900px] bg-white text-gray-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 p-10 cursor-default z-50 max-h-[450px] overflow-y-auto custom-scrollbar">
                 <div className="grid grid-rows-7 grid-flow-col gap-x-8 gap-y-6">
                   {solutionsList.map((solution, index) => (
                     <div key={index} onClick={() => handleNavigation(solution.path)} className="flex items-center gap-4 group/sol cursor-pointer">
-                       <solution.icon className="text-cyan-500 text-[22px] group-hover/sol:text-orange-500 transition-colors" />
-                       <span className="font-bold text-[15px] text-slate-800 group-hover/sol:text-orange-500 transition-colors">{solution.name}</span>
+                       <solution.icon className="text-cyan-500 text-[22px] group-hover/sol:text-purple-600 transition-colors" />
+                       <span className="font-bold text-[15px] text-slate-800 group-hover/sol:text-purple-600 transition-colors">{solution.name}</span>
                     </div>
                   ))}
                 </div>
               </div>
             </li>
 
-            <li onClick={() => handleNavigation('/blog')} className="hover:text-orange-400 cursor-pointer py-4">Blog</li>
+            <li onClick={() => handleNavigation('/blog')} className="hover:text-purple-600 cursor-pointer py-4">Blog</li>
           </ul>
         </div>
 
-        <button onClick={() => setIsHireModalOpen(true)} className="hidden xl:block bg-slate-900 text-white px-8 py-2.5 rounded-full font-bold hover:bg-orange-500 transition-all shadow-lg text-sm">Hire Us ↗</button>
+        <button onClick={() => setIsHireModalOpen(true)} className="hidden xl:block bg-slate-900 text-white px-8 py-2.5 rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg text-sm">Hire Us ↗</button>
       </nav>
 
       <HireUsModal isOpen={isHireModalOpen} onClose={() => setIsHireModalOpen(false)} />
@@ -372,30 +363,30 @@ const Navbar = () => {
               <img src="/logo.png" alt="Bayes" className="h-12 w-auto" />
             </div>
             <div className="space-y-6 pb-20">
-              <button onClick={() => handleNavigation('/')} className="w-full text-left text-xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Home</button>
+              <button onClick={() => handleNavigation('/')} className="w-full text-left text-xl py-3 border-b border-purple-50 text-purple-600 transition-colors">Home</button>
               
-              <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-orange-500">AI Solutions <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('ai')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">AI Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'ai' && (
-                <div className="bg-orange-50 rounded-lg p-2 space-y-1">
+                <div className="bg-purple-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
                   {aiDropdownOptions.map(item => (
-                    <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-3 text-sm font-normal text-orange-800 hover:bg-white rounded-md cursor-pointer">{item.label}</div>
+                    <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-3 text-sm font-normal text-purple-800 hover:bg-white rounded-md cursor-pointer">{item.label}</div>
                   ))}
                 </div>
               )}
 
               <button onClick={() => toggleMobileSection('iot')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Internet of Things <FaChevronDown size={14}/></button>
               {activeMobileSection === 'iot' && (
-                <div className="bg-purple-50 rounded-lg p-2 space-y-1">
+                <div className="bg-purple-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
                   {iotDropdownOptions.map(item => (
                     <div key={item.id} onClick={() => handleNavigation(item.path)} className="p-3 text-sm font-normal text-purple-800 hover:bg-white rounded-md cursor-pointer">{item.label}</div>
                   ))}
                 </div>
               )}
 
-              {/* UPGRADED: Mobile Research & Innovation Toggle */}
-              <button onClick={() => toggleMobileSection('research')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-700">Research & Innovation <FaChevronDown size={14}/></button>
+              {/* RESEARCH & INNOVATION Toggle */}
+              <button onClick={() => toggleMobileSection('research')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Research & Innovation <FaChevronDown size={14}/></button>
               {activeMobileSection === 'research' && (
-                <div className="bg-purple-50 rounded-lg p-3 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div className="bg-purple-50 rounded-lg p-3 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
                   
                   <div>
                     <h3 className="font-bold text-purple-900 border-b border-purple-200 pb-2 mb-2">Services</h3>
@@ -421,38 +412,36 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">Services <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Services <FaChevronDown size={14}/></button>
               {activeMobileSection === 'services' && (
-                <div className="bg-slate-50 rounded-lg p-4 space-y-4">
+                <div className="bg-slate-50 rounded-lg p-4 space-y-4 max-h-[40vh] overflow-y-auto custom-scrollbar">
                   <p onClick={() => handleNavigation('/ui-ux-design')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">UI/UX Design</p>
                   <p onClick={() => handleNavigation('/web-development')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">Web Development</p>
                   <p onClick={() => handleNavigation('/mobile-app-development')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">Mobile App Development</p>
-                  <p onClick={() => handleNavigation('/digital-marketing')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">Digital Marketing</p>
-                  <p onClick={() => handleNavigation('/game-development')} className="text-sm font-normal text-slate-700 hover:text-purple-900 cursor-pointer">Game Development</p>
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">Solutions <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('solutions')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Solutions <FaChevronDown size={14}/></button>
               {activeMobileSection === 'solutions' && (
-                <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-80 overflow-y-auto">
+                <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-80 overflow-y-auto custom-scrollbar">
                   {solutionsList.map((sol, index) => (
                     <button key={index} onClick={() => handleNavigation(sol.path)} className="w-full flex items-center gap-3 text-left p-3 text-sm font-normal text-slate-800 hover:bg-white rounded-md border-b border-slate-100/50 last:border-0">
-                      <sol.icon className="text-orange-500 text-lg flex-shrink-0" /> {sol.name}
+                      <sol.icon className="text-purple-600 text-lg flex-shrink-0" /> {sol.name}
                     </button>
                   ))}
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50">About <FaChevronDown size={14}/></button>
+              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">About <FaChevronDown size={14}/></button>
               {activeMobileSection === 'about' && (
-                <div className="bg-slate-50 rounded-lg p-2 space-y-1">
+                <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
                   {aboutLinks.map(link => (
                     <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-3 text-sm font-normal text-slate-800 hover:bg-white rounded-md">{link.name}</button>
                   ))}
                 </div>
               )}
 
-              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-xl py-3 border-b border-purple-50 hover:text-purple-600 transition-colors">Blog</button>
+              <button onClick={() => handleNavigation('/blog')} className="w-full text-left text-xl py-3 border-b border-purple-50 text-purple-600 transition-colors">Blog</button>
             </div>
             <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-purple-600 text-white py-4 rounded-xl shadow-lg shadow-purple-200 text-xl font-bold mt-auto mb-6">Hire Us</button>
           </div>

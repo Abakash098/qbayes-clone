@@ -64,16 +64,9 @@ const ContactSection = () => {
                 </div>
                 
                 <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wider">{item.title}</h3>
-                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                <p className="text-gray-300 leading-relaxed text-sm md:text-base mb-6">
                   {item.value}
                 </p>
-
-                {/* Decorative Element */}
-                <div className="mt-auto pt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                   <button className="text-xs font-bold text-white uppercase tracking-widest border-b border-orange-500 pb-1 hover:text-orange-500 transition">
-                      Find Us →
-                   </button>
-                </div>
               </div>
             </div>
           ))}

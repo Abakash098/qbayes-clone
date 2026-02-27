@@ -5,7 +5,7 @@ import {
   FaNetworkWired, FaCode, FaMobileAlt, FaBrain, FaDatabase,
   FaRunning, FaShareAlt, FaCar, FaCoins, FaUniversity, FaMotorcycle, FaCut,
   FaHome, FaHandPointer, FaCogs, FaGraduationCap, FaUsers, FaHeartbeat, FaBox,
-  FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase, FaMicrochip, FaFlask
+  FaStore, FaCalendarAlt, FaPlane, FaHeart, FaHandHoldingHeart, FaBriefcase, FaMicrochip, FaFlask, FaBuilding
 } from 'react-icons/fa';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom'; 
@@ -31,10 +31,6 @@ const Navbar = () => {
   ];
 
   const iotDropdownOptions = [
-   /* { id: 'iot-1', label: 'Agricultural AI Bot', path: '/agricultural-ai-bot', title: 'Agricultural Monitoring System', desc: 'Autonomous field operations with 81.8% disease detection accuracy.', image: '/agri-bot.png' },*/
-   /* { id: 'iot-2', label: 'Autonomous Beach Cleaner', path: '/autonomous-beach-cleaner', title: 'Real-Time Beach Cleaner', desc: 'Intelligently classifies waste into biodegradable and non-biodegradable.', image: '/beach-cleaner.png' },*/
-   /* { id: 'iot-3', label: 'Aquisher Water Monitor', path: '/aquisher-water-monitor', title: 'Aquisher Fish Cultivation', desc: 'Predicts fish suitability and monitors TDS, oxygen, and pH levels.', image: '/aquisher.png' },*/
-   /* { id: 'iot-4', label: 'Haze & Rain Removal', path: '/haze-rain-removal', title: 'Portable Video Enhancement', desc: 'Real-time video clarity improvement for adverse weather surveillance.', image: '/haze-removal.png' },*/
     { id: 'iot-5', label: 'Soil Parameter Estimation', path: '/soil-parameter-estimation', title: 'Soil Fertility Analysis', desc: 'AI-powered accuracy for instant NPK estimation in the field.', image: '/soil-estimation.png' },
     { id: 'iot-6', label: 'Solar Agri Dashboard', path: '/solar-agri-dashboard', title: 'Solar-Powered Dashboard', desc: 'Continuous off-grid monitoring of temperature, humidity, and soil.', image: '/agri-dashboard.png' },
     { id: 'iot-7', label: 'Patient Monitoring', path: '/patient-monitoring', title: 'Centralized Patient Vitals', desc: '24/7 logging of heart rate, SpO2, and temperature with alerts.', image: '/patient-monitor.png' },
@@ -209,15 +205,11 @@ const Navbar = () => {
               Research & Innovation <FaChevronDown size={10}/>
             </button>
             <div className="absolute top-[50px] left-[-200px] w-[1000px] bg-white shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-700 overflow-hidden z-50 flex flex-col">
-               
-               {/* Header Section */}
                <div className="bg-purple-50 p-6 border-b border-purple-100">
                  <h2 className="text-2xl font-bold text-purple-900 text-center">Research and Innovation</h2>
                  <p className="text-center text-purple-600 text-sm mt-1 font-medium">Driving the future of technology through advanced research and analysis</p>
                </div>
-               
                <div className="p-8 grid grid-cols-3 gap-8 bg-white max-h-[450px] overflow-y-auto custom-scrollbar">
-                 {/* Column 1 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaFlask className="text-purple-600 text-lg"/>
@@ -232,8 +224,6 @@ const Navbar = () => {
                      ))}
                    </ul>
                  </div>
-
-                 {/* Column 2 */}
                  <div className="border-l border-r border-slate-100 px-6">
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaMicrochip className="text-purple-600 text-lg"/>
@@ -248,8 +238,6 @@ const Navbar = () => {
                      ))}
                    </ul>
                  </div>
-
-                 {/* Column 3 */}
                  <div>
                    <div className="flex items-center gap-2 mb-6 border-b border-slate-100 pb-2">
                      <FaBrain className="text-purple-600 text-lg"/>
@@ -271,14 +259,35 @@ const Navbar = () => {
           <ul className="flex items-center gap-4 2xl:gap-6 text-[13px] 2xl:text-[14px] font-bold tracking-wide text-slate-900">
             <li onClick={() => handleNavigation('/')} className="hover:text-purple-600 cursor-pointer py-4">Home</li>
             
+            {/* NEW ABOUT US MEGA MENU */}
             <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
-              <div className="absolute top-[50px] left-0 w-64 bg-white text-gray-800 shadow-2xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all border-t-4 border-purple-500 z-50 max-h-[300px] overflow-y-auto custom-scrollbar">
-                {aboutLinks.map(link => (
-                  <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-3 hover:bg-slate-50 hover:text-purple-600 border-b border-slate-50 font-semibold transition-colors">
-                    {link.name}
-                  </button>
-                ))}
+              <div className="absolute top-[50px] left-[-250px] w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 flex overflow-hidden z-50 cursor-default">
+                
+                {/* Left Side: Navigation Links */}
+                <div className="w-1/3 bg-slate-50 py-6 border-r border-slate-100 flex flex-col">
+                   {aboutLinks.map(link => (
+                     <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-8 py-4 hover:bg-white hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500 font-bold transition-all text-[15px]">
+                       {link.name}
+                     </button>
+                   ))}
+                </div>
+
+                {/* Right Side: Company Details from Image */}
+                <div className="w-2/3 p-10 bg-white flex flex-col justify-center">
+                    <h3 className="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-3 border-b border-slate-100 pb-3">
+                        <FaBuilding className="text-purple-500" /> About QBayes
+                    </h3>
+                    <div className="text-sm text-slate-600 space-y-4 leading-relaxed text-justify pr-2">
+                        <p>
+                            <strong className="text-slate-800 font-bold">QBAYES LLP (LLP Identification Number: ACV-5906)</strong> is incorporated pursuant to section 12(1) of the Limited Liability Partnership Act 2008, Ministry of Corporate Affairs, Government of India. We aim to innovate and provide intelligent solutions that can achieve an ease of efficiency and performance no matter the complexity of the concerned task(s).
+                        </p>
+                        <p>
+                            In the times where the quest for smart execution of different applications is being pursued, we are equipped with the necessary skills and resources to help you build smooth, hassle free, user-friendly, harmless, intelligent products. Furthermore, we are committed to the development of the society and the environment globally which we believe govern daily lives in a healthy and systematic manner.
+                        </p>
+                    </div>
+                </div>
+
               </div>
             </li>
 
@@ -403,6 +412,23 @@ const Navbar = () => {
                 </div>
               )}
 
+              {/* UPDATED ABOUT SECTION IN MOBILE MENU */}
+              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">About <FaChevronDown size={14}/></button>
+              {activeMobileSection === 'about' && (
+                <div className="bg-slate-50 rounded-lg p-4 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                  <div className="bg-white p-5 rounded-xl shadow-sm border border-purple-100 mb-2">
+                    <p className="text-xs text-slate-600 leading-relaxed text-justify">
+                      <strong className="text-slate-800">QBAYES LLP (ACV-5906)</strong> is incorporated under the Ministry of Corporate Affairs, India. We aim to innovate and provide intelligent solutions for smart execution of applications. We are equipped to build smooth, user-friendly products while committing to society and the environment globally.
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    {aboutLinks.map(link => (
+                      <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-3 text-[15px] font-bold text-slate-800 hover:bg-purple-100 hover:text-purple-700 rounded-md transition-colors">{link.name}</button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <button onClick={() => toggleMobileSection('services')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">Services <FaChevronDown size={14}/></button>
               {activeMobileSection === 'services' && (
                 <div className="bg-slate-50 rounded-lg p-4 space-y-4 max-h-[40vh] overflow-y-auto custom-scrollbar">
@@ -423,14 +449,6 @@ const Navbar = () => {
                 </div>
               )}
 
-              <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">About <FaChevronDown size={14}/></button>
-              {activeMobileSection === 'about' && (
-                <div className="bg-slate-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
-                  {aboutLinks.map(link => (
-                    <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-3 text-sm font-normal text-slate-800 hover:bg-white rounded-md">{link.name}</button>
-                  ))}
-                </div>
-              )}
             </div>
             <button onClick={() => {setNav(false); setIsHireModalOpen(true);}} className="w-full bg-purple-600 text-white py-4 rounded-xl shadow-lg shadow-purple-200 text-xl font-bold mt-auto mb-6">Hire Us</button>
           </div>

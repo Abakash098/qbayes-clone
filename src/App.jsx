@@ -16,9 +16,14 @@ import AboutUs from './components/AboutUs';
 import OurTeam from './components/OurTeam'; 
 import HowWeWork from './components/HowWeWork'; 
 import Services from './components/Services';
+import Service1 from './components/Service1'; 
+
+// ---> IMPORT YOUR NEW SERVICE PAGE HERE <---
+import Service2 from './components/Service2'; 
+
 import CaseStudies from './components/CaseStudies'; 
 
-// --> UPDATED IMPORT PATH FOR DATA ANALYTICS <--
+// --> PATHS STACKED CORRECTLY FOR HOME PAGE <--
 import DataAnalyticsAI from './components/DataAnalyticsAI'; 
 
 // --- CORE SERVICES ---
@@ -138,10 +143,20 @@ function App() {
         {/* 1. HOME PAGE */}
         <Route path="/" element={
           <div className="animate-fadeIn">
+            {/* The Hero component comes first */}
             <Hero />
             
+            {/* Main Services (Purple Theme) */}
             <Services />
-            <DataAnalyticsAI />
+            
+            {/* Data/AI Services (Indigo Theme - Full Upgrade) */}
+            <Service1 />
+            
+            {/* ---> YOUR NEW SERVICE PAGE ADDED HERE <--- */}
+            <Service2/>
+            
+            {/* Subsequent Sections stack perfectly */}
+            
             <MiscellaneousServices />
             <ResearchInnovation />
             <IoTService />
@@ -161,10 +176,7 @@ function App() {
         <Route path="/our-team" element={<PageLayout showPadding={false}><OurTeam /></PageLayout>} /> 
         <Route path="/how-we-work" element={<PageLayout><HowWeWork /></PageLayout>} />
         <Route path="/services" element={<PageLayout><Services /></PageLayout>} />
-        
-        {/* --> NEW PAGE ROUTE <-- */}
         <Route path="/data-analytics-ai" element={<PageLayout showPadding={false}><DataAnalyticsAI /></PageLayout>} />
-        
         <Route path="/case-studies" element={<PageLayout showPadding={false}><CaseStudies /></PageLayout>} />
 
         {/* 3. CORE SERVICE ROUTES */}
@@ -177,42 +189,15 @@ function App() {
         <Route path="/game-development" element={<PageLayout showPadding={false}><GameDevelopment /></PageLayout>} /> 
 
         {/* 4. IOT PRODUCT ROUTES */}
-        <Route 
-          path="/agricultural-ai-bot" 
-          element={<PageLayout showPadding={false}><AgriculturalAiBot /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/autonomous-beach-cleaner" 
-          element={<PageLayout showPadding={false}><AutonomousBeachCleaner /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/aquisher-water-monitor" 
-          element={<PageLayout showPadding={false}><AquisherWaterMonitor /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/patient-monitoring" 
-          element={<PageLayout showPadding={false}><PatientMonitoring /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/soil-parameter-estimation" 
-          element={<PageLayout showPadding={false}><SoilParameterEstimation /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/haze-rain-removal" 
-          element={<PageLayout showPadding={false}><HazeRainRemoval /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/gps-asset-tracking" 
-          element={<PageLayout showPadding={false}><GPSAssetTracking /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/rfid-inventory-system" 
-          element={<PageLayout showPadding={false}><RFIDInventorySystem /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
-        <Route 
-          path="/solar-agri-dashboard" 
-          element={<PageLayout showPadding={false}><SolarAgriDashboard /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} 
-        />
+        <Route path="/agricultural-ai-bot" element={<PageLayout showPadding={false}><AgriculturalAiBot /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/autonomous-beach-cleaner" element={<PageLayout showPadding={false}><AutonomousBeachCleaner /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/aquisher-water-monitor" element={<PageLayout showPadding={false}><AquisherWaterMonitor /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/patient-monitoring" element={<PageLayout showPadding={false}><PatientMonitoring /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/soil-parameter-estimation" element={<PageLayout showPadding={false}><SoilParameterEstimation /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/haze-rain-removal" element={<PageLayout showPadding={false}><HazeRainRemoval /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/gps-asset-tracking" element={<PageLayout showPadding={false}><GPSAssetTracking /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/rfid-inventory-system" element={<PageLayout showPadding={false}><RFIDInventorySystem /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
+        <Route path="/solar-agri-dashboard" element={<PageLayout showPadding={false}><SolarAgriDashboard /><div className="bg-slate-50 py-10 border-t border-slate-100"></div></PageLayout>} />
 
         {/* 5. AI PAGES */}
         <Route path="/ai-chatbot" element={<PageLayout><AIChatbot /></PageLayout>} />

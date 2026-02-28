@@ -259,35 +259,17 @@ const Navbar = () => {
           <ul className="flex items-center gap-4 2xl:gap-6 text-[13px] 2xl:text-[14px] font-bold tracking-wide text-slate-900">
             <li onClick={() => handleNavigation('/')} className="hover:text-purple-600 cursor-pointer py-4">Home</li>
             
-            {/* NEW ABOUT US MEGA MENU */}
+            {/* CLEANED UP ABOUT US MENU */}
             <li className="relative group cursor-pointer hover:text-purple-600 flex items-center gap-1 py-4">
               About <FaChevronDown size={10}/>
-              <div className="absolute top-[50px] left-[-250px] w-[850px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 flex overflow-hidden z-50 cursor-default">
-                
-                {/* Left Side: Navigation Links */}
-                <div className="w-1/3 bg-slate-50 py-6 border-r border-slate-100 flex flex-col">
+              <div className="absolute top-[50px] left-0 w-[220px] bg-white text-slate-800 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border-t-4 border-purple-500 overflow-hidden z-50">
+                <div className="flex flex-col py-2">
                    {aboutLinks.map(link => (
-                     <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-8 py-4 hover:bg-white hover:text-purple-600 border-l-4 border-transparent hover:border-purple-500 font-bold transition-all text-[15px]">
+                     <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left px-6 py-4 hover:bg-purple-50 hover:text-purple-700 border-l-4 border-transparent hover:border-purple-500 font-bold transition-all text-[14px]">
                        {link.name}
                      </button>
                    ))}
                 </div>
-
-                {/* Right Side: Company Details from Image */}
-                <div className="w-2/3 p-10 bg-white flex flex-col justify-center">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-3 border-b border-slate-100 pb-3">
-                        <FaBuilding className="text-purple-500" /> About QBayes
-                    </h3>
-                    <div className="text-sm text-slate-600 space-y-4 leading-relaxed text-justify pr-2">
-                        <p>
-                            <strong className="text-slate-800 font-bold">QBAYES LLP (LLP Identification Number: ACV-5906)</strong> is incorporated pursuant to section 12(1) of the Limited Liability Partnership Act 2008, Ministry of Corporate Affairs, Government of India. We aim to innovate and provide intelligent solutions that can achieve an ease of efficiency and performance no matter the complexity of the concerned task(s).
-                        </p>
-                        <p>
-                            In the times where the quest for smart execution of different applications is being pursued, we are equipped with the necessary skills and resources to help you build smooth, hassle free, user-friendly, harmless, intelligent products. Furthermore, we are committed to the development of the society and the environment globally which we believe govern daily lives in a healthy and systematic manner.
-                        </p>
-                    </div>
-                </div>
-
               </div>
             </li>
 
@@ -353,7 +335,9 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <button onClick={() => setIsHireModalOpen(true)} className="hidden xl:block bg-slate-900 text-white px-8 py-2.5 rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg text-sm">Hire Us ↗</button>
+        <div className="hidden xl:flex items-center gap-4">
+          <button onClick={() => setIsHireModalOpen(true)} className="bg-slate-900 text-white px-8 py-2.5 rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg text-sm">Hire Us ↗</button>
+        </div>
       </nav>
 
       <HireUsModal isOpen={isHireModalOpen} onClose={() => setIsHireModalOpen(false)} />
@@ -412,20 +396,13 @@ const Navbar = () => {
                 </div>
               )}
 
-              {/* UPDATED ABOUT SECTION IN MOBILE MENU */}
+              {/* CLEANED UP ABOUT US IN MOBILE MENU */}
               <button onClick={() => toggleMobileSection('about')} className="w-full flex justify-between items-center text-xl py-3 border-b border-purple-50 text-purple-600">About <FaChevronDown size={14}/></button>
               {activeMobileSection === 'about' && (
-                <div className="bg-slate-50 rounded-lg p-4 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
-                  <div className="bg-white p-5 rounded-xl shadow-sm border border-purple-100 mb-2">
-                    <p className="text-xs text-slate-600 leading-relaxed text-justify">
-                      <strong className="text-slate-800">QBAYES LLP (ACV-5906)</strong> is incorporated under the Ministry of Corporate Affairs, India. We aim to innovate and provide intelligent solutions for smart execution of applications. We are equipped to build smooth, user-friendly products while committing to society and the environment globally.
-                    </p>
-                  </div>
-                  <div className="space-y-2">
+                <div className="bg-purple-50 rounded-lg p-2 space-y-1 max-h-[40vh] overflow-y-auto custom-scrollbar">
                     {aboutLinks.map(link => (
-                      <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-3 text-[15px] font-bold text-slate-800 hover:bg-purple-100 hover:text-purple-700 rounded-md transition-colors">{link.name}</button>
+                      <button key={link.name} onClick={() => handleNavigation(link.path)} className="w-full text-left p-4 text-base font-medium text-purple-800 hover:bg-white rounded-md transition-colors">{link.name}</button>
                     ))}
-                  </div>
                 </div>
               )}
 

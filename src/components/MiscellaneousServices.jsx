@@ -11,14 +11,14 @@ const MiscellaneousServices = () => {
       id: "1", 
       title: "Academics/Education", 
       path: "/misc/academics", // --- ADDED PATH ---
-      desc: "Imparting Technical Knowledge, Vocational Training, EdTech Development, and Career Counselling.", 
+      desc: "Imparting Technical KnowledgeSkill Development through Vocational Training Development and Deployment of Education Technology Training on Emerging Technologies and Domains Career Counselling and Guidance.", 
       image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80&w=800" 
     },
     { 
       id: "2", 
       title: "Documentation", 
       path: "/misc/documentation", // --- ADDED PATH ---
-      desc: "Reports, Presentations, Brochures, Research Papers, Dissertations, and Thesis writing.", 
+      desc: "Report, Presentation, Brochure, Excelsheets(Academic, Management, BusinessRequirement, other allied areas)Academic, Financial, Commercial, Economical,LegalResearch Paper, Dissertation, Thesis.", 
       image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" 
     },
     { 

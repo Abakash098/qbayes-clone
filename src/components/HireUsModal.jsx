@@ -21,7 +21,7 @@ const HireUsModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // UPDATED: Sending date and slot as separate properties
+    // Sending date and slot as separate properties to match the backend
     const finalData = {
       ...formData,
       selected_date: selectedDate, 
@@ -44,7 +44,7 @@ const HireUsModal = ({ isOpen, onClose }) => {
         alert(`❌ Error: ${errorData.error}`);
       }
     } catch (error) {
-      alert("❌ Server is not running. Did you start npm run dev?");
+      alert("❌ Server is not running. Did you start your backend server?");
     }
   };
 

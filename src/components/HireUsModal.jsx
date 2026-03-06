@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 
 const HireUsModal = ({ isOpen, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(15);
@@ -21,7 +21,6 @@ const HireUsModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Sending date and slot as separate properties to match the backend
     const finalData = {
       ...formData,
       selected_date: selectedDate, 
@@ -29,7 +28,8 @@ const HireUsModal = ({ isOpen, onClose }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      // UPDATED: Points to your live Render backend
+      const response = await fetch('https://qbayes-backend-1.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalData)
@@ -44,7 +44,7 @@ const HireUsModal = ({ isOpen, onClose }) => {
         alert(`❌ Error: ${errorData.error}`);
       }
     } catch (error) {
-      alert("❌ Server is not running. Did you start your backend server?");
+      alert("❌ Live server error. Please check your Render logs.");
     }
   };
 
@@ -59,7 +59,6 @@ const HireUsModal = ({ isOpen, onClose }) => {
 
         <div className="p-8 md:p-12">
           <div className="grid lg:grid-cols-2 gap-12">
-            {/* LEFT: FORM */}
             <div>
               <h2 className="text-3xl font-bold text-[#0b1c38] mb-2">Ready To Get Started?</h2>
               <p className="text-gray-500 mb-8">Fill the details to sync with your selected time.</p>
@@ -79,7 +78,6 @@ const HireUsModal = ({ isOpen, onClose }) => {
               </form>
             </div>
 
-            {/* RIGHT: DATE BAR & SLOTS */}
             <div className="bg-gray-50 p-8 rounded-3xl">
               <h2 className="text-2xl font-bold text-[#0b1c38] mb-6">Select Date & Time</h2>
               

@@ -15,7 +15,8 @@ const ContactForm = () => {
         setStatus('Sending...');
         
         try {
-            const response = await fetch('http://localhost:5000/api/contact', {
+            // UPDATED: Points to your live Render backend
+            const response = await fetch('https://qbayes-backend-1.onrender.com/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)

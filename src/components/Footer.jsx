@@ -9,10 +9,8 @@ const Footer = () => {
         {/* --- Top Row: Logo and Socials --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
           <div>
+            {/* The subtitle paragraph below the logo has been removed */}
             <h2 className="text-4xl font-black text-[#4A90E2] tracking-tight">QBayes</h2>
-            <p className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-slate-400 mt-2 font-semibold">
-              A National Award Winning Company
-            </p>
           </div>
           
           {/* Social Icons */}

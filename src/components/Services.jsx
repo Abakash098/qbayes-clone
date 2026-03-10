@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
 import { FaArrowRight, FaRocket } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
-  const navigate = useNavigate();
+  // Removed useNavigate since we are staying on the same page
 
   const services = [
-    { id: "01", title: "IT Consultancy", path: "/it-consultancy", desc: "Inventory Management /Enterprise Resource Planning (ERP) Systems,", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" },
-    { id: "02", title: "UI/UX Design", path: "/ui-ux-design", desc: "Finance Management Systems.", image: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800" },
-    { id: "03", title: "Web & App Development", path: "/web-development", desc: "Human Resource Management Systems,", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" },
-    { id: "04", title: "Artificial Intelligence (AI)", path: "/ai-services", desc: "Human Resource Management System,", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
-    { id: "05", title: "Data Analytics & Science", path: "/data-analytics", desc: "Smart Optimization,", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" },
-    { id: "06", title: "Deployment & Cloud", path: "/cloud-deployment", desc: "Academic/Learning Management Systems,", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" },
-    { id: "07", title: "API & IoT Integration", path: "/iot-development", desc: "Web Design & Development.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
-    { id: "08", title: "System Upgradation", path: "/system-upgradation", desc: "Daily Lifestyle Tracking/Health/Routine Management Systems,", image: "https://images.unsplash.com/photo-1504384308090-c54be3855485?auto=format&fit=crop&q=80&w=800" },
-    { id: "09", title: "Testing & QA", path: "/testing-qa", desc: "Online/Web based Systems", image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800" },
-    { id: "10", title: "Maintenance & Monitoring", path: "/maintenance-monitoring", desc: "App Development.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" }
+    { id: "01", title: "IT Consultancy", desc: "Inventory Management /Enterprise Resource Planning (ERP) Systems,", image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800" },
+    { id: "02", title: "UI/UX Design", desc: "Finance Management Systems.", image: "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800" },
+    { id: "03", title: "Web & App Development", desc: "Human Resource Management Systems,", image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800" },
+    { id: "04", title: "Artificial Intelligence (AI)", desc: "Human Resource Management System,", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" },
+    { id: "05", title: "Data Analytics & Science", desc: "Smart Optimization,", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" },
+    { id: "06", title: "Deployment & Cloud", desc: "Academic/Learning Management Systems,", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" },
+    { id: "07", title: "API & IoT Integration", desc: "Web Design & Development.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" },
+    { id: "08", title: "System Upgradation", desc: "Daily Lifestyle Tracking/Health/Routine Management Systems,", image: "https://images.unsplash.com/photo-1504384308090-c54be3855485?auto=format&fit=crop&q=80&w=800" },
+    { id: "09", title: "Testing & QA", desc: "Online/Web based Systems", image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&q=80&w=800" },
+    { id: "10", title: "Maintenance & Monitoring", desc: "App Development.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" }
   ];
 
   const [activeId, setActiveId] = useState("01");
@@ -52,14 +51,15 @@ const Services = () => {
               <div 
                 key={service.id}
                 onMouseEnter={() => setActiveId(service.id)}
-                onClick={() => navigate(service.path)}
+                // UPDATED: Now clicking just sets it as active instead of navigating to a new page
+                onClick={() => setActiveId(service.id)}
                 className={`group relative p-8 rounded-[2rem] transition-all duration-500 border cursor-pointer
                   ${activeId === service.id 
                     ? 'bg-white border-purple-100 shadow-[0_20px_50px_rgba(126,34,206,0.08)]' 
                     : 'bg-transparent border-transparent hover:bg-white/50'
                   }`}
               >
-                {/* Visual indicator fixed to be perfectly flush inside the card */}
+                {/* Visual indicator */}
                 <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-12 bg-purple-600 rounded-r-full transition-all duration-500
                   ${activeId === service.id ? 'opacity-100' : 'opacity-0'}`}></div>
 

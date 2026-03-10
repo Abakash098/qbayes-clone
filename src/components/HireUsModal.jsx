@@ -4,6 +4,7 @@ import { FaTimes } from 'react-icons/fa';
 const HireUsModal = ({ isOpen, onClose }) => {
   const [selectedDate, setSelectedDate] = useState(15);
   const [selectedSlot, setSelectedSlot] = useState("10:00 AM");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     first_name: '',
@@ -16,10 +17,11 @@ const HireUsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const timeSlots = ["09:00 AM", "10:00 AM", "11:00 AM", "01:00 PM", "02:00 PM", "03:00 PM"];
-  const days = Array.from({ length: 14 }, (_, i) => 15 + i); // Feb 15 - Feb 28
+  const days = Array.from({ length: 14 }, (_, i) => 15 + i); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true); 
     
     const finalData = {
       ...formData,
@@ -28,8 +30,8 @@ const HireUsModal = ({ isOpen, onClose }) => {
     };
 
     try {
-      // UPDATED: Points to your live Render backend
-      const response = await fetch('https://qbayes-backend-1.onrender.com/api/contact', {
+      // UPDATED: Now pointing to your LOCAL server for testing
+      const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(finalData)
@@ -44,7 +46,10 @@ const HireUsModal = ({ isOpen, onClose }) => {
         alert(`❌ Error: ${errorData.error}`);
       }
     } catch (error) {
-      alert("❌ Live server error. Please check your Render logs.");
+      // Improved error message to help you debug local connection
+      alert("❌ Local server error. Make sure 'node server.js' is running in your terminal!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -72,15 +77,20 @@ const HireUsModal = ({ isOpen, onClose }) => {
                 <input type="text" placeholder="Phone *" className="w-full bg-gray-50 p-4 rounded-xl outline-none" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} required />
                 <textarea rows="3" placeholder="Message *" className="w-full bg-gray-50 p-4 rounded-xl outline-none resize-none" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} required></textarea>
                 
-                <button type="submit" className="w-full bg-[#0b1c38] text-white font-bold py-4 rounded-xl hover:bg-purple-600 transition-all shadow-lg">
-                  Submit & Book Slot
+                <button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className={`w-full font-bold py-4 rounded-xl transition-all shadow-lg ${
+                    isSubmitting ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-[#0b1c38] text-white hover:bg-purple-600'
+                  }`}
+                >
+                  {isSubmitting ? 'Sending to Local Server...' : 'Submit & Book Slot'}
                 </button>
               </form>
             </div>
 
             <div className="bg-gray-50 p-8 rounded-3xl">
               <h2 className="text-2xl font-bold text-[#0b1c38] mb-6">Select Date & Time</h2>
-              
               <div className="flex gap-3 overflow-x-auto pb-4 mb-8 custom-scrollbar">
                 {days.map(day => (
                   <button key={day} type="button" onClick={() => setSelectedDate(day)} className={`flex-shrink-0 w-14 h-20 rounded-2xl flex flex-col items-center justify-center transition-all ${selectedDate === day ? 'bg-purple-600 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-200'}`}>
@@ -89,7 +99,6 @@ const HireUsModal = ({ isOpen, onClose }) => {
                   </button>
                 ))}
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 {timeSlots.map(slot => (
                   <button key={slot} type="button" onClick={() => setSelectedSlot(slot)} className={`p-4 rounded-xl font-bold transition-all border-2 ${selectedSlot === slot ? 'bg-white border-purple-600 text-purple-600' : 'bg-white border-transparent text-gray-500 hover:border-gray-300'}`}>

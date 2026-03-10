@@ -48,13 +48,16 @@ const Hero = () => {
             </span>
           </h1>
           
-          {/* Editorial Text - Tightened spacing and improved border accent */}
+          {/* Editorial Text - Updated with Official Details */}
           <div className="relative pl-6 border-l-4 border-purple-500/60 animate-fade-in-up delay-200 mb-10 max-w-2xl">
             <p className="text-slate-700 text-[16px] sm:text-lg leading-relaxed mb-4">
-              <strong className="text-slate-900 font-extrabold">QBAYES LLP</strong> is incorporated pursuant to the Limited Liability Partnership Act 2008. We aim to innovate and provide intelligent solutions that achieve effortless efficiency and performance, no matter the complexity of the task.
+              <strong className="text-slate-900 font-extrabold">QBAYES LLP</strong> (LLP Identification Number: ACV-5906) is incorporated pursuant to section 12(1) of the Limited Liability Partnership Act 2008, Ministry of Corporate Affairs, Government of India.
+            </p>
+            <p className="text-slate-500 text-[15px] sm:text-base leading-relaxed mb-4">
+              We aim to innovate and provide intelligent solutions that can achieve an ease of efficiency and performance no matter the complexity of the concerned task(s). 
             </p>
             <p className="text-slate-500 text-[15px] sm:text-base leading-relaxed">
-              In an era driven by smart execution, we are equipped with the skills and resources to help you build smooth, hassle-free, user-centric, and intelligent digital products.
+              Through our works, we also contribute to the evolution of technical solutions that may help improve life and the environment globally in a healthy and systematic manner.
             </p>
           </div>
 
@@ -69,7 +72,7 @@ const Hero = () => {
               <FaArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" />
             </button>
             
-            {/* Added a secondary "Learn More" style button for balance */}
+            {/* Secondary "Learn More" style button */}
             <button 
               onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full sm:w-auto px-6 py-4 rounded-full font-bold text-slate-600 hover:text-purple-700 hover:bg-purple-50 transition-colors flex items-center justify-center gap-2 group"
@@ -101,7 +104,7 @@ const Hero = () => {
                    <div>
                      <h3 className="text-white font-bold text-base mb-1">Global Commitment</h3>
                      <p className="text-slate-200 text-xs leading-relaxed font-medium">
-                       Committed to the development of society and the environment globally, governing daily lives in a healthy and systematic manner.
+                       Improving life and the environment globally through the evolution of healthy and systematic technical solutions.
                      </p>
                    </div>
                  </div>
